@@ -68,7 +68,7 @@ namespace Gamelogic.Grids
 		{
 			get
 			{
-				var sprite = transform.FindChild("Sprite").GetComponent<SpriteRenderer>();
+				var sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
 				if (sprite == null)
 				{
