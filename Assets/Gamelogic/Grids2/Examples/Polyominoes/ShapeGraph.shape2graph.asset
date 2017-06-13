@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b2ddfea3215b742b25fe3a21349885, type: 3}
+  m_Name: ShapeGraph.shape2graph
+  m_EditorClassIdentifier: 
+  idCounter: 7
+  nodes:
+  - {fileID: 11418940}
+  - {fileID: 11442682}
+--- !u!114 &11418940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: Parallelogram
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 5
+  rect:
+    serializedVersion: 2
+    x: 209
+    y: 43
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 20
+    y: 3
+--- !u!114 &11442682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a0eec6eae5cbb4ba842a582f64347f, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 6
+  rect:
+    serializedVersion: 2
+    x: 561
+    y: 51
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11418940}

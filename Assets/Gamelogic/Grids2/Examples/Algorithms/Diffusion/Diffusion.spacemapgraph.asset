@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a7c5478f6b05e47a6419b387cef5a3, type: 3}
+  m_Name: Diffusion.spacemapgraph
+  m_EditorClassIdentifier: 
+  idCounter: 3
+  nodes:
+  - {fileID: 11482268}
+  - {fileID: 11477582}
+  - {fileID: 11412734}
+--- !u!114 &11412734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf07f7dfa3309c743a7096533a613079, type: 3}
+  m_Name: (2) ScaleSpaceMapNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 2
+  rect:
+    serializedVersion: 2
+    x: 377
+    y: 150
+    width: 250
+    height: 77
+  inputNodes:
+  - {fileID: 11482268}
+  scaleFactor: {x: 200, y: 200, z: 1}
+--- !u!114 &11477582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e274e7df256aac846a5630e4bf24c767, type: 3}
+  m_Name: (1) OutputSpaceMapNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 1
+  rect:
+    serializedVersion: 2
+    x: 701
+    y: 186
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11412734}
+--- !u!114 &11482268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6ae604857cfb043a4f10cf18e8aeed, type: 3}
+  m_Name: (0) PointyHexSpaceMap
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 0
+  rect:
+    serializedVersion: 2
+    x: 65
+    y: 111
+    width: 250
+    height: 43
+  inputNodes: []

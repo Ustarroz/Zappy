@@ -1,0 +1,283 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b2ddfea3215b742b25fe3a21349885, type: 3}
+  m_Name: ComplexShape.shape2graph
+  m_EditorClassIdentifier: 
+  idCounter: 11
+  nodes:
+  - {fileID: 11403188}
+  - {fileID: 11407586}
+  - {fileID: 11450682}
+  - {fileID: 11485978}
+  - {fileID: 11486006}
+  - {fileID: 11434222}
+  - {fileID: 11404512}
+  - {fileID: 11461136}
+  - {fileID: 11436682}
+  - {fileID: 11427380}
+  - {fileID: 11443092}
+--- !u!114 &11403188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a0eec6eae5cbb4ba842a582f64347f, type: 3}
+  m_Name: (0) OutputShape2Node
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 0
+  rect:
+    serializedVersion: 2
+    x: 1745
+    y: 373
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11443092}
+--- !u!114 &11404512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7998bd18cbc31514ea19843f1d571368, type: 3}
+  m_Name: (6) TranslateShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 6
+  rect:
+    serializedVersion: 2
+    x: 570
+    y: 377
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11434222}
+  offset:
+    x: 4
+    y: 0
+--- !u!114 &11407586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: (1) ParallelogramShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 1
+  rect:
+    serializedVersion: 2
+    x: 13
+    y: 215
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 5
+    y: 1
+--- !u!114 &11427380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7998bd18cbc31514ea19843f1d571368, type: 3}
+  m_Name: (9) TranslateShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 9
+  rect:
+    serializedVersion: 2
+    x: 1385
+    y: 295
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11461136}
+  offset:
+    x: 3
+    y: 3
+--- !u!114 &11434222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7998bd18cbc31514ea19843f1d571368, type: 3}
+  m_Name: (5) TranslateShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 5
+  rect:
+    serializedVersion: 2
+    x: 296
+    y: 313
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11486006}
+  offset:
+    x: 0
+    y: 1
+--- !u!114 &11436682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: (8) ParallelogramShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 8
+  rect:
+    serializedVersion: 2
+    x: 838
+    y: 185
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 5
+    y: 5
+--- !u!114 &11443092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e2f0463ae803b4ba9c2fc22b399aab, type: 3}
+  m_Name: (10) UnionShape2Node
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 10
+  rect:
+    serializedVersion: 2
+    x: 1639
+    y: 235
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11427380}
+  - {fileID: 11461136}
+--- !u!114 &11450682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7998bd18cbc31514ea19843f1d571368, type: 3}
+  m_Name: (2) TranslateShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 2
+  rect:
+    serializedVersion: 2
+    x: 310
+    y: 165
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11407586}
+  offset:
+    x: 0
+    y: 4
+--- !u!114 &11461136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b7cc33e1d714e48b4cc0b88c1ca985, type: 3}
+  m_Name: (7) ProductShape2Node
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 7
+  rect:
+    serializedVersion: 2
+    x: 1118
+    y: 229
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11436682}
+  - {fileID: 11485978}
+  scaleFactor:
+    x: 6
+    y: 6
+--- !u!114 &11485978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e2f0463ae803b4ba9c2fc22b399aab, type: 3}
+  m_Name: (3) UnionShape2Node
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 3
+  rect:
+    serializedVersion: 2
+    x: 831
+    y: 281
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11407586}
+  - {fileID: 11450682}
+  - {fileID: 11434222}
+  - {fileID: 11404512}
+--- !u!114 &11486006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: (4) ParallelogramShapeNode
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 4
+  rect:
+    serializedVersion: 2
+    x: 13
+    y: 334
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 1
+    y: 4

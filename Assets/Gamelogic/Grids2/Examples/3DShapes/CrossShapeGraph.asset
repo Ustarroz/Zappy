@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b2ddfea3215b742b25fe3a21349885, type: 3}
+  m_Name: CrossShapeGraph
+  m_EditorClassIdentifier: 
+  idCounter: 12
+  nodes:
+  - {fileID: 11413228}
+  - {fileID: 11463006}
+  - {fileID: 11476792}
+  - {fileID: 11466004}
+  - {fileID: 11459430}
+  - {fileID: 11432564}
+--- !u!114 &11413228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: Parallelogram
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 6
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 1
+    y: 5
+--- !u!114 &11432564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7998bd18cbc31514ea19843f1d571368, type: 3}
+  m_Name: Translate
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 11
+  rect:
+    serializedVersion: 2
+    x: 564
+    y: 189
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11459430}
+  offset:
+    x: 2
+    y: 2
+--- !u!114 &11459430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e2f0463ae803b4ba9c2fc22b399aab, type: 3}
+  m_Name: Union
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 10
+  rect:
+    serializedVersion: 2
+    x: 332
+    y: 115
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11463006}
+--- !u!114 &11463006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db05d109613d534ca735ad5d6eb0237, type: 3}
+  m_Name: Center
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 7
+  rect:
+    serializedVersion: 2
+    x: 285
+    y: 25
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11413228}
+  - {fileID: 11466004}
+--- !u!114 &11466004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: Parallelogram
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 9
+  rect:
+    serializedVersion: 2
+    x: 17
+    y: 169
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 5
+    y: 1
+--- !u!114 &11476792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a0eec6eae5cbb4ba842a582f64347f, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 8
+  rect:
+    serializedVersion: 2
+    x: 902
+    y: 184
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11432564}

@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b2ddfea3215b742b25fe3a21349885, type: 3}
+  m_Name: RingShapeGraph
+  m_EditorClassIdentifier: 
+  idCounter: 6
+  nodes:
+  - {fileID: 11493210}
+  - {fileID: 11482172}
+  - {fileID: 11497418}
+  - {fileID: 11430688}
+  - {fileID: 11436488}
+  - {fileID: 11469892}
+--- !u!114 &11430688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b385dfc60ccd7d84488ede1d81a4dfdc, type: 3}
+  m_Name: Subtract
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 3
+  rect:
+    serializedVersion: 2
+    x: 668
+    y: 136
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11497418}
+--- !u!114 &11436488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a0eec6eae5cbb4ba842a582f64347f, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 4
+  rect:
+    serializedVersion: 2
+    x: 950
+    y: 194
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11469892}
+--- !u!114 &11469892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7998bd18cbc31514ea19843f1d571368, type: 3}
+  m_Name: Translate
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 5
+  rect:
+    serializedVersion: 2
+    x: 611
+    y: 291
+    width: 250
+    height: 61
+  inputNodes:
+  - {fileID: 11430688}
+  offset:
+    x: 2
+    y: 2
+--- !u!114 &11482172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: Parallelogram
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 1
+  rect:
+    serializedVersion: 2
+    x: 14
+    y: 125
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 3
+    y: 3
+--- !u!114 &11493210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92aa88d3916a574783dd3842fd86262, type: 3}
+  m_Name: Parallelogram
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 0
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 250
+    height: 61
+  inputNodes: []
+  dimensions:
+    x: 5
+    y: 5
+--- !u!114 &11497418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db05d109613d534ca735ad5d6eb0237, type: 3}
+  m_Name: Center
+  m_EditorClassIdentifier: 
+  enable: 1
+  id: 2
+  rect:
+    serializedVersion: 2
+    x: 369
+    y: 115
+    width: 250
+    height: 43
+  inputNodes:
+  - {fileID: 11493210}
+  - {fileID: 11482172}
