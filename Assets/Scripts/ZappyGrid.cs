@@ -56,7 +56,7 @@ namespace Gamelogic.Grids2.Examples
 
 		private void InitCell(GridPoint3 point, MeshTileCell cell)
 		{
-			cell.Color = colors[point.GetColor(colorFunction) + point.Z];
+			//cell.Color = colors[point.GetColor(colorFunction) + point.Z];
 		}
 	}
 }
