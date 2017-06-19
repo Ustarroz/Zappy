@@ -21,7 +21,7 @@ public class StateObject {
 
 public class AsynchronousClient {
 	// The port number for the remote device.
-	private const int port = 11000;
+	private const int port = 4242;
 
 	// ManualResetEvent instances signal completion.
 	private static ManualResetEvent connectDone = 
@@ -38,7 +38,7 @@ public class AsynchronousClient {
 		// Connect to a remote device.
 		try {
 			// Establish the remote endpoint for the socket.
-			IPHostEntry ipHostInfo = Dns.Resolve("host.contoso.com");
+			IPHostEntry ipHostInfo = Dns.GetHostEntry("www.contoso.com");
 			IPAddress ipAddress = ipHostInfo.AddressList[0];
 			IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
 
