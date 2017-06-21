@@ -39,17 +39,17 @@ public class SocketRead : MonoBehaviour {
 			// Create a TCP/IP socket.
 			Socket client = new Socket(AddressFamily.InterNetwork,
 				SocketType.Stream, ProtocolType.Tcp);
-
+			
 			// Connect to the remote endpoint.
 			client.BeginConnect( remoteEP, 
 				new AsyncCallback(ConnectCallback), client);
-
+			File.WriteAllText("/home/ubuntu/Zappy/test", "Begin connect\n");
 			// Send test data to the remote device.
 			Send(client,"This is a test<EOF>");
-
+			File.WriteAllText("/home/ubuntu/Zappy/test", "Send\n");
 			// Receive the response from the remote device.
 			Receive(client);
-			File.WriteAllText("/home/ubuntu/Zappy/test", response);
+			File.WriteAllText("/home/ubuntu/Zappy/test", "Receive\n");
 			// Write the response to the console.
 			Console.WriteLine("Response received : {0}", response);
 
