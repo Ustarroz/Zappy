@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-public class Socket : MonoBehaviour {
+public class SocketTest : MonoBehaviour {
 
 	public static void StartClient() {
 		// Data buffer for incoming data.
@@ -21,7 +21,7 @@ public class Socket : MonoBehaviour {
 			IPEndPoint remoteEP = new IPEndPoint(ipAddress,11000);
 
 			// Create a TCP/IP  socket.
-			Socket sender = new Socket(Family.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+			Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
 			// Connect the socket to the remote endpoint. Catch any errors.
 			try {

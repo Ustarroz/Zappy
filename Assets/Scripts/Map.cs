@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Map : MonoBehaviour {
+public class Map : MonoBehaviour
+{
 
     public static readonly Vector3 North = new Vector3(0, 0, 1);
     public static readonly Vector3 East = new Vector3(1, 0, 0);
@@ -29,21 +30,22 @@ public class Map : MonoBehaviour {
         CreateMap();
     }
 
-    void CreateMap () {
+    void CreateMap()
+    {
         cells = new ZappyCell[(int)dimension.x, (int)dimension.y];
 
         mesh = prefab.GetComponent<MeshFilter>().sharedMesh;
-        for (int x = 0; x < dimension.x ; x++)
+        for (int x = 0; x < dimension.x; x++)
         {
             for (int y = 0; y < dimension.y; y++)
             {
-               GameObject go = Instantiate(prefab, new Vector3(mesh.bounds.size.x * x, 0, mesh.bounds.size.z * y), Quaternion.identity, transform);
-                cells[x , y] = go.GetComponent<ZappyCell>();
+                GameObject go = Instantiate(prefab, new Vector3(mesh.bounds.size.x * x, 0, mesh.bounds.size.z * y), Quaternion.identity, transform);
+                cells[x, y] = go.GetComponent<ZappyCell>();
                 cells[x, y].gridPos = new Vector2(x, y);
             }
-        }	
-	}
-	
+        }
+    }
+
     public Vector3 WorldToGrid(Vector3 worldPoint)
     {
         print("ref worldpoint : " + worldPoint);
@@ -66,7 +68,7 @@ public class Map : MonoBehaviour {
         return (vec.x >= 0 && vec.z >= 0 && vec.x < cells.GetLength(0) && vec.z < cells.GetLength(1));
     }
 
-   int MyCeil(double i)
+    int MyCeil(double i)
     {
         int r;
 
