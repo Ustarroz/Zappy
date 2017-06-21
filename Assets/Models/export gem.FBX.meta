@@ -1,15 +1,51 @@
 fileFormatVersion: 2
-guid: da3ae60cc71407b468e947826d1cc545
-timeCreated: 1497522045
+guid: 770ceab217a68b04eb631a5922ef6b27
+timeCreated: 1498037212
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: gem01
+    100004: gem02
+    100006: gem03
+    100008: gem04
+    100010: gem05
+    100012: gem06
+    100014: gem07
+    100016: gem08
+    100018: gem09
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Ground Green
+    400002: gem01
+    400004: gem02
+    400006: gem03
+    400008: gem04
+    400010: gem05
+    400012: gem06
+    400014: gem07
+    400016: gem08
+    400018: gem09
+    2300000: gem01
+    2300002: gem02
+    2300004: gem03
+    2300006: gem04
+    2300008: gem07
+    2300010: gem08
+    2300012: gem09
+    3300000: gem01
+    3300002: gem02
+    3300004: gem03
+    3300006: gem04
+    3300008: gem07
+    3300010: gem08
+    3300012: gem09
+    4300000: gem07
+    4300002: gem08
+    4300004: gem09
+    4300006: gem04
+    4300008: gem03
+    4300010: gem01
+    4300012: gem02
   materials:
     importMaterials: 1
     materialName: 0
@@ -36,7 +72,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.02
+    globalScale: 0.7
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
