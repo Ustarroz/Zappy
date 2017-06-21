@@ -1,62 +1,72 @@
 ﻿using Gamelogic.Extensions;
 using UnityEngine;
+using Gamelogic.Grids2;
 
-namespace Gamelogic.Grids2.Examples
+public class ZappyGrid : GLMonoBehaviour
 {
-	public class ZappyGrid : GLMonoBehaviour
-	{
-		[Tooltip("The prefab to use for cells.")]
-		public MeshTileCell cellPrefab;
+    [Tooltip("The prefab to use for cells.")]
+    public MeshTileCell cellPrefab;
 
-		[Tooltip("All our cells will use this as root to keep the scene neat.")]
-		public GameObject gridRoot;
+    [Tooltip("All our cells will use this as root to keep the scene neat.")]
+    public GameObject gridRoot;
 
-		[Tooltip("The dimensions for the grid to use.")]
-		public InspectableGridPoint3 gridDimensions;
+    [Tooltip("The dimensions for the grid to use.")]
+    public InspectableGridPoint3 gridDimensions;
 
-		[Tooltip("Used to color the cells.")]
-		public ColorFunction colorFunction;
+    [Tooltip("Used to color the cells.")]
+    public ColorFunction colorFunction;
 
-		[Tooltip("The colors to use to color the cells.")]
-		public ColorList colors;
+    [Tooltip("The colors to use to color the cells.")]
+    public ColorList colors;
 
-		public void Start()
-		{
-			BuildGrid();
-		}
+    private Grid3<MeshTileCell> _grid;
+    private GridMap<GridPoint3> _map;
 
-		private void BuildGrid()
-		{
-			var grid = CreateGrid();
-			var map = CreateMap();
+    public Grid3<MeshTileCell> Grid {
+        get { return _grid; }
+    }
 
-			GridBuilderUtils.InitTileGrid(grid, map, cellPrefab, gridRoot, InitCell);
-		}
+    public GridMap<GridPoint3> GetMap
+    {
+        get { return _map; }
+    }
 
-		private Grid3<MeshTileCell> CreateGrid()
-		{
-			var dimensions = gridDimensions.GetGridPoint();
-			var shape = ImplicitShape.Parallelepiped(dimensions);
-			var storage = shape.ToExplicit(new GridBounds(GridPoint3.Zero, dimensions));
-			var grid = new Grid3<MeshTileCell>(storage);
+    public void Awake()
+    {
+        BuildGrid();
+    }
 
-			return grid;
-		}
+    private void BuildGrid()
+    {
+        _grid = CreateGrid();
+        _map = CreateMap();
 
-		private GridMap<GridPoint3> CreateMap()
-		{
-			var cellDimensions = cellPrefab.SharedMesh.bounds.size;
+        GridBuilderUtils.InitTileGrid(_grid, _map, cellPrefab, gridRoot, InitCell);
+    }
 
-			var spaceMap = Map.Linear(Matrixf33.Scale(cellDimensions));
-			var roundMap = Map.BlockRound();
-			var gridMap = new GridMap<GridPoint3>(spaceMap, roundMap);
+    private Grid3<MeshTileCell> CreateGrid()
+    {
+        var dimensions = gridDimensions.GetGridPoint();
+        var shape = ImplicitShape.Parallelepiped(dimensions);
+        var storage = shape.ToExplicit(new GridBounds(GridPoint3.Zero, dimensions));
+        var grid = new Grid3<MeshTileCell>(storage);
 
-			return gridMap;
-		}
+        return grid;
+    }
 
-		private void InitCell(GridPoint3 point, MeshTileCell cell)
-		{
-			//cell.Color = colors[point.GetColor(colorFunction) + point.Z];
-		}
-	}
+    private GridMap<GridPoint3> CreateMap()
+    {
+        var cellDimensions = cellPrefab.SharedMesh.bounds.size;
+
+        var spaceMap = Map.Linear(Matrixf33.Scale(cellDimensions));
+        var roundMap = Map.BlockRound();
+        var gridMap = new GridMap<GridPoint3>(spaceMap, roundMap);
+
+        return gridMap;
+    }
+
+    private void InitCell(GridPoint3 point, MeshTileCell cell)
+    {
+        //cell.Color = colors[point.GetColor(colorFunction) + point.Z];
+    }
 }
