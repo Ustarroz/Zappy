@@ -6,87 +6,86 @@ public class Player : MonoBehaviour
 {
     public Vector3 offset;
     public float speed;
+    public int level = 0;
+    public GameObject currModel;
+    public List<GameObject> models;
 
     Map map;
     Vector3 pos;
     ZappyObjects inventory;
     bool coroutineRunning;
-    CoroutineFramework coroutineFramework;
+    CoroutineFramework coroutineManager;
 
     void Start()
     {
-        coroutineFramework = GetComponent<CoroutineFramework>();
+        coroutineManager = GetComponent<CoroutineFramework>();
         //TODO recup spawn pos from server
         map = GameObject.FindGameObjectWithTag("Grid").GetComponent<Map>();
-        transform.position = map.cells[0, 0].transform.position + offset;
+        Spawn(map.cells[0, 0].transform.position);
 
-       // StartCoroutine(MoveDown());
-        //StartCoroutine(MoveUp());
-       // StartCoroutine(MoveUp());
-
+        StartCoroutine(MoveDown());
+        StartCoroutine(MoveDown());
         StartCoroutine(MoveUp());
         StartCoroutine(MoveUp());
-
-        //  StartCoroutine(MoveUp());
-
-        //  StartCoroutine(MoveRight());
-        /*   StartCoroutine(MoveRight());
-         /*   StartCoroutine(MoveLeft());
-            StartCoroutine(MoveDown());
-            StartCoroutine(MoveDown());
-            StartCoroutine(MoveUp());
-            StartCoroutine(MoveUp());
-            StartCoroutine(MoveUp());*/
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveRight());
+        StartCoroutine(MoveRight());
+        StartCoroutine(MoveRight());
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveUp());
+        StartCoroutine(MoveLeft());
+        StartCoroutine(MoveLeft());
+        StartCoroutine(MoveLeft());
+        StartCoroutine(MoveLeft());
+        StartCoroutine(MoveLeft());
     }
 
     private IEnumerator MoveUp()
     {
-        while (coroutineFramework.IsTrackedCoroutineRunning())
+        while (coroutineManager.IsTrackedCoroutineRunning())
             yield return new WaitForEndOfFrame();
-        print("MoveUp : position before : " + transform.position);
+        //print("MoveUp : position before : " + transform.position);
         Vector3 dest = map.WorldToGrid(transform.position + Map.North);
-        print("BLABLA " + (transform.position + Map.North) + " dest " + dest + " allo " + map.cells[(int)dest.x, (int)dest.z].transform.position);
-        if (map.Contains(dest))
-            yield return coroutineFramework.StartTrackedCoroutine(MoveOverSpeed(map.cells[(int)dest.x, (int)dest.z].transform.position + offset, speed));
-        else
-        {
-            transform.position = map.GridToWorld(Map.South * (map.dimension.y));
-            print(transform.position);
-        }
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.North * map.ScaleFactor.z), speed));
+        if (!map.Contains(dest))
+            transform.position = new Vector3(transform.position.x, transform.position.y, map.GridToWorld(Map.South * (map.dimension.y)).z + transform.position.z);
     }
 
-   /* private IEnumerator MoveDown()
+    private IEnumerator MoveDown()
     {
-        while (coroutineFramework.IsTrackedCoroutineRunning())
+        while (coroutineManager.IsTrackedCoroutineRunning())
             yield return new WaitForEndOfFrame();
-        Vector3 dest = zappyGrid.GetMap.GridToWorld(transform.position + BlockPoint.South + BlockPoint.Down) + offset;
-        yield return coroutineFramework.StartTrackedCoroutine(MoveOverSpeed(dest, speed));
-        if (!zappyGrid.Grid.Contains(new GridPoint3((int)dest.x, 0, (int)dest.z)))
-            transform.position = zappyGrid.GetMap.GridToWorld(BlockPoint.North * (zappyGrid.gridDimensions.z)) + dest;
+        // print("MoveDOwn : position before : " + transform.position);
+        Vector3 dest = map.WorldToGrid(transform.position + Map.South);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.South * map.ScaleFactor.z), speed));
+        if (!map.Contains(dest))
+            transform.position = new Vector3(transform.position.x, transform.position.y, map.GridToWorld(Map.North * (map.dimension.y - 1)).z);
     }
 
     private IEnumerator MoveLeft()
     {
-        while (coroutineFramework.IsTrackedCoroutineRunning())
+        while (coroutineManager.IsTrackedCoroutineRunning())
             yield return new WaitForEndOfFrame();
-        Vector3 dest = zappyGrid.GetMap.GridToWorld(transform.position + BlockPoint.East + BlockPoint.Down) + offset;
-        yield return coroutineFramework.StartTrackedCoroutine(MoveOverSpeed(dest, speed));
-        if (!zappyGrid.Grid.Contains(new GridPoint3((int)dest.x, 0, (int)dest.z)))
-            transform.position = dest + BlockPoint.West * zappyGrid.gridDimensions.x;
+        Vector3 dest = map.WorldToGrid(transform.position + Map.East);
+        //print("MoveLeft : position before : " + transform.position + " dest : " + dest);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.East * map.ScaleFactor.x), speed));
+        if (!map.Contains(dest))
+            transform.position = new Vector3(map.GridToWorld(Map.West * (map.dimension.x)).x + transform.position.x, transform.position.y, transform.position.z);
     }
-    */
+
     private IEnumerator MoveRight()
     {
-        while (coroutineFramework.IsTrackedCoroutineRunning())
+        while (coroutineManager.IsTrackedCoroutineRunning())
             yield return new WaitForEndOfFrame();
-        Vector3 dest = map.GridToWorld(transform.position + Map.West) + offset;
-        print("dest :" + dest);
-        yield return coroutineFramework.StartTrackedCoroutine(MoveOverSpeed(dest, speed));
+        Vector3 dest = map.WorldToGrid(transform.position + Map.West);
+        //print("MoveRIght : position before : " + transform.position + " dest : " + dest);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.West * map.ScaleFactor.x), speed));
         if (!map.Contains(dest))
-        {
-            transform.position = map.GridToWorld(Map.East * (map.dimension.x)) + dest;
-            print("toto");
-        }
+            transform.position = new Vector3(map.GridToWorld(Map.East * (map.dimension.x - 1)).x, transform.position.y, transform.position.z);
     }
 
     private IEnumerator MoveOverSpeed(Vector3 end, float speed)
@@ -99,4 +98,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Spawn(Vector3 position)
+    {
+        if (currModel != null)
+            Destroy(currModel);
+        if (level < models.Count)
+        currModel = Instantiate(models[level], Vector3.zero, models[level].transform.rotation, transform);
+        transform.position = position + offset;
+    }
 }
