@@ -750,11 +750,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423263879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74b1b89072f341b792b2400f66356ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b9e2f396bf2b4fd59c9ce815283048b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 
-  port: 0
 --- !u!4 &1423263881
 Transform:
   m_ObjectHideFlags: 0
@@ -800,7 +798,10 @@ MonoBehaviour:
   speed: 5
   level: 0
   currModel: {fileID: 0}
-  models: []
+  models:
+  - {fileID: 100000, guid: 2035346fc988e254788b48035fb40d38, type: 3}
+  - {fileID: 100000, guid: 0db8926c951bac540b9c3abed70a5e67, type: 3}
+  - {fileID: 100288, guid: d32cc01bcf29d0644b7cbfc3e959fcfd, type: 3}
 --- !u!114 &1444494432
 MonoBehaviour:
   m_ObjectHideFlags: 0
