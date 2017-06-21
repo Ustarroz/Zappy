@@ -5,6 +5,7 @@ using Gamelogic.Grids2;
 
 public class ZappyCell : MonoBehaviour {
 
+    public Vector2 gridPos;
     ZappyObjects inventory;
 
     // Use this for initialization
