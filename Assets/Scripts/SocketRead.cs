@@ -69,6 +69,7 @@ public class SocketRead : MonoBehaviour {
 
 			// Complete the connection.
 			client.EndConnect(ar);
+			File.WriteAllText("/home/ubuntu/Zappy/test", "Socket connected\n" + client.RemoteEndPoint.ToString());
 
 			Console.WriteLine("Socket connected to {0}",
 				client.RemoteEndPoint.ToString());
@@ -133,7 +134,7 @@ public class SocketRead : MonoBehaviour {
 			// Complete sending the data to the remote device.
 			int bytesSent = client.EndSend(ar);
 			Console.WriteLine("Sent {0} bytes to server.", bytesSent);
-
+			File.WriteAllText("/home/ubuntu/Zappy/test", "Send callback\n");
 			// Signal that all bytes have been sent.
 		} catch (Exception e) {
 			Console.WriteLine(e.ToString());
