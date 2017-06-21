@@ -13,7 +13,7 @@ public class StateObject {
 	public Socket workSocket = null;
 	// Size of receive buffer.
 	public const int BufferSize = 256;
-	// Receive buffer.
+	// Receive buffer.	
 	public byte[] buffer = new byte[BufferSize];
 	// Received data string.
 	public StringBuilder sb = new StringBuilder();
@@ -38,8 +38,8 @@ public class AsynchronousClient {
 		// Connect to a remote device.
 		try {
 			// Establish the remote endpoint for the socket.
-			IPHostEntry ipHostInfo = Dns.GetHostEntry("www.contoso.com");
-			IPAddress ipAddress = ipHostInfo.AddressList[0];
+			//IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
+			IPAddress ipAddress = Dns.GetHostEntry("localhost").AddressList[0];
 			IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
 
 			// Create a TCP/IP socket.
