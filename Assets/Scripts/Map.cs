@@ -19,6 +19,11 @@ public class Map : MonoBehaviour {
 
     Mesh mesh;
 
+    public Vector3 ScaleFactor
+    {
+        get { return mesh.bounds.size; }
+    }
+
     private void Awake()
     {
         CreateMap();
@@ -41,17 +46,38 @@ public class Map : MonoBehaviour {
 	
     public Vector3 WorldToGrid(Vector3 worldPoint)
     {
-        print("worldToGRid : " + worldPoint.x / mesh.bounds.size.x + " - " + Math.Ceiling(worldPoint.z / mesh.bounds.size.z));
-        return (new Vector3((int)Math.Ceiling(worldPoint.x / mesh.bounds.size.x), 0, (int)Math.Ceiling(worldPoint.z / mesh.bounds.size.z)));
+        print("ref worldpoint : " + worldPoint);
+        Vector3 vec = new Vector3(worldPoint.x / mesh.bounds.size.x, 0, worldPoint.z / mesh.bounds.size.z);
+        print("worldToGRid : " + vec);
+        vec.x = MyCeil(vec.x);
+        vec.z = MyCeil(vec.z);
+        print("VVV 22222 worldToGRid : " + vec);
+        return vec;
     }
 
-    public Vector3 GridToWorld(Vector2 gridPoint)
+    public Vector3 GridToWorld(Vector3 gridPoint)
     {
-        return (new Vector3(gridPoint.x * mesh.bounds.size.x, 0, gridPoint.y * mesh.bounds.size.z));
+        return (new Vector3(gridPoint.x * mesh.bounds.size.x, 0, gridPoint.z * mesh.bounds.size.z));
     }
 
     public bool Contains(Vector3 vec)
     {
-        return (vec.x >= 0 && vec.y >= 0 && vec.x < cells.GetLength(0) && vec.z < cells.GetLength(1));
+        print(vec + " " + cells.GetLength(0) + " " + cells.GetLength(1));
+        return (vec.x >= 0 && vec.z >= 0 && vec.x < cells.GetLength(0) && vec.z < cells.GetLength(1));
+    }
+
+   int MyCeil(double i)
+    {
+        int r;
+
+        if (i < 0)
+        {
+            i *= -1;
+            r = (int)Math.Ceiling(i);
+            r *= -1;
+        }
+        else
+            r = (int)Math.Ceiling(i);
+        return r;
     }
 }
