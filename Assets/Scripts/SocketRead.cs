@@ -137,6 +137,7 @@ public class SocketRead : MonoBehaviour {
 			File.WriteAllText("/home/ubuntu/Zappy/test", "Send callback\n");
 			// Signal that all bytes have been sent.
 		} catch (Exception e) {
+			File.WriteAllText("/home/ubuntu/Zappy/test", "Send failed" + e.ToString());
 			Console.WriteLine(e.ToString());
 		}
 	}
