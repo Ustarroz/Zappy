@@ -6,6 +6,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Text;
+using System.IO;
 
 public class SocketRead : MonoBehaviour {
 // State object for receiving data from remote device.
@@ -23,6 +24,7 @@ public class SocketRead : MonoBehaviour {
 	public string ip;
 	public int port;
 	void Start (){
+		File.WriteAllText("./", "COUCOU");
 		Console.Write("COUCOU JE SUIS UN SCRIPT");
 	// The port number for the remote device.
 	 const int port = 4242;
