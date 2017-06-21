@@ -49,7 +49,7 @@ public class SocketRead : MonoBehaviour {
 
 			// Receive the response from the remote device.
 			Receive(client);
-
+			File.WriteAllText("/home/ubuntu/Zappy/test", response);
 			// Write the response to the console.
 			Console.WriteLine("Response received : {0}", response);
 
