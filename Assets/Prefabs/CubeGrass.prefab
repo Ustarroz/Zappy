@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33301637765901194}
   - component: {fileID: 23644360797467564}
   - component: {fileID: 114528798862022734}
-  m_Layer: 0
+  - component: {fileID: 65188891838533274}
+  m_Layer: 8
   m_Name: CubeGrass
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180635636252012}
   m_Mesh: {fileID: 4300000, guid: da3ae60cc71407b468e947826d1cc545, type: 3}
+--- !u!65 &65188891838533274
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1180635636252012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4.0000005, z: 4.0000005}
+  m_Center: {x: 0, y: -2.0000002, z: 0.00000023841858}
 --- !u!114 &114528798862022734
 MonoBehaviour:
   m_ObjectHideFlags: 1

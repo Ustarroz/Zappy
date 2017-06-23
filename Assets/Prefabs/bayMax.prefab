@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4789740785645552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4358104646134966}
   - component: {fileID: 33133845902390782}
   - component: {fileID: 23803165810593700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4737198973512898}
   - component: {fileID: 33403007277336554}
   - component: {fileID: 23084451459959598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4310569188724666}
   - component: {fileID: 33187232975064914}
   - component: {fileID: 23669961336358536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4395686970555042}
   - component: {fileID: 33227920405190014}
   - component: {fileID: 23012911252419298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 33727506294738390}
   - component: {fileID: 23257732498773666}
   - component: {fileID: 95222512860466240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bayMax
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4027885961595154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
