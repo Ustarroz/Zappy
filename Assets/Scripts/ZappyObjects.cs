@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ZappyObjects {
 
-    int Food { get; set; }
-    int Linemate { get; set; }
-    int Deraumere { get; set; }
-    int Sibur { get; set; }
-    int Mendiane { get; set; }
-    int Phiras { get; set; }
-    int Thystame { get; set; }
+    public int Food { get; set; }
+    public int Linemate { get; set; }
+    public int Deraumere { get; set; }
+    public int Sibur { get; set; }
+    public int Mendiane { get; set; }
+    public int Phiras { get; set; }
+    public int Thystame { get; set; }
 
     public ZappyObjects()
     {

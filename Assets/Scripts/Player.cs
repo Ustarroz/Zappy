@@ -23,25 +23,25 @@ public class Player : MonoBehaviour
         map = GameObject.FindGameObjectWithTag("Grid").GetComponent<Map>();
         Spawn(map.cells[2, 0].transform.position);
 
-     /*   StartCoroutine(MoveDown());
-        StartCoroutine(MoveDown());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveRight());
-        StartCoroutine(MoveRight());
-        StartCoroutine(MoveRight());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveUp());
-        StartCoroutine(MoveLeft());
-        StartCoroutine(MoveLeft());
-        StartCoroutine(MoveLeft());
-        StartCoroutine(MoveLeft());
-        StartCoroutine(MoveLeft());*/
+        /*   StartCoroutine(MoveDown());
+           StartCoroutine(MoveDown());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveRight());
+           StartCoroutine(MoveRight());
+           StartCoroutine(MoveRight());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveUp());
+           StartCoroutine(MoveLeft());
+           StartCoroutine(MoveLeft());
+           StartCoroutine(MoveLeft());
+           StartCoroutine(MoveLeft());
+           StartCoroutine(MoveLeft());*/
     }
 
     private IEnumerator MoveUp()
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
         if (currModel != null)
             Destroy(currModel);
         if (level < models.Count)
-        currModel = Instantiate(models[level], Vector3.zero, models[level].transform.rotation, transform);
+            currModel = Instantiate(models[level], Vector3.zero, models[level].transform.rotation, transform);
         transform.position = position + offset;
     }
 }

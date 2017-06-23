@@ -40,6 +40,7 @@ public class Map : MonoBehaviour
             for (int y = 0; y < dimension.y; y++)
             {
                 GameObject go = Instantiate(prefab, new Vector3(mesh.bounds.size.x * x, 0, mesh.bounds.size.z * y), Quaternion.identity, transform);
+                go.name = "cube(" + x +","+ y + ")";
                 cells[x, y] = go.GetComponent<ZappyCell>();
                 cells[x, y].gridPos = new Vector2(x, y);
             }

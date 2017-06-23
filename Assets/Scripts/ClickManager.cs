@@ -5,7 +5,14 @@ using UnityEngine;
 public class ClickManager : MonoBehaviour
 {
 
-    ZappyObjects Click()
+    //private InventoryUI inventoryUI;
+
+    private void Start()
+    {
+    //    inventoryUI = GameObject.FindGameObjectWithTag("InventoryUI").GetComponent<InventoryUI>();
+    }
+
+    private ZappyObjects Click()
     {
         RaycastHit hit;
         Ray screenToWorldPos = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -23,12 +30,19 @@ public class ClickManager : MonoBehaviour
         return null;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             ZappyObjects inv = Click();
+
+            InventoryUI.UpdateUI("Food", inv.Food);
+            InventoryUI.UpdateUI("Deraumere", inv.Deraumere);
+            InventoryUI.UpdateUI("Linebate", inv.Linemate);
+            InventoryUI.UpdateUI("Mendiane", inv.Mendiane);
+            InventoryUI.UpdateUI("Phiras", inv.Phiras);
+            InventoryUI.UpdateUI("Sibur", inv.Sibur);
+            InventoryUI.UpdateUI("Thystame", inv.Thystame);
         }
     }
 }
