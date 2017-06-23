@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour
 {
-
-    //private InventoryUI inventoryUI;
-
-    private void Start()
-    {
-    //    inventoryUI = GameObject.FindGameObjectWithTag("InventoryUI").GetComponent<InventoryUI>();
-    }
-
     private ZappyObjects Click()
     {
         RaycastHit hit;
@@ -20,15 +12,10 @@ public class ClickManager : MonoBehaviour
         if (Physics.Raycast(screenToWorldPos, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Clickable")))
         {
             Debug.Log(hit.transform.name);
-            //if (ZoneMap.HexMap.mapGrid.WorldToGrid(hit.transform.localPosition))
-            //Debug.Log(ZoneMap.HexMap.mapGrid.WorldToGrid(hit.transform.localPosition).name);
             if (hit.transform.tag == "Player")
                 return hit.transform.parent.gameObject.GetComponent<Player>().inventory;
             else
-            {
-                print("allo");
                 return hit.transform.gameObject.GetComponent<ZappyCell>().inventory;
-            }
         }
         return null;
     }
@@ -41,7 +28,6 @@ public class ClickManager : MonoBehaviour
 
             if (inv != null)
             {
-                print("toto");
                 InventoryUI.UpdateUI("Food", inv.Food);
                 InventoryUI.UpdateUI("Deraumere", inv.Deraumere);
                 InventoryUI.UpdateUI("Linebate", inv.Linemate);
