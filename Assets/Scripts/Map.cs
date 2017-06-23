@@ -48,12 +48,9 @@ public class Map : MonoBehaviour
 
     public Vector3 WorldToGrid(Vector3 worldPoint)
     {
-        print("ref worldpoint : " + worldPoint);
         Vector3 vec = new Vector3(worldPoint.x / mesh.bounds.size.x, 0, worldPoint.z / mesh.bounds.size.z);
-        print("worldToGRid : " + vec);
         vec.x = MyCeil(vec.x);
         vec.z = MyCeil(vec.z);
-        print("VVV 22222 worldToGRid : " + vec);
         return vec;
     }
 
@@ -64,7 +61,6 @@ public class Map : MonoBehaviour
 
     public bool Contains(Vector3 vec)
     {
-        print(vec + " " + cells.GetLength(0) + " " + cells.GetLength(1));
         return (vec.x >= 0 && vec.z >= 0 && vec.x < cells.GetLength(0) && vec.z < cells.GetLength(1));
     }
 

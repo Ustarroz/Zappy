@@ -6,15 +6,6 @@ using Gamelogic.Grids2;
 public class ZappyCell : MonoBehaviour {
 
     public Vector2 gridPos;
-    ZappyObjects inventory;
+    public ZappyObjects inventory;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

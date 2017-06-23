@@ -27,7 +27,7 @@ public class SocketTest : MonoBehaviour {
 			try {
 				sender.Connect(remoteEP);
 
-				Console.WriteLine("Socket connected to {0}",
+				Debug.Log("Socket connected to " +
 					sender.RemoteEndPoint.ToString());
 
 				// Encode the data string into a byte array.
@@ -38,23 +38,22 @@ public class SocketTest : MonoBehaviour {
 
 				// Receive the response from the remote device.
 				int bytesRec = sender.Receive(bytes);
-				Console.WriteLine("Echoed test = {0}",
-					Encoding.ASCII.GetString(bytes,0,bytesRec));
+                Debug.Log("Echoed test = {0}" + Encoding.ASCII.GetString(bytes,0,bytesRec));
 
 				// Release the socket.
 				sender.Shutdown(SocketShutdown.Both);
 				sender.Close();
 
 			} catch (ArgumentNullException ane) {
-				Console.WriteLine("ArgumentNullException : {0}",ane.ToString());
+                Debug.Log("ArgumentNullException : " + ane.ToString());
 			} catch (SocketException se) {
-				Console.WriteLine("SocketException : {0}",se.ToString());
+                Debug.Log("SocketException : " + se.ToString());
 			} catch (Exception e) {
-				Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                Debug.Log("Unexpected exception : " + e.ToString());
 			}
 
 		} catch (Exception e) {
-			Console.WriteLine( e.ToString());
+            Debug.Log(e.ToString());
 		}
 	}
 

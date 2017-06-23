@@ -24,7 +24,7 @@ public class SocketRead : MonoBehaviour {
 	public string ip;
 	public int port;
 	void Start (){
-		File.WriteAllText("/home/ubuntu/Zappy/test", "COUCOU");
+		File.WriteAllText("./test", "COUCOU");
 		Console.Write("COUCOU JE SUIS UN SCRIPT");
 	// The port number for the remote device.
 	 const int port = 4242;

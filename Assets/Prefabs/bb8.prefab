@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4617143089623770}
   - component: {fileID: 33183242737498566}
   - component: {fileID: 23730546666097326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4272328074389006}
   - component: {fileID: 33998294782001658}
   - component: {fileID: 23677833838969378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4849942099157058}
   - component: {fileID: 33400023514853732}
   - component: {fileID: 23472483076192384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4722619421752526}
   - component: {fileID: 33742827147809906}
   - component: {fileID: 23401962461963268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4041661483597902}
   - component: {fileID: 33516333494685076}
   - component: {fileID: 23148694957172070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4431749779478302}
   - component: {fileID: 33898792827610864}
   - component: {fileID: 23212678409507276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,9 +124,10 @@ GameObject:
   - component: {fileID: 33390837384446758}
   - component: {fileID: 23762972036063998}
   - component: {fileID: 95415129445054756}
-  m_Layer: 0
+  - component: {fileID: 65858267733399640}
+  m_Layer: 8
   m_Name: bb8
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -505,6 +506,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1065503786396056}
   m_Mesh: {fileID: 4300004, guid: 2035346fc988e254788b48035fb40d38, type: 3}
+--- !u!65 &65858267733399640
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936728153286714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.82, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0.6}
 --- !u!95 &95415129445054756
 Animator:
   serializedVersion: 3

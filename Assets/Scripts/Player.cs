@@ -9,10 +9,10 @@ public class Player : MonoBehaviour
     public int level = 0;
     public GameObject currModel;
     public List<GameObject> models;
+    public ZappyObjects inventory;
 
     Map map;
     Vector3 pos;
-    ZappyObjects inventory;
     bool coroutineRunning;
     CoroutineFramework coroutineManager;
 
@@ -21,10 +21,10 @@ public class Player : MonoBehaviour
         coroutineManager = GetComponent<CoroutineFramework>();
         //TODO recup spawn pos from server
         map = GameObject.FindGameObjectWithTag("Grid").GetComponent<Map>();
-        Spawn(map.cells[0, 0].transform.position);
+        Spawn(map.cells[2, 0].transform.position);
 
+     /*   StartCoroutine(MoveDown());
         StartCoroutine(MoveDown());
-        StartCoroutine(MoveDown());
         StartCoroutine(MoveUp());
         StartCoroutine(MoveUp());
         StartCoroutine(MoveUp());
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         StartCoroutine(MoveLeft());
         StartCoroutine(MoveLeft());
         StartCoroutine(MoveLeft());
-        StartCoroutine(MoveLeft());
+        StartCoroutine(MoveLeft());*/
     }
 
     private IEnumerator MoveUp()
