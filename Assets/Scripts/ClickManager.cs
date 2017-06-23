@@ -25,7 +25,10 @@ public class ClickManager : MonoBehaviour
             if (hit.transform.tag == "Player")
                 return hit.transform.parent.gameObject.GetComponent<Player>().inventory;
             else
+            {
+                print("allo");
                 return hit.transform.gameObject.GetComponent<ZappyCell>().inventory;
+            }
         }
         return null;
     }
@@ -36,13 +39,17 @@ public class ClickManager : MonoBehaviour
         {
             ZappyObjects inv = Click();
 
-            InventoryUI.UpdateUI("Food", inv.Food);
-            InventoryUI.UpdateUI("Deraumere", inv.Deraumere);
-            InventoryUI.UpdateUI("Linebate", inv.Linemate);
-            InventoryUI.UpdateUI("Mendiane", inv.Mendiane);
-            InventoryUI.UpdateUI("Phiras", inv.Phiras);
-            InventoryUI.UpdateUI("Sibur", inv.Sibur);
-            InventoryUI.UpdateUI("Thystame", inv.Thystame);
+            if (inv != null)
+            {
+                print("toto");
+                InventoryUI.UpdateUI("Food", inv.Food);
+                InventoryUI.UpdateUI("Deraumere", inv.Deraumere);
+                InventoryUI.UpdateUI("Linebate", inv.Linemate);
+                InventoryUI.UpdateUI("Mendiane", inv.Mendiane);
+                InventoryUI.UpdateUI("Phiras", inv.Phiras);
+                InventoryUI.UpdateUI("Sibur", inv.Sibur);
+                InventoryUI.UpdateUI("Thystame", inv.Thystame);
+            }
         }
     }
 }

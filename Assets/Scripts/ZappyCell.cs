@@ -8,4 +8,9 @@ public class ZappyCell : MonoBehaviour {
     public Vector2 gridPos;
     public ZappyObjects inventory;
 
+    private void Start()
+    {
+        inventory = new ZappyObjects();
+    }
+
 }
