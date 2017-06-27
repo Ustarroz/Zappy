@@ -25,12 +25,7 @@ public class Map : MonoBehaviour
         get { return mesh.bounds.size; }
     }
 
-    private void Awake()
-    {
-        CreateMap();
-    }
-
-    void CreateMap()
+    public void CreateMap()
     {
         cells = new ZappyCell[(int)dimension.x, (int)dimension.y];
 
@@ -40,7 +35,7 @@ public class Map : MonoBehaviour
             for (int y = 0; y < dimension.y; y++)
             {
                 GameObject go = Instantiate(prefab, new Vector3(mesh.bounds.size.x * x, 0, mesh.bounds.size.z * y), Quaternion.identity, transform);
-                go.name = "cube(" + x +","+ y + ")";
+                go.name = "cube(" + x + ","+ y + ")";
                 cells[x, y] = go.GetComponent<ZappyCell>();
                 cells[x, y].gridPos = new Vector2(x, y);
             }
@@ -63,6 +58,11 @@ public class Map : MonoBehaviour
     public bool Contains(Vector3 vec)
     {
         return (vec.x >= 0 && vec.z >= 0 && vec.x < cells.GetLength(0) && vec.z < cells.GetLength(1));
+    }
+
+    public void UpdateCell(int x, int y, int food, int libenate, int deraumere, int sibur, int mendiane, int phiras, int thystame)
+    {
+        cells[x, y].UpdateCell(food, libenate, deraumere, sibur, mendiane, phiras, thystame);
     }
 
     int MyCeil(double i)

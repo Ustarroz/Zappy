@@ -17,4 +17,15 @@ public class ZappyObjects {
     {
         Food = Linemate = Deraumere = Sibur = Mendiane = Phiras = Thystame = 0;
     }
+
+    public void UpdateValues(int food, int libenate, int deraumere, int sibur, int mendiane, int phiras, int thystame)
+    {
+        Food = food;
+        Linemate = libenate;
+        Deraumere = deraumere;
+        Sibur = sibur;
+        Mendiane = mendiane;
+        Phiras = phiras;
+        Thystame = thystame;
+    }
 }

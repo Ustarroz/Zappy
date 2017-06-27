@@ -30,7 +30,7 @@ public class ClickManager : MonoBehaviour
             {
                 InventoryUI.UpdateUI("Food", inv.Food);
                 InventoryUI.UpdateUI("Deraumere", inv.Deraumere);
-                InventoryUI.UpdateUI("Linebate", inv.Linemate);
+                InventoryUI.UpdateUI("Linemate", inv.Linemate);
                 InventoryUI.UpdateUI("Mendiane", inv.Mendiane);
                 InventoryUI.UpdateUI("Phiras", inv.Phiras);
                 InventoryUI.UpdateUI("Sibur", inv.Sibur);
