@@ -6,13 +6,13 @@ using Random = UnityEngine.Random;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
-    public class FirstPersonController : MonoBehaviour
+    public class FlyCamController : MonoBehaviour
     {
         private const float _movementVelocity = 1f;
 
-        float mainSpeed = 80.0f; //regular speed
-        float shiftAdd = 250.0f; //multiplied by how long shift is held.  Basically running
-        float maxShift = 500.0f; //Maximum speed when holdin gshift
+        float mainSpeed = 65.0f; //regular speed
+        float shiftAdd = 200.0f; //multiplied by how long shift is held.  Basically running
+        float maxShift = 400.0f; //Maximum speed when holdin gshift
         float camSens = 0.20f; //How sensitive it with mouse
         private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
         private float totalRun= 1.0f;
@@ -59,10 +59,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         }
         
-        public void Start()
-        {
-        }
-
         private Vector3 GetBaseInput() 
         { //returns the basic values, if it's 0 than it's not active.
             Vector3 p_Velocity = new Vector3();
