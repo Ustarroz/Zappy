@@ -7,19 +7,6 @@ public class UpdateManager : MonoBehaviour
     public SpawnManager spawnManager;
     public Map map;
 
-    private void Awake()
-    {
-        MapSizeUpdate("msz 10 5\n".Split(' '));
-        map.CreateMap();
-        NewPlayer("pnw 0 0 2 4 0 toto\n".Split(' '));
-        UpdateCell("bct 0 0 1 2 3 4 5 6 7".Split(' '));
-    }
-
-    string[] Parse(string response)
-    {
-        return response.Split(' ');
-    }
-
     public void UpdateCell(string[] res)
     {
         if (res.Length == 10 && res[0] == "bct")
@@ -34,6 +21,7 @@ public class UpdateManager : MonoBehaviour
         {
             map.dimension.x = int.Parse(res[1]);
             map.dimension.y = int.Parse(res[2]);
+            map.CreateMap();
         }
     }
 
@@ -56,7 +44,7 @@ public class UpdateManager : MonoBehaviour
 
     public void UpdatePlayerPos(string[] res)
     {
-        if (res.Length == 3 && res[0] == "plv")
+        if (res.Length == 3 && res[0] == "ppo")
         {
 
         }
@@ -68,6 +56,11 @@ public class UpdateManager : MonoBehaviour
     }
 
     public void StartIncantation(string[] res)
+    {
+
+    }
+
+    public void EndIncantation(string[] res)
     {
 
     }
@@ -107,21 +100,13 @@ public class UpdateManager : MonoBehaviour
 
     public void UpdateUnitTime(string[] res)
     {
-        if (res.Length == 2 && res[0] == "sqt")
-        {
-
-        }
-    }
-
-    public void ChangeUnitTime(string[] res)
-    {
         if (res.Length == 2 && res[0] == "sgt")
         {
 
         }
     }
 
-    public void EndTime(string[] res)
+    public void EndGame(string[] res)
     {
         if (res.Length == 2 && res[0] == "seg")
         {

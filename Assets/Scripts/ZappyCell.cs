@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Gamelogic.Grids2;
 
 public class ZappyCell : MonoBehaviour
 {
