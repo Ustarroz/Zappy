@@ -7,6 +7,8 @@ public class UpdateManager : MonoBehaviour
     public SpawnManager spawnManager;
     public Map map;
 
+    public static int frequency = 100;
+
     public void UpdateCell(string[] res)
     {
         if (res.Length == 10 && res[0] == "bct")
@@ -59,9 +61,10 @@ public class UpdateManager : MonoBehaviour
 
     public void PlayerExpulse(string[] res)
     {
-        if (res.Length == 1 && res[0] == "pex")
+        if (res.Length == 2 && res[0] == "pex")
         {
-            spawnManager.FindPlayerById(int.Parse(res[0]));
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            StartCoroutine(p.Expulse());
         }
     }
 
@@ -112,7 +115,12 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 2 && res[0] == "sgt")
         {
+            frequency = int.Parse(res[1]);
 
+            foreach (Player p in spawnManager.players)
+            {
+                p.speed = 7 / frequency;
+            }
         }
     }
 

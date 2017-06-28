@@ -5,8 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector3 offset;
+    [HideInInspector]
     public float speed;
-    public int level = 0;
+    public int level = 1;
     public GameObject currModel;
     public List<GameObject> models;
     public ZappyObjects inventory;
@@ -28,11 +29,11 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void Awake()
     {
         waitForEndOfFrame = new WaitForEndOfFrame();
         coroutineManager = GetComponent<CoroutineFramework>();
+        speed = 7 / UpdateManager.frequency;
 
         /*   StartCoroutine(MoveForward());
            StartCoroutine(Turn90Left());
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         //print("MoveUp : position before : " + transform.position);
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.North);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.South * (GetMap.dimension.y)).z + transform.position.z);
     }
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         // print("MoveDOwn : position before : " + transform.position);
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.South);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.South * GetMap.ScaleFactor.z), speed));
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.South * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.North * (GetMap.dimension.y - 1)).z);
     }
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.East);
         //print("MoveLeft : position before : " + transform.position + " dest : " + dest);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.East * GetMap.ScaleFactor.x), speed));
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.East * GetMap.ScaleFactor.x), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(GetMap.GridToWorld(Map.West * (GetMap.dimension.x)).x + transform.position.x, transform.position.y, transform.position.z);
     }
@@ -115,7 +116,7 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.West);
         // print("MoveRIght : position before : " + transform.position + " dest : " + dest);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.West * GetMap.ScaleFactor.x), speed));
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.West * GetMap.ScaleFactor.x), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(GetMap.GridToWorld(Map.East * (GetMap.dimension.x - 1)).x, transform.position.y, transform.position.z);
     }
@@ -128,6 +129,21 @@ public class Player : MonoBehaviour
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, end, speed * Time.deltaTime);
             yield return waitForEndOfFrame;
         }
+    }
+
+    public IEnumerator MoveOverSeconds(Vector3 end, float seconds)
+    {
+        float elapsedTime = 0;
+        Vector3 startPos = transform.position;
+
+        while (elapsedTime < seconds)
+        {
+            transform.position = Vector3.Lerp(startPos, end, (elapsedTime / seconds));
+            elapsedTime += Time.deltaTime;
+            print(elapsedTime);
+            yield return waitForEndOfFrame;
+        }
+        transform.position = end;
     }
 
     public IEnumerator Turn(Vector3 orientation)
@@ -179,8 +195,8 @@ public class Player : MonoBehaviour
     {
         if (currModel != null)
             Destroy(currModel);
-        if (level < models.Count)
-            currModel = Instantiate(models[level], Vector3.zero, models[level].transform.rotation, transform);
+        if (level - 1 < models.Count)
+            currModel = Instantiate(models[level - 1], Vector3.zero, models[level - 1].transform.rotation, transform);
         transform.position = position + offset;
     }
 
@@ -194,8 +210,12 @@ public class Player : MonoBehaviour
         return transform.rotation.eulerAngles != orientation;
     }
 
-    public void Expulse()
+    public IEnumerator Expulse()
     {
-        expulse.SetActive(!expulse.activeSelf);
+        while (coroutineManager.IsTrackedCoroutineRunning())
+            yield return waitForEndOfFrame;
+        expulse.SetActive(true);
+        yield return new WaitForSeconds(1);
+        expulse.SetActive(false);
     }
 }
