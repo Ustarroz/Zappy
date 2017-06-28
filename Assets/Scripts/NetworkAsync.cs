@@ -10,8 +10,21 @@ public class NetworkAsync : UnityTcpClientAsync
     public string ip;
     public int port;
 
-    private void Start()
+    public void GetPort(string str)
     {
+        port = int.Parse(str);
+    }
+
+    public void GetIp(string str)
+    {
+        print(str);
+        ip = str;
+        print(ip);
+    }
+
+    public void ConnecteToServer()
+    {
+        print(ip);
         Init();
         Connect(ip, port);
     }
