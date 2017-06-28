@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-
     public GameObject playerPrefab;
     public Color[] teamColor;
     public List<Player> players;
+    public Map map;
 
     int nbTeams;
 
@@ -26,35 +26,44 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(Vector3 pos, int orientation, int id, string team)
+    public void SpawnPlayer(int x, int y, int orientation, int id, string team)
     {
-
+        Vector3 pos = map.cells[x, y].transform.position;
         GameObject go = Instantiate(playerPrefab);
         Player player = go.GetComponent<Player>();
 
+        player.gridPos = new Vector2(x, y);
         player.team = team;
         player.id = id;
         player.Spawn(pos);
         players.Add(player);
+        player.transform.eulerAngles = ConvertOrientation(orientation);
+
+        //change color material for team;
+    }
+
+    public Player FindPlayerById(int id)
+    {
+        return players.Find((x) => x.id == id);
+    }
+
+    public Vector3 ConvertOrientation(int orientation)
+    {
         switch (orientation)
         {
             case 1:
                 //north
-                player.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                break;
+                return new Vector3(0, 0, 0);
             case 2:
                 //east
-                player.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0)); 
-                break;
+                return new Vector3(0, 90, 0);
             case 3:
                 //south
-                player.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                break;
+                return new Vector3(0, 180, 0);
             case 4:
                 //west
-                player.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-                break;
+                return new Vector3(0, -90, 0);
         };
-        //change color material for team;
+        return Vector3.zero;
     }
 }
