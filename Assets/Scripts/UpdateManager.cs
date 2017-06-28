@@ -35,11 +35,12 @@ public class UpdateManager : MonoBehaviour
         }
     }
 
-    public void UpdatePlayerLvl(string[] res)
+    public void UpdatePlayerLvl(string[] res) 
     {
         if (res.Length == 3 && res[0] == "plv")
         {
-
+			Player play = spawnManager.FindPlayerById(int.Parse(res[1]));
+			play.level = int.Parse(res[2]);
         }
     }
 
