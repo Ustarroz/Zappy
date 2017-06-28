@@ -28,7 +28,10 @@ public class NetworkAsync : UnityTcpClientAsync
 
     public override void OnError(params object[] p)
     {
-        throw new NotImplementedException();
+        foreach(object o in p)
+        {
+            Debug.Log(o.ToString());
+        }
     }
 
     public override void OnReceive(params object[] p)

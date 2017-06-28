@@ -7,6 +7,7 @@ public class InterpretServerResponse : MonoBehaviour
 {
     public UpdateManager updateManager;
     private Dictionary<string, Action<string[]>> commands;
+    bool wait = true;
 
     private void Awake()
     {
@@ -29,8 +30,10 @@ public class InterpretServerResponse : MonoBehaviour
 
 
         InterpretResponse("msz 10 5\n");
-        InterpretResponse("pnw 0 0 2 4 0 toto\n");
+        InterpretResponse("pnw 0 0 0 1 0 toto\n");
         InterpretResponse("bct 0 0 1 2 3 4 5 6 7");
+        InterpretResponse("ppo 0 0 0 2\n");
+        InterpretResponse("ppo 0 1 0 1\n");
     }
 
     string[] Parse(string response)

@@ -12,31 +12,36 @@ public class Player : MonoBehaviour
     public ZappyObjects inventory;
     public int id;
     public string team;
+    public Vector3 gridPos;
+    public GameObject expulse;
+    private CoroutineFramework coroutineManager;
+    private WaitForEndOfFrame waitForEndOfFrame;
+    private Map map;
 
-    Map map;
-    Vector3 pos;
-    bool coroutineRunning;
-    CoroutineFramework coroutineManager;
+    private Map GetMap
+    {
+        get
+        {
+            if (map == null)
+                map = GameObject.FindGameObjectWithTag("Grid").GetComponent<Map>();
+            return map;
+        }
+    }
 
-    WaitForEndOfFrame waitForEndOfFrame;
 
-    void Start()
+    void Awake()
     {
         waitForEndOfFrame = new WaitForEndOfFrame();
         coroutineManager = GetComponent<CoroutineFramework>();
-        //TODO recup spawn pos from server
-        map = GameObject.FindGameObjectWithTag("Grid").GetComponent<Map>();
-        /*   Spawn(map.cells[2, 0].transform.position);
-        */
 
-     /*   StartCoroutine(MoveForward());
-        StartCoroutine(Turn90Left());
-        StartCoroutine(MoveForward());
-        StartCoroutine(Turn90Right());
-        StartCoroutine(MoveForward());
-        StartCoroutine(Turn90Right());
-        StartCoroutine(MoveForward());
-       */ 
+        /*   StartCoroutine(MoveForward());
+           StartCoroutine(Turn90Left());
+           StartCoroutine(MoveForward());
+           StartCoroutine(Turn90Right());
+           StartCoroutine(MoveForward());
+           StartCoroutine(Turn90Right());
+           StartCoroutine(MoveForward());
+          */
     }
 
     public IEnumerator MoveForward()
@@ -54,15 +59,32 @@ public class Player : MonoBehaviour
             yield return StartCoroutine(MoveLeft());
     }
 
+    public IEnumerator Move(int x, int y)
+    {
+        while (coroutineManager.IsTrackedCoroutineRunning())
+            yield return waitForEndOfFrame;
+        if (x < gridPos.x)
+            yield return StartCoroutine(MoveLeft());
+        else if (x > gridPos.x)
+            yield return StartCoroutine(MoveRight());
+        else if (y < gridPos.y)
+            yield return StartCoroutine(MoveDown());
+        else if (y > gridPos.y)
+            yield return StartCoroutine(MoveUp());
+        gridPos.x = x;
+        gridPos.y = y;
+    }
+
+
     private IEnumerator MoveUp()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         //print("MoveUp : position before : " + transform.position);
-        Vector3 dest = map.WorldToGrid(transform.position + Map.North);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.North * map.ScaleFactor.z), speed));
-        if (!map.Contains(dest))
-            transform.position = new Vector3(transform.position.x, transform.position.y, map.GridToWorld(Map.South * (map.dimension.y)).z + transform.position.z);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.North);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
+        if (!GetMap.Contains(dest))
+            transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.South * (GetMap.dimension.y)).z + transform.position.z);
     }
 
     private IEnumerator MoveDown()
@@ -70,32 +92,32 @@ public class Player : MonoBehaviour
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         // print("MoveDOwn : position before : " + transform.position);
-        Vector3 dest = map.WorldToGrid(transform.position + Map.South);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.South * map.ScaleFactor.z), speed));
-        if (!map.Contains(dest))
-            transform.position = new Vector3(transform.position.x, transform.position.y, map.GridToWorld(Map.North * (map.dimension.y - 1)).z);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.South);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.South * GetMap.ScaleFactor.z), speed));
+        if (!GetMap.Contains(dest))
+            transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.North * (GetMap.dimension.y - 1)).z);
     }
 
     private IEnumerator MoveRight()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        Vector3 dest = map.WorldToGrid(transform.position + Map.East);
-        print("MoveLeft : position before : " + transform.position + " dest : " + dest);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.East * map.ScaleFactor.x), speed));
-        if (!map.Contains(dest))
-            transform.position = new Vector3(map.GridToWorld(Map.West * (map.dimension.x)).x + transform.position.x, transform.position.y, transform.position.z);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.East);
+        //print("MoveLeft : position before : " + transform.position + " dest : " + dest);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.East * GetMap.ScaleFactor.x), speed));
+        if (!GetMap.Contains(dest))
+            transform.position = new Vector3(GetMap.GridToWorld(Map.West * (GetMap.dimension.x)).x + transform.position.x, transform.position.y, transform.position.z);
     }
 
     private IEnumerator MoveLeft()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        Vector3 dest = map.WorldToGrid(transform.position + Map.West);
-        print("MoveRIght : position before : " + transform.position + " dest : " + dest);
-        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.West * map.ScaleFactor.x), speed));
-        if (!map.Contains(dest))
-            transform.position = new Vector3(map.GridToWorld(Map.East * (map.dimension.x - 1)).x, transform.position.y, transform.position.z);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.West);
+        // print("MoveRIght : position before : " + transform.position + " dest : " + dest);
+        yield return coroutineManager.StartTrackedCoroutine(MoveOverSpeed(transform.position + (Map.West * GetMap.ScaleFactor.x), speed));
+        if (!GetMap.Contains(dest))
+            transform.position = new Vector3(GetMap.GridToWorld(Map.East * (GetMap.dimension.x - 1)).x, transform.position.y, transform.position.z);
     }
 
     private IEnumerator MoveOverSpeed(Vector3 end, float speed)
@@ -106,6 +128,18 @@ public class Player : MonoBehaviour
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, end, speed * Time.deltaTime);
             yield return waitForEndOfFrame;
         }
+    }
+
+    public IEnumerator Turn(Vector3 orientation)
+    {
+        while (coroutineManager.IsTrackedCoroutineRunning())
+            yield return waitForEndOfFrame;
+        float angle = Vector3.Angle(transform.rotation.eulerAngles, orientation);
+
+        if (angle < 0)
+            yield return StartCoroutine(Turn90Left());
+        else
+            yield return StartCoroutine(Turn90Right());
     }
 
     public IEnumerator Turn90Left()
@@ -120,6 +154,13 @@ public class Player : MonoBehaviour
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         yield return coroutineManager.StartTrackedCoroutine(Rotate(90));
+    }
+
+    public float AngleBetween(Vector3 vec1, Vector3 vec2)
+    {
+        Vector3 diference = vec2 - vec1;
+        float sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
+        return Vector3.Angle(Vector3.right, diference) * sign;
     }
 
     private IEnumerator Rotate(float rotationAmount)
@@ -141,5 +182,20 @@ public class Player : MonoBehaviour
         if (level < models.Count)
             currModel = Instantiate(models[level], Vector3.zero, models[level].transform.rotation, transform);
         transform.position = position + offset;
+    }
+
+    public bool IsPositionDifferent(int x, int y)
+    {
+        return gridPos.x != x || gridPos.y != y;
+    }
+
+    public bool IsOrientationDifferent(Vector3 orientation)
+    {
+        return transform.rotation.eulerAngles != orientation;
+    }
+
+    public void Expulse()
+    {
+        expulse.SetActive(!expulse.activeSelf);
     }
 }

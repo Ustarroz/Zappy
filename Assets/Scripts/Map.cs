@@ -28,7 +28,6 @@ public class Map : MonoBehaviour
     public void CreateMap()
     {
         cells = new ZappyCell[(int)dimension.x, (int)dimension.y];
-
         mesh = prefab.GetComponent<MeshFilter>().sharedMesh;
         for (int x = 0; x < dimension.x; x++)
         {

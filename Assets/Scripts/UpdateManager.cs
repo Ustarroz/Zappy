@@ -29,8 +29,7 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 7 && res[0] == "pnw")
         {
-            Vector3 pos = map.cells[int.Parse(res[2]), int.Parse(res[3])].transform.position;
-            spawnManager.SpawnPlayer(pos, int.Parse(res[4]), int.Parse(res[1]), res[5]);
+            spawnManager.SpawnPlayer(int.Parse(res[2]), int.Parse(res[3]), int.Parse(res[4]), int.Parse(res[1]), res[5]);
         }
     }
 
@@ -44,15 +43,26 @@ public class UpdateManager : MonoBehaviour
 
     public void UpdatePlayerPos(string[] res)
     {
-        if (res.Length == 3 && res[0] == "ppo")
+        if (res.Length == 5 && res[0] == "ppo")
         {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            Vector3 orientation = spawnManager.ConvertOrientation(int.Parse(res[4]));
+            int x = int.Parse(res[2]);
+            int y = int.Parse(res[3]);
 
+            if (p.IsPositionDifferent(x, y))
+                StartCoroutine(p.Move(x, y));
+            else if (p.IsOrientationDifferent(orientation))
+                StartCoroutine(p.Turn(orientation));
         }
     }
 
     public void PlayerExpulse(string[] res)
     {
-
+        if (res.Length == 1 && res[0] == "pex")
+        {
+            spawnManager.FindPlayerById(int.Parse(res[0]));
+        }
     }
 
     public void StartIncantation(string[] res)
