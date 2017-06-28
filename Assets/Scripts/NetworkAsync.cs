@@ -9,6 +9,10 @@ public class NetworkAsync : UnityTcpClientAsync
 {
     public string ip;
     public int port;
+    public GameObject homeUI;
+    public GameObject inventoryUI;
+
+    public InterpretServerResponse interpretor;
 
     public void GetPort(string str)
     {
@@ -17,20 +21,20 @@ public class NetworkAsync : UnityTcpClientAsync
 
     public void GetIp(string str)
     {
-        print(str);
         ip = str;
-        print(ip);
     }
 
     public void ConnecteToServer()
     {
-        print(ip);
+        print(ip + ":"+ port);
         Init();
         Connect(ip, port);
     }
 
     public override void OnConnect(params object[] p)
     {
+        homeUI.SetActive(false);
+        inventoryUI.SetActive(true);
         Send("GRAPHIC\n");
     }
 
@@ -52,6 +56,7 @@ public class NetworkAsync : UnityTcpClientAsync
         foreach (object obj in p)
         {
             print(obj.ToString());
+            interpretor.InterpretResponse(obj.ToString());
         }
     }
 

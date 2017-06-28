@@ -23,7 +23,8 @@ public class UpdateManager : MonoBehaviour
         {
             map.dimension.x = int.Parse(res[1]);
             map.dimension.y = int.Parse(res[2]);
-            map.CreateMap();
+         //   if (map.cells != null && map.cells.Length == 0)
+                map.CreateMap();
         }
     }
 
@@ -35,12 +36,12 @@ public class UpdateManager : MonoBehaviour
         }
     }
 
-    public void UpdatePlayerLvl(string[] res) 
+    public void UpdatePlayerLvl(string[] res)
     {
         if (res.Length == 3 && res[0] == "plv")
         {
-			Player play = spawnManager.FindPlayerById(int.Parse(res[1]));
-			play.level = int.Parse(res[2]);
+            Player play = spawnManager.FindPlayerById(int.Parse(res[1]));
+            play.level = int.Parse(res[2]);
         }
     }
 

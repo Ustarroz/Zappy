@@ -347,7 +347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &355777066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -970,55 +970,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78017cf5fbd3f684bb20b322ec6473ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 
-  port: 0
---- !u!1 &1339333127
+  ip: 127.0.0.1
+  port: 4242
+  homeUI: {fileID: 1497002269}
+  inventoryUI: {fileID: 355777065}
+  interpretor: {fileID: 1187159457}
+--- !u!1 &1372548854
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1339333132}
-  - component: {fileID: 1339333131}
-  - component: {fileID: 1339333130}
-  - component: {fileID: 1339333129}
-  - component: {fileID: 1339333128}
-  - component: {fileID: 1339333133}
+  - component: {fileID: 1372548860}
+  - component: {fileID: 1372548859}
+  - component: {fileID: 1372548858}
+  - component: {fileID: 1372548857}
+  - component: {fileID: 1372548856}
+  - component: {fileID: 1372548855}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1339333128
+--- !u!114 &1372548855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1372548854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3609bf8829f5041bb3bc81cb6e8ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clampInDegrees: {x: 360, y: 180}
+  sensitivity: {x: 2, y: 2}
+  smoothing: {x: 3, y: 3}
+  targetDirection: {x: 0, y: 0}
+  targetCharacterDirection: {x: 0, y: 0}
+  characterBody: {fileID: 0}
+  flySpeed: 5
+  defaultCamera: {fileID: 1372548854}
+--- !u!81 &1372548856
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1339333127}
+  m_GameObject: {fileID: 1372548854}
   m_Enabled: 1
---- !u!124 &1339333129
+--- !u!92 &1372548857
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1339333127}
+  m_GameObject: {fileID: 1372548854}
   m_Enabled: 1
---- !u!92 &1339333130
+--- !u!124 &1372548858
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1339333127}
+  m_GameObject: {fileID: 1372548854}
   m_Enabled: 1
---- !u!20 &1339333131
+--- !u!20 &1372548859
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1339333127}
+  m_GameObject: {fileID: 1372548854}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -1034,7 +1056,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1049,38 +1071,19 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!4 &1339333132
+--- !u!4 &1372548860
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1339333127}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_GameObject: {fileID: 1372548854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1339333133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1339333127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a3609bf8829f5041bb3bc81cb6e8ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clampInDegrees: {x: 360, y: 180}
-  sensitivity: {x: 1, y: 1}
-  smoothing: {x: 3, y: 3}
-  targetDirection: {x: 0, y: 0}
-  targetCharacterDirection: {x: 0, y: 0}
-  characterBody: {fileID: 0}
-  flySpeed: 5
-  defaultCamera: {fileID: 1339333127}
 --- !u!1 &1423109107
 GameObject:
   m_ObjectHideFlags: 0

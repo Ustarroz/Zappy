@@ -10,7 +10,7 @@ public class InventoryUI : MonoBehaviour
     public readonly string[] names = { "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame", "Food" };
     public Sprite[] img;
 
-    void Start()
+    void Awake()
     {
         inventoryPair = new Dictionary<string, Text>();
         for (int i = 0; i < names.Length; i++)

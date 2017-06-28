@@ -12,6 +12,7 @@ public class InterpretServerResponse : MonoBehaviour
     private void Awake()
     {
         commands = new Dictionary<string, Action<string[]>>();
+
         commands["bct"] = updateManager.UpdateCell;
         commands["msz"] = updateManager.MapSizeUpdate;
         commands["pnw"] = updateManager.NewPlayer;
@@ -37,17 +38,18 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("pex 0\n");
     }
 
-    string[] Parse(string response)
-    {
-        return response.Split(' ');
-    }
-
+ 
     public void InterpretResponse(string response)
     {
-        string[] arg = Parse(response);
+        string[] line = response.Split('\n');
 
-        if (commands.ContainsKey(arg[0]))
-            commands[arg[0]](arg);
+        foreach (string l in line)
+        {
+            string[] arg = l.Split(' ');
+
+            if (commands.ContainsKey(arg[0]))
+                commands[arg[0]](arg);
+        }
     }
 
 }
