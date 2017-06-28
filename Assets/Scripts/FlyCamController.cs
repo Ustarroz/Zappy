@@ -2,12 +2,33 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace UnityStandardAssets.Characters.FirstPerson
+public class FlyCamController : MonoBehaviour
 {
-    public class FlyCamController : MonoBehaviour
-    {
-        private const float _movementVelocity = 1f;
+    Vector2 _mouseAbsolute;
+    Vector2 _smoothMouse;
 
+    public Vector2 clampInDegrees = new Vector2(360, 180);
+    public Vector2 sensitivity = new Vector2(0.1f, 0.1f);
+    public Vector2 smoothing = new Vector2(5, 5);
+    public Vector2 targetDirection;
+    public Vector2 targetCharacterDirection;
+
+    // Assign this if there's a parent object controlling motion, such as a Character Controller.
+    // Yaw rotation will affect this object instead of the camera if set.
+    public GameObject characterBody;
+
+    private bool _mouselookEnabled = false;
+    private bool _shifted = false;
+    public float flySpeed = 100.0f;
+    public GameObject defaultCamera;
+
+
+    void Start()
+    {
+        // Set target direction to the camera's initial orientation.
+        targetDirection = transform.localRotation.eulerAngles;
+
+<<<<<<< HEAD
         public float mainSpeed = 65.0f; //regular speed
         public float shiftAdd = 200.0f; //multiplied by how long shift is held.  Basically running
         public float maxShift = 400.0f; //Maximum speed when holdin gshift
@@ -15,73 +36,106 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
         private float totalRun= 1.0f;
         private bool flyMode = false;
+=======
+        // Set target direction for the character body to its inital state.
+        if (characterBody)
+            targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
+>>>>>>> d5236a8fc0b39389ad449ab24a1f949850988b1f
 
-        void Update () 
-        {
-            if (flyMode)
-            {
-                lastMouse = Input.mousePosition - lastMouse ;
-                lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0 );
-                lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x , transform.eulerAngles.y + lastMouse.y, 0);
-                transform.eulerAngles = lastMouse;
-                lastMouse =  Input.mousePosition;
-                //Mouse  camera angle done.  
-        
-                //Keyboard commands
-                float f = 0.0f;
-                Vector3 p = GetBaseInput();
-                if (Input.GetKey (KeyCode.LeftShift))
-                {
-                    totalRun += Time.deltaTime;
-                    p  = p * totalRun * shiftAdd;
-                    p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-                    p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-                    p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-                }
-                else
-                {
-                    totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-                    p = p * mainSpeed;
-                }
-            
-                p = p * Time.deltaTime;
-                Vector3 newPosition = transform.position;
-                if (Input.GetKey(KeyCode.Space))
-                { //If player wants to move on X and Z axis only
-                    transform.Translate(p);
-                    newPosition.x = transform.position.x;
-                    newPosition.z = transform.position.z;
-                    transform.position = newPosition;
-                }
-                else
-                {
-                    transform.Translate(p);
-                }
-            }   
-            if (Input.GetKeyDown (KeyCode.F))
-                flyMode = !flyMode;
-        }
-        
-        private Vector3 GetBaseInput() 
-        { //returns the basic values, if it's 0 than it's not active.
-            Vector3 p_Velocity = new Vector3();
-            if (Input.GetKey (KeyCode.Z))
-            {
-                p_Velocity += new Vector3(0, 0 , _movementVelocity);
-            }
-            if (Input.GetKey (KeyCode.S))
-            {
-                p_Velocity += new Vector3(0, 0, -_movementVelocity);
-            }
-            if (Input.GetKey (KeyCode.Q))
-            {
-                p_Velocity += new Vector3(-_movementVelocity, 0, 0);
-            }
-            if (Input.GetKey (KeyCode.D))
-            {
-                p_Velocity += new Vector3(_movementVelocity, 0, 0);
-            }
-            return p_Velocity;
-        }    
     }
+
+    void Update()
+    { 
+        if (Input.GetKeyUp(KeyCode.LeftShift) & _shifted)
+            _shifted = false;
+
+        if ((Input.GetKeyDown(KeyCode.LeftShift) & !_shifted) |
+            (Input.GetKeyDown(KeyCode.Escape) & _mouselookEnabled))
+        {
+            _shifted = true;
+
+            if (!_mouselookEnabled)
+            {
+                _mouselookEnabled = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    _shifted = false;
+
+                _mouselookEnabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
+        if (!_mouselookEnabled)
+            return;
+
+        //ensure these stay this way
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        // Allow the script to clamp based on a desired target value.
+        var targetOrientation = Quaternion.Euler(targetDirection);
+        var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
+
+        // Get raw mouse input for a cleaner reading on more sensitive mice.
+        var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+        // Scale input against the sensitivity setting and multiply that against the smoothing value.
+        mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
+
+        // Interpolate mouse movement over time to apply smoothing delta.
+        _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
+        _smoothMouse.y = Mathf.Lerp(_smoothMouse.y, mouseDelta.y, 1f / smoothing.y);
+
+        // Find the absolute mouse movement value from point zero.
+        _mouseAbsolute += _smoothMouse;
+
+        // Clamp and apply the local x value first, so as not to be affected by world transforms.
+        if (clampInDegrees.x < 360)
+            _mouseAbsolute.x = Mathf.Clamp(_mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
+
+        // Then clamp and apply the global y value.
+        if (clampInDegrees.y < 360)
+            _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
+
+        var xRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right);
+        transform.localRotation = xRotation * targetOrientation;
+
+        // If there's a character body that acts as a parent to the camera
+        if (characterBody)
+        {
+            var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, characterBody.transform.up);
+            characterBody.transform.localRotation = yRotation;
+            characterBody.transform.localRotation *= targetCharacterOrientation;
+        }
+        else
+        {
+            var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
+            transform.localRotation *= yRotation;
+        }
+
+        //movement
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            transform.Translate(defaultCamera.transform.forward * flySpeed * Input.GetAxis("Vertical") * Time.deltaTime, Space.World);
+        }
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            transform.Translate(defaultCamera.transform.right * flySpeed * Input.GetAxis("Horizontal") * Time.deltaTime, Space.World);
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+            transform.Translate(Vector3.up * flySpeed * Time.deltaTime, Space.World);
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(-Vector3.up * flySpeed * Time.deltaTime, Space.World);
+        }
+        else if ()
+    }    
 }

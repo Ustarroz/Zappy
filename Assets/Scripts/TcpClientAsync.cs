@@ -4,8 +4,11 @@ using System.Text;
 using System.Reflection;
 using UnityEngine;
 
+<<<<<<< HEAD
 namespace TcpAsync
 {
+=======
+>>>>>>> d5236a8fc0b39389ad449ab24a1f949850988b1f
     public class TcpClientAsync
     {
         private TcpClient client = null;
@@ -26,7 +29,10 @@ namespace TcpAsync
             client = new TcpClient();
         }
 
+<<<<<<< HEAD
         #region Connect Functions
+=======
+>>>>>>> d5236a8fc0b39389ad449ab24a1f949850988b1f
         public void Connect(string _ip, int _port)
         {
             try
@@ -50,9 +56,6 @@ namespace TcpAsync
             client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
             connectStatus = true;
         }
-        #endregion
-
-        #region Receive Functions
         
         public void Receive()
         {
@@ -93,9 +96,7 @@ namespace TcpAsync
                 receiveStatus = true;
             }
         }
-        #endregion
 
-        #region Send Functions
         public void Send(string data)
         {
             if (client.Connected)
@@ -119,7 +120,6 @@ namespace TcpAsync
                 Console.WriteLine(e.ToString());
             }
         }
-        #endregion
 
         public void Disconnect()
         {
@@ -133,7 +133,10 @@ namespace TcpAsync
             }
         }
 
+<<<<<<< HEAD
         #region Getter
+=======
+>>>>>>> d5236a8fc0b39389ad449ab24a1f949850988b1f
         public string getData()
         {
             return returndata;
@@ -158,6 +161,10 @@ namespace TcpAsync
         {
             return client.Client;
         }
+<<<<<<< HEAD
         #endregion
     }
 }
+=======
+    }
+>>>>>>> d5236a8fc0b39389ad449ab24a1f949850988b1f
