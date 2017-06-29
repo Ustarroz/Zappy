@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     public ZappyObjects inventory;
     public int id;
     public string team;
-    public Vector3 gridPos;
+    public Vector2 gridPos;
+    public Vector2 nexGgridPos;
     public GameObject expulse;
     public Orientation orientation;
+    public Orientation nextOrientation;
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
@@ -74,24 +76,23 @@ public class Player : MonoBehaviour
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        if (x < gridPos.x)
+        if (gridPos.x - x == -GetMap.dimension.x || gridPos.x - x == 1)
             yield return StartCoroutine(MoveLeft());
-        else if (x > gridPos.x)
+        else if (gridPos.x - x == GetMap.dimension.x || gridPos.x - x == -1)
             yield return StartCoroutine(MoveRight());
-        else if (y < gridPos.y)
+        else if (gridPos.y - y == -GetMap.dimension.y || gridPos.y - y == 1)
             yield return StartCoroutine(MoveDown());
-        else if (y > gridPos.y)
+        else if (gridPos.y - y == GetMap.dimension.y || gridPos.y - y == -1)
             yield return StartCoroutine(MoveUp());
         gridPos.x = x;
         gridPos.y = y;
     }
 
-
     private IEnumerator MoveUp()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        //print("MoveUp : position before : " + transform.position);
+       // print("MoveUp : position before : " + transform.position);
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.North);
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
@@ -150,7 +151,6 @@ public class Player : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
-            print(elapsedTime);
             yield return waitForEndOfFrame;
         }
         transform.position = end;
@@ -210,12 +210,12 @@ public class Player : MonoBehaviour
 
     public bool IsPositionDifferent(int x, int y)
     {
-        return gridPos.x != x || gridPos.y != y;
+        return nexGgridPos.x != x || nexGgridPos.y != y;
     }
 
     public bool IsOrientationDifferent(Orientation orient)
     {
-        return orientation != orient;
+        return nextOrientation != orient;
     }
 
     public IEnumerator Expulse()
