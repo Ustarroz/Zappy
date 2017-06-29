@@ -125,6 +125,5 @@ public class FlyCamController : MonoBehaviour
         {
             transform.Translate(-Vector3.up * flySpeed * Time.deltaTime, Space.World);
         }
-        else if ()
     }    
 }
