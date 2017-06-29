@@ -44,6 +44,7 @@ public class UpdateManager : MonoBehaviour
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
             p.level = int.Parse(res[2]);
             p.Spawn(p.transform.position);
+            incantation.StopIncantation(true);
         }
     }
 
@@ -80,7 +81,7 @@ public class UpdateManager : MonoBehaviour
 
     public void EndIncantation(string[] res)
     {
-        incantation.StopIncantation(true);
+        incantation.StopIncantation(false);
         // stop anim for incant
     }
 

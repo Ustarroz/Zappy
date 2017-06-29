@@ -6,6 +6,7 @@ public class Incantation : MonoBehaviour
 {
     public AudioClip   incantationMainSound;
     public AudioClip   incantationEndSound;
+    public AudioClip   incantationLevelUpSound;
     public AudioSource audio;
 
     public void PlayIncantation()
@@ -18,10 +19,8 @@ public class Incantation : MonoBehaviour
     {
         audio.Stop();
         if (success)
-            audio.PlayOneShot(incantationEndSound, 0.5f);        
+            audio.PlayOneShot(incantationLevelUpSound, 0.5f);
         else
-        {
-            // todo
-        }
+            audio.PlayOneShot(incantationEndSound, 0.5f);
     }
 }
