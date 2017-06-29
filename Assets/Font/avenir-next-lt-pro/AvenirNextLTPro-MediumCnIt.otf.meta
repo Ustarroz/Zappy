@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 3f1662977134941dd88ca4a8bffdf99a
+timeCreated: 1498666767
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Avenir Next LT Pro
+  fontNames:
+  - Avenir Next LT Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 30b30fb8959f846bb9c6000f7d413884, type: 3}
+  - {fileID: 12800000, guid: 38fb505905e324c9a92dfb9fdf76e1f6, type: 3}
+  - {fileID: 12800000, guid: 2c2c015a2a0f3410f99c7136020413d4, type: 3}
+  - {fileID: 12800000, guid: 05b8abecc6bbe4d82bb8684a646b066b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

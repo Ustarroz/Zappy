@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: f0e32672ffbbc4bdfa8f889e68bd5563
+timeCreated: 1498666767
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Avenir Next LT Pro
+  fontNames:
+  - Avenir Next LT Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b87ec21023d0e42c99894b6d414e29ea, type: 3}
+  - {fileID: 12800000, guid: a5fe2ba09b1334227ab7f833801320a7, type: 3}
+  - {fileID: 12800000, guid: 56f440218a82e4daa89060e319e0711f, type: 3}
+  - {fileID: 12800000, guid: a09603a2c9c3642119e825bb023bc02d, type: 3}
+  - {fileID: 12800000, guid: df35fdd2e226340f08af7d56b3857aff, type: 3}
+  - {fileID: 12800000, guid: 86f724546272741fbb0fa17279725fff, type: 3}
+  - {fileID: 12800000, guid: d6ec26074ff244d18bf1128640b16339, type: 3}
+  - {fileID: 12800000, guid: 3f1662977134941dd88ca4a8bffdf99a, type: 3}
+  - {fileID: 12800000, guid: 7cb549f70456a494a8b3ed62eeb7457e, type: 3}
+  - {fileID: 12800000, guid: 30b30fb8959f846bb9c6000f7d413884, type: 3}
+  - {fileID: 12800000, guid: 38fb505905e324c9a92dfb9fdf76e1f6, type: 3}
+  - {fileID: 12800000, guid: 2c2c015a2a0f3410f99c7136020413d4, type: 3}
+  - {fileID: 12800000, guid: effcb36c997f54587beef25c1b9ef24c, type: 3}
+  - {fileID: 12800000, guid: 05b8abecc6bbe4d82bb8684a646b066b, type: 3}
+  - {fileID: 12800000, guid: b42fcceff41d040a793882244e481d8c, type: 3}
+  - {fileID: 12800000, guid: 625a99ff2c691411ebdb674c90e5180d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
