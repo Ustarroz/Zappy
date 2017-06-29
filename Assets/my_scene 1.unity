@@ -347,7 +347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &355777066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -363,8 +363,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 114, y: 0}
-  m_SizeDelta: {x: 228, y: 720}
+  m_AnchoredPosition: {x: 200, y: 0}
+  m_SizeDelta: {x: 400, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &355777067
 MonoBehaviour:
@@ -385,8 +385,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 50}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 300, y: 75}
+  m_Spacing: {x: 0, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &355777068
@@ -408,9 +408,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 21300000, guid: 2be932a7c809d4191aba57e83da52412, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -435,13 +435,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabsUI: {fileID: 1973960065013128, guid: 6d9cf41c46aea5b4983395fe1cdaf6d6, type: 2}
   img:
-  - {fileID: 21300000, guid: eebf5ef6fd3f8ff4e88c684ec5167c9c, type: 3}
-  - {fileID: 21300000, guid: ceccd93f4052206468c363b3b05bc7ed, type: 3}
   - {fileID: 21300000, guid: ae180975372a15c4480fc5d84b659290, type: 3}
-  - {fileID: 21300000, guid: a40c844fa4b984740912f95a2cd0c688, type: 3}
+  - {fileID: 21300000, guid: eebf5ef6fd3f8ff4e88c684ec5167c9c, type: 3}
   - {fileID: 21300000, guid: 33a9ece8aedf09b4dab9cbe7cb7233e8, type: 3}
-  - {fileID: 21300000, guid: 02db5441427e7d542a13bcbefab17c24, type: 3}
   - {fileID: 21300000, guid: 9534cd6613fdf204495925f7543b5659, type: 3}
+  - {fileID: 21300000, guid: ceccd93f4052206468c363b3b05bc7ed, type: 3}
+  - {fileID: 21300000, guid: a40c844fa4b984740912f95a2cd0c688, type: 3}
+  - {fileID: 0}
 --- !u!1 &424875056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,16 +1003,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1372548854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a3609bf8829f5041bb3bc81cb6e8ad8, type: 3}
+  m_Script: {fileID: 11500000, guid: eedbb8cddf4dc454d883fb81012e3c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clampInDegrees: {x: 360, y: 180}
-  sensitivity: {x: 2, y: 2}
-  smoothing: {x: 3, y: 3}
+  sensitivity: {x: 1, y: 1}
+  smoothing: {x: 5, y: 5}
   targetDirection: {x: 0, y: 0}
   targetCharacterDirection: {x: 0, y: 0}
   characterBody: {fileID: 0}
-  flySpeed: 5
+  flySpeed: 10
   defaultCamera: {fileID: 1372548854}
 --- !u!81 &1372548856
 AudioListener:

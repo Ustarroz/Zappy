@@ -37,8 +37,8 @@ public class SpawnManager : MonoBehaviour
         player.id = id;
         player.Spawn(pos);
         players.Add(player);
-        player.transform.eulerAngles = ConvertOrientation(orientation);
-
+        player.orientation = (Player.Orientation)orientation;
+        player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
         //change color material for team;
     }
 
@@ -47,22 +47,18 @@ public class SpawnManager : MonoBehaviour
         return players.Find((x) => x.id == id);
     }
 
-    public Vector3 ConvertOrientation(int orientation)
+    public Vector3 ConvertOrientation(Player.Orientation orientation)
     {
         switch (orientation)
         {
-            case 1:
-                //north
+            case Player.Orientation.NORTH:
                 return new Vector3(0, 0, 0);
-            case 2:
-                //east
+            case Player.Orientation.EAST:
                 return new Vector3(0, 90, 0);
-            case 3:
-                //south
+            case Player.Orientation.SOUTH:
                 return new Vector3(0, 180, 0);
-            case 4:
-                //west
-                return new Vector3(0, -90, 0);
+            case Player.Orientation.WEST:
+                return new Vector3(0, 270, 0);
         };
         return Vector3.zero;
     }

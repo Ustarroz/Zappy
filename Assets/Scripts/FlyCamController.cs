@@ -27,21 +27,9 @@ public class FlyCamController : MonoBehaviour
     {
         // Set target direction to the camera's initial orientation.
         targetDirection = transform.localRotation.eulerAngles;
-
-<<<<<<< HEAD
-        public float mainSpeed = 65.0f; //regular speed
-        public float shiftAdd = 200.0f; //multiplied by how long shift is held.  Basically running
-        public float maxShift = 400.0f; //Maximum speed when holdin gshift
-        public float camSens = 0.20f; //How sensitive it with mouse
-        private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
-        private float totalRun= 1.0f;
-        private bool flyMode = false;
-=======
         // Set target direction for the character body to its inital state.
         if (characterBody)
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
->>>>>>> d5236a8fc0b39389ad449ab24a1f949850988b1f
-
     }
 
     void Update()
@@ -136,6 +124,5 @@ public class FlyCamController : MonoBehaviour
         {
             transform.Translate(-Vector3.up * flySpeed * Time.deltaTime, Space.World);
         }
-        else if ()
     }    
 }

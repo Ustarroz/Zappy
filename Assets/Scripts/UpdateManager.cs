@@ -7,7 +7,7 @@ public class UpdateManager : MonoBehaviour
     public SpawnManager spawnManager;
     public Map map;
 
-    public static int frequency = 100;
+    public static float frequency = 100;
 
     public void UpdateCell(string[] res)
     {
@@ -40,8 +40,9 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 3 && res[0] == "plv")
         {
-            Player play = spawnManager.FindPlayerById(int.Parse(res[1]));
-            play.level = int.Parse(res[2]);
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            p.level = int.Parse(res[2]);
+            p.Spawn(p.transform.position);
         }
     }
 
@@ -50,7 +51,7 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 5 && res[0] == "ppo")
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            Vector3 orientation = spawnManager.ConvertOrientation(int.Parse(res[4]));
+            Player.Orientation orientation = (Player.Orientation)int.Parse(res[4]);
             int x = int.Parse(res[2]);
             int y = int.Parse(res[3]);
 
@@ -100,12 +101,20 @@ public class UpdateManager : MonoBehaviour
 
     public void Put(string[] res)
     {
-
+        if (res.Length == 3)
+        {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            p.inventory.UpdateRessource(int.Parse(res[2]), -1);
+        }
     }
 
     public void Take(string[] res)
     {
-
+        if (res.Length == 3)
+        {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            p.inventory.UpdateRessource(int.Parse(res[2]), 1);
+        }
     }
 
     public void PlayerDied(string[] res)

@@ -28,4 +28,32 @@ public class ZappyObjects {
         Phiras = phiras;
         Thystame = thystame;
     }
+
+    public void UpdateRessource(int ressource, int amount)
+    {
+        switch (ressource)
+        {
+            case 0:
+                Food += amount;
+                break;
+            case 1:
+                Linemate += amount;
+                break;
+            case 2:
+                Deraumere += amount;
+                break;
+            case 3:
+                Sibur += amount;
+                break;
+            case 4:
+                Mendiane += amount;
+                break;
+            case 5:
+                Phiras += amount;
+                break;
+            case 6:
+                Thystame += amount;
+                break;
+        }
+    }
 }

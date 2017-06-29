@@ -18,6 +18,7 @@ public class InventoryUI : MonoBehaviour
             GameObject go = Instantiate(prefabsUI, transform);
             go.name = names[i];
             go.transform.GetChild(0).GetComponent<Image>().sprite = img[i];
+            go.transform.GetChild(0).GetComponent<Image>().preserveAspect = true;
             go.transform.GetChild(1).GetComponent<Text>().text = names[i];
             inventoryPair[names[i]] = go.transform.GetChild(2).GetComponent<Text>();
         }

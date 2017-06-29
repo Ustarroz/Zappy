@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Vector3 offset;
-    [HideInInspector]
     public float speed;
     public int level = 1;
     public GameObject currModel;
@@ -15,9 +14,19 @@ public class Player : MonoBehaviour
     public string team;
     public Vector3 gridPos;
     public GameObject expulse;
+    public Orientation orientation;
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
+
+
+    public enum Orientation
+    {
+        NORTH = 1,
+        EAST = 2,
+        SOUTH = 3,
+        WEST = 4
+    }
 
     private Map GetMap
     {
@@ -29,8 +38,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
+        inventory = new ZappyObjects();
         waitForEndOfFrame = new WaitForEndOfFrame();
         coroutineManager = GetComponent<CoroutineFramework>();
         speed = 7 / UpdateManager.frequency;
@@ -146,46 +156,44 @@ public class Player : MonoBehaviour
         transform.position = end;
     }
 
-    public IEnumerator Turn(Vector3 orientation)
+    public IEnumerator Turn(Orientation orient)
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        float angle = Vector3.Angle(transform.rotation.eulerAngles, orientation);
-
-        if (angle < 0)
-            yield return StartCoroutine(Turn90Left());
-        else
+        print("player orientation : " + orientation + " new oriantation :" + orient);
+        if ((orientation == Orientation.NORTH && orient == Orientation.EAST) ||
+            (orientation == Orientation.EAST && orient == Orientation.SOUTH) ||
+            (orientation == Orientation.SOUTH && orient == Orientation.WEST) ||
+            (orientation == Orientation.WEST && orient == Orientation.NORTH))
             yield return StartCoroutine(Turn90Right());
+        else
+            yield return StartCoroutine(Turn90Left());
+        orientation = orient;
     }
 
     public IEnumerator Turn90Left()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        yield return coroutineManager.StartTrackedCoroutine(Rotate(-90));
+        yield return coroutineManager.StartTrackedCoroutine(Rotate(-90, speed));
     }
 
     public IEnumerator Turn90Right()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        yield return coroutineManager.StartTrackedCoroutine(Rotate(90));
+        yield return coroutineManager.StartTrackedCoroutine(Rotate(90, speed));
     }
 
-    public float AngleBetween(Vector3 vec1, Vector3 vec2)
+    private IEnumerator Rotate(float rotationAmount, float seconds)
     {
-        Vector3 diference = vec2 - vec1;
-        float sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
-        return Vector3.Angle(Vector3.right, diference) * sign;
-    }
-
-    private IEnumerator Rotate(float rotationAmount)
-    {
+        float elapsedTime = 0;
+        Quaternion startRotation = transform.rotation;
         Quaternion finalRotation = Quaternion.Euler(0, rotationAmount, 0) * transform.rotation;
-
-        while (transform.rotation != finalRotation)
+        while (elapsedTime < seconds)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, finalRotation, Time.deltaTime * 2);
+            transform.rotation = Quaternion.Lerp(startRotation, finalRotation, (elapsedTime / seconds));
+            elapsedTime += Time.deltaTime;
             yield return waitForEndOfFrame;
         }
         transform.rotation = finalRotation;
@@ -205,9 +213,9 @@ public class Player : MonoBehaviour
         return gridPos.x != x || gridPos.y != y;
     }
 
-    public bool IsOrientationDifferent(Vector3 orientation)
+    public bool IsOrientationDifferent(Orientation orient)
     {
-        return transform.rotation.eulerAngles != orientation;
+        return orientation != orient;
     }
 
     public IEnumerator Expulse()
