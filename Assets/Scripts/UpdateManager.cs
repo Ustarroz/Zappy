@@ -7,7 +7,8 @@ public class UpdateManager : MonoBehaviour
     public SpawnManager spawnManager;
     public Map map;
 
-    public static int frequency = 100;
+    public static float frequency = 100;
+    public Incantation incantation;
 
     public void UpdateCell(string[] res)
     {
@@ -40,8 +41,10 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 3 && res[0] == "plv")
         {
-            Player play = spawnManager.FindPlayerById(int.Parse(res[1]));
-            play.level = int.Parse(res[2]);
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            p.level = int.Parse(res[2]);
+            p.Spawn(p.transform.position);
+            incantation.StopIncantation(true);
         }
     }
 
@@ -50,7 +53,7 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 5 && res[0] == "ppo")
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            Vector3 orientation = spawnManager.ConvertOrientation(int.Parse(res[4]));
+            Player.Orientation orientation = (Player.Orientation)int.Parse(res[4]);
             int x = int.Parse(res[2]);
             int y = int.Parse(res[3]);
 
@@ -58,6 +61,9 @@ public class UpdateManager : MonoBehaviour
                 StartCoroutine(p.Move(x, y));
             else if (p.IsOrientationDifferent(orientation))
                 StartCoroutine(p.Turn(orientation));
+            p.nexGgridPos.x = x;
+            p.nexGgridPos.y = y;
+            p.nextOrientation = orientation;
         }
     }
 
@@ -72,12 +78,14 @@ public class UpdateManager : MonoBehaviour
 
     public void StartIncantation(string[] res)
     {
-
+        incantation.PlayIncantation();
+        // start anim for incant
     }
 
     public void EndIncantation(string[] res)
     {
-
+        incantation.StopIncantation(false);
+        // stop anim for incant
     }
 
     public void LayEgg(string[] res)
@@ -100,17 +108,31 @@ public class UpdateManager : MonoBehaviour
 
     public void Put(string[] res)
     {
-
+        if (res.Length == 3)
+        {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            p.inventory.UpdateRessource(int.Parse(res[2]), -1);
+        }
     }
 
     public void Take(string[] res)
     {
-
+        if (res.Length == 3)
+        {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+            p.inventory.UpdateRessource(int.Parse(res[2]), 1);
+        }
     }
 
     public void PlayerDied(string[] res)
     {
-
+        if (res.Length == 2)
+        {
+            Player player;
+            int playerId = int.Parse(res[1]);
+            player = spawnManager.FindPlayerById(playerId);
+            Destroy(player);
+        }
     }
 
     public void UpdateUnitTime(string[] res)

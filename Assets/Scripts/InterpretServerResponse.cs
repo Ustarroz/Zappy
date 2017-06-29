@@ -29,16 +29,32 @@ public class InterpretServerResponse : MonoBehaviour
         commands["sgt"] = updateManager.UpdateUnitTime;
         commands["seg"] = updateManager.EndGame;
 
-        //InterpretResponse("sgt 1\n");
+        InterpretResponse("sgt 10\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("pnw 0 0 0 1 0 toto\n");
-        InterpretResponse("bct 0 0 1 2 3 4 5 6 7");
-        InterpretResponse("ppo 0 0 0 2\n");
-        InterpretResponse("ppo 0 1 0 1\n");
-        InterpretResponse("pex 0\n");
+        //InterpretResponse("ppo 0 0 0 2\n");
+        InterpretResponse("ppo 0 0 5 1\n");
+        InterpretResponse("ppo 0 0 0 1\n");
+
+
+        /*InterpretResponse("ppo 0 0 4 1\n");
+        InterpretResponse("ppo 0 10 4 1\n");
+        InterpretResponse("ppo 0 0 4 1\n");
+        InterpretResponse("ppo 0 0 5 1\n");
+
+        //  InterpretResponse("ppo 0 0 0 4\n");
+        // InterpretResponse("ppo 0 0 0 3\n");
+
+        //InterpretResponse("bct 0 0 1 2 3 4 5 6 7");
+
+        /*  InterpretResponse("ppo 0 0 0 2\n");
+          InterpretResponse("ppo 0 1 0 1\n");
+          InterpretResponse("pex 0\n"); */
+        /*    InterpretResponse("pex 0\n");
+            InterpretResponse("pic 0 0 1 0\n");*/
     }
 
- 
+
     public void InterpretResponse(string response)
     {
         string[] line = response.Split('\n');
