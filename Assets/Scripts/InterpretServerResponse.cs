@@ -36,6 +36,7 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("ppo 0 0 0 2\n");
         InterpretResponse("ppo 0 1 0 1\n");
         InterpretResponse("pex 0\n");
+        InterpretResponse("pic 0 0 1 0\n");
     }
 
  
