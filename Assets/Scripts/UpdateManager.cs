@@ -8,6 +8,7 @@ public class UpdateManager : MonoBehaviour
     public Map map;
 
     public static float frequency = 100;
+    public Incantation incantation;
 
     public void UpdateCell(string[] res)
     {
@@ -73,12 +74,14 @@ public class UpdateManager : MonoBehaviour
 
     public void StartIncantation(string[] res)
     {
-
+        incantation.PlayIncantation();
+        // start anim for incant
     }
 
     public void EndIncantation(string[] res)
     {
-
+        incantation.StopIncantation(true);
+        // stop anim for incant
     }
 
     public void LayEgg(string[] res)
@@ -119,7 +122,13 @@ public class UpdateManager : MonoBehaviour
 
     public void PlayerDied(string[] res)
     {
-
+        if (res.Length == 2)
+        {
+            Player player;
+            int playerId = int.Parse(res[1]);
+            player = spawnManager.FindPlayerById(playerId);
+            GameObject.Destroy(player);
+        }
     }
 
     public void UpdateUnitTime(string[] res)

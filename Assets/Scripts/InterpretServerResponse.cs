@@ -33,18 +33,17 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("msz 10 5\n");
         InterpretResponse("pnw 0 0 0 1 0 toto\n");
         InterpretResponse("ppo 0 0 0 2\n");
-        InterpretResponse("ppo 0 0 0 3\n");
-        InterpretResponse("ppo 0 0 0 2\n");
 
         //  InterpretResponse("ppo 0 0 0 4\n");
         // InterpretResponse("ppo 0 0 0 3\n");
 
           InterpretResponse("bct 0 0 1 2 3 4 5 6 7");
-          InterpretResponse("bct 0 0 0 2 3 4 5 6 7");
 
         /*  InterpretResponse("ppo 0 0 0 2\n");
           InterpretResponse("ppo 0 1 0 1\n");
           InterpretResponse("pex 0\n"); */
+        InterpretResponse("pex 0\n");
+        InterpretResponse("pic 0 0 1 0\n");
     }
 
 
