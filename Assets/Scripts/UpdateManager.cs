@@ -60,6 +60,9 @@ public class UpdateManager : MonoBehaviour
                 StartCoroutine(p.Move(x, y));
             else if (p.IsOrientationDifferent(orientation))
                 StartCoroutine(p.Turn(orientation));
+            p.nexGgridPos.x = x;
+            p.nexGgridPos.y = y;
+            p.nextOrientation = orientation;
         }
     }
 
@@ -127,7 +130,7 @@ public class UpdateManager : MonoBehaviour
             Player player;
             int playerId = int.Parse(res[1]);
             player = spawnManager.FindPlayerById(playerId);
-            GameObject.Destroy(player);
+            Destroy(player);
         }
     }
 
