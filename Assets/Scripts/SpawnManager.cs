@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     public List<Player> players;
     public Map map;
 
-    int nbTeams;
+	int nbTeams = 0;
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(int x, int y, int orientation, int id, string team)
+  public void SpawnPlayer(int x, int y, int orientation, int id, string team)
     {
         Vector3 pos = map.cells[x, y].transform.position;
         GameObject go = Instantiate(playerPrefab);

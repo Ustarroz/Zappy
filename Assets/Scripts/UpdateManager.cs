@@ -23,8 +23,8 @@ public class UpdateManager : MonoBehaviour
         {
             map.dimension.x = int.Parse(res[1]);
             map.dimension.y = int.Parse(res[2]);
-         //   if (map.cells != null && map.cells.Length == 0)
-                map.CreateMap();
+            //   if (map.cells != null && map.cells.Length == 0)
+            map.CreateMap();
         }
     }
 
@@ -139,7 +139,7 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 2 && res[0] == "seg")
         {
-
+            EndGameGui end = GetComponent<EndGameGui>();
         }
     }
 }
