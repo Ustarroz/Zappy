@@ -1,16 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(AudioSource))]
 public class Incantation : MonoBehaviour
 {
     // Position
-    private Vector2 position;
+    private Vector2 position = new Vector2(0, 0);
 
     // Audio
-    private  AudioClip   incantationMainSound;
-    private  AudioClip   incantationEndSound;
-    private  AudioClip   incantationLevelUpSound;
-    private  AudioSource audio;
+    public float volume;
+    public  AudioClip   incantationMainSound;
+    public  AudioClip   incantationEndSound;
+    public  AudioClip   incantationLevelUpSound;
+    public  AudioSource audio;
 
     // Particle
     public ParticleSystem particle;
@@ -21,21 +23,24 @@ public class Incantation : MonoBehaviour
 
     private void Awake()
     {
+        particle.Stop();
         id = nextid;
         nextid++;
         audio = GetComponent<AudioSource>();
-        incantationMainSound    = (AudioClip)Resources.Load("incantation");
-        incantationEndSound     = (AudioClip)Resources.Load("incantation_end");
-        incantationLevelUpSound = (AudioClip)Resources.Load("levelup");
+/*        incantationMainSound    = (AudioClip)Resources.Load("incantation.ogg");
+        incantationEndSound     = (AudioClip)Resources.Load("incantation_end.ogg");
+        incantationLevelUpSound = (AudioClip)Resources.Load("levelup.ogg");
+*/
     }
 
     public void PlayIncantation()
     {
-        Vector3 pos = new Vector3(position.x, position.y, 0);
+        Vector3 pos = new Vector3(4, 0, 0);
 
         audio.Stop();
         audio.loop = true;
         audio.clip = incantationMainSound;
+        audio.volume = volume;
         audio.Play();
         particle.Stop();
         particle.transform.position = pos;
@@ -49,12 +54,12 @@ public class Incantation : MonoBehaviour
         if (success)
         {
             particle.Stop();
-            audio.PlayOneShot(incantationLevelUpSound, 0.5f);
+            audio.PlayOneShot(incantationLevelUpSound, volume);
         }
         else
         {
             particle.Stop();
-            audio.PlayOneShot(incantationEndSound, 0.5f);
+            audio.PlayOneShot(incantationEndSound, volume);
         }
     }
 
