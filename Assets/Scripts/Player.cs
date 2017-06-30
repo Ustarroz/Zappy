@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
 
+    private AudioClip   putSound;
+    private AudioClip   pickupSound;
+    private AudioSource audioSource;
+
 
     public enum Orientation
     {
@@ -42,6 +46,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        // Load audio stuff
+        audioSource = gameObject.GetComponent<AudioSource>();
+        putSound = (AudioClip)Resources.Load("Sounds/put");
+        pickupSound = (AudioClip)Resources.Load("Sounds/pickup");
+
         inventory = new ZappyObjects();
         waitForEndOfFrame = new WaitForEndOfFrame();
         coroutineManager = GetComponent<CoroutineFramework>();
@@ -225,5 +234,17 @@ public class Player : MonoBehaviour
         expulse.SetActive(true);
         yield return new WaitForSeconds(1);
         expulse.SetActive(false);
+    }
+
+    public void Put()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(putSound, 1);
+    }
+
+    public void Take()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(pickupSound, 1);
     }
 }

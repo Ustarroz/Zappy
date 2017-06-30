@@ -8,7 +8,9 @@ public class UpdateManager : MonoBehaviour
     public Map map;
 
     public static float frequency = 100;
-    public Incantation incantation;
+    public GameObject   incantationPrefab;
+    private List<Incantation> incantationList;
+    private List<Egg> eggList;
 
     public void UpdateCell(string[] res)
     {
@@ -44,7 +46,6 @@ public class UpdateManager : MonoBehaviour
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
             p.level = int.Parse(res[2]);
             p.Spawn(p.transform.position);
-            incantation.StopIncantation(true);
         }
     }
 
@@ -78,14 +79,44 @@ public class UpdateManager : MonoBehaviour
 
     public void StartIncantation(string[] res)
     {
-        incantation.PlayIncantation(new Vector3(0, 0, 0));
-        // start anim for incant
+        int x;
+        int y;
+        Vector2 pos;
+
+        if (res.Length < 3)
+            return;
+        x = int.Parse(res[1]);
+        y = int.Parse(res[2]);
+        pos = new Vector2(x, y);
+        GameObject go = Instantiate(incantationPrefab);
+        print(go);
+        Incantation newIncant = go.GetComponent<Incantation>();
+        print(newIncant);
+        newIncant.setPosition(pos);
+        print(newIncant);
+        incantationList.Add(newIncant);
+        incantationList.Find(incant => incant.getPosition() == pos).PlayIncantation();
     }
 
     public void EndIncantation(string[] res)
     {
-        incantation.StopIncantation(false);
-        // stop anim for incant
+        int x;
+        int y;
+        int success;
+        Vector2 pos;
+
+        if (res.Length < 4)
+            return;
+        x = int.Parse(res[1]);
+        y = int.Parse(res[2]);
+        success = int.Parse(res[3]);
+        pos = new Vector2(x, y);
+        Incantation incantation = incantationList.Find(incant => incant.getPosition() == pos);
+        if (incantation != null)
+        {
+            incantation.StopIncantation(success == 1);
+            incantationList.Remove(incantation);
+        }
     }
 
     public void LayEgg(string[] res)
@@ -112,6 +143,7 @@ public class UpdateManager : MonoBehaviour
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
             p.inventory.UpdateRessource(int.Parse(res[2]), -1);
+            p.Put();
         }
     }
 
@@ -121,6 +153,7 @@ public class UpdateManager : MonoBehaviour
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
             p.inventory.UpdateRessource(int.Parse(res[2]), 1);
+            p.Take();
         }
     }
 

@@ -1,27 +1,44 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(ParticleSystem))]
 public class Incantation : MonoBehaviour
 {
+    // Position
+    private Vector2 position;
+
     // Audio
-    public AudioClip   incantationMainSound;
-    public AudioClip   incantationEndSound;
-    public AudioClip   incantationLevelUpSound;
-    public AudioSource audio;
+    private  AudioClip   incantationMainSound;
+    private  AudioClip   incantationEndSound;
+    private  AudioClip   incantationLevelUpSound;
+    private  AudioSource audio;
 
     // Particle
     public ParticleSystem particle;
 
-    public void PlayIncantation(Vector3 playerPos)
+    // Id of incant
+    private static int nextid = 0;
+    private int        id;
+
+    private void Awake()
     {
+        id = nextid;
+        nextid++;
+        audio = GetComponent<AudioSource>();
+        incantationMainSound    = (AudioClip)Resources.Load("incantation");
+        incantationEndSound     = (AudioClip)Resources.Load("incantation_end");
+        incantationLevelUpSound = (AudioClip)Resources.Load("levelup");
+    }
+
+    public void PlayIncantation()
+    {
+        Vector3 pos = new Vector3(position.x, position.y, 0);
+
         audio.Stop();
         audio.loop = true;
         audio.clip = incantationMainSound;
         audio.Play();
         particle.Stop();
-        particle.transform.position = playerPos;
+        particle.transform.position = pos;
         particle.Play();
     }
 
@@ -40,4 +57,20 @@ public class Incantation : MonoBehaviour
             audio.PlayOneShot(incantationEndSound, 0.5f);
         }
     }
+
+    public void setPosition(Vector2 pos)
+    {
+        position = pos;
+    }
+
+    public Vector2 getPosition()
+    {
+        return position;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
 }
