@@ -14,17 +14,20 @@ public class Incantation : MonoBehaviour
     // Particle
     public ParticleSystem particle;
 
-    public void PlayIncantation()
+    public void PlayIncantation(Vector3 playerPos)
     {
         audio.Stop();
-        audio.PlayOneShot(incantationMainSound, 1f);
+        audio.loop = true;
+        audio.clip = incantationMainSound;
+        audio.Play();
         particle.Stop();
+        particle.transform.position = playerPos;
         particle.Play();
-        StopIncantation(true);  
     }
 
     public void StopIncantation(bool success)
     {
+        audio.loop = false;
         audio.Stop();
         if (success)
         {

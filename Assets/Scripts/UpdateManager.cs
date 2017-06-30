@@ -78,7 +78,7 @@ public class UpdateManager : MonoBehaviour
 
     public void StartIncantation(string[] res)
     {
-        incantation.PlayIncantation();
+        incantation.PlayIncantation(new Vector3(0, 0, 0));
         // start anim for incant
     }
 
