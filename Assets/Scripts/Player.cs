@@ -7,8 +7,7 @@ public class Player : MonoBehaviour
     public Vector3 offset;
     public float speed;
     public int level = 1;
-    public GameObject currModel;
-    public List<GameObject> models;
+    public Animator animator;
     public ZappyObjects inventory;
     public int id;
     public string team;
@@ -20,7 +19,6 @@ public class Player : MonoBehaviour
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
-
 
     public enum Orientation
     {
@@ -37,6 +35,18 @@ public class Player : MonoBehaviour
             if (map == null)
                 map = GameObject.FindGameObjectWithTag("Grid").GetComponent<Map>();
             return map;
+        }
+    }
+
+    public bool Walk
+    {
+        get
+        {
+            return animator.GetBool("walk");
+        }
+        set
+        {
+            animator.SetBool("walk", value);
         }
     }
 
@@ -74,6 +84,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator Move(int x, int y)
     {
+        Walk = true;
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         if (gridPos.x - x == -GetMap.dimension.x || gridPos.x - x == 1)
@@ -84,6 +95,7 @@ public class Player : MonoBehaviour
             yield return StartCoroutine(MoveDown());
         else if (gridPos.y - y == GetMap.dimension.y || gridPos.y - y == -1)
             yield return StartCoroutine(MoveUp());
+        Walk = false;
         gridPos.x = x;
         gridPos.y = y;
     }
@@ -199,13 +211,10 @@ public class Player : MonoBehaviour
         transform.rotation = finalRotation;
     }
 
-    public void Spawn(Vector3 position)
+    public void LevelUp(int lvl)
     {
-        if (currModel != null)
-            Destroy(currModel);
-        if (level - 1 < models.Count)
-            currModel = Instantiate(models[level - 1], Vector3.zero, models[level - 1].transform.rotation, transform);
-        transform.position = position + offset;
+        level = lvl;
+        //change color
     }
 
     public bool IsPositionDifferent(int x, int y)

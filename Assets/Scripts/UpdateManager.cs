@@ -42,8 +42,7 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 3 && res[0] == "plv")
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            p.level = int.Parse(res[2]);
-            p.Spawn(p.transform.position);
+            p.LevelUp(int.Parse(res[2]));
         }
     }
 

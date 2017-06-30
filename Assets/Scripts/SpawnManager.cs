@@ -35,7 +35,6 @@ public class SpawnManager : MonoBehaviour
         player.gridPos = new Vector2(x, y);
         player.team = team;
         player.id = id;
-        player.Spawn(pos);
         players.Add(player);
         player.orientation = (Player.Orientation)orientation;
         player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
