@@ -5,40 +5,48 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public Color[] teamColor;
     public List<Player> players;
     public Map map;
+    public Material[] body;
+    public Material[] arms;
 
-	int nbTeams = 0;
+    private Dictionary<string, int> teamMaterial;
+    private int teamIndex = 0;
 
-    void Start()
-    {
-        //TODO get nbTeams from server
-        InitTeamColor();
-    }
-
-    void InitTeamColor()
-    {
-        teamColor = new Color[nbTeams];
-        for (int i = 0; i < nbTeams; i++)
-        {
-            teamColor[i] = Random.ColorHSV(0f, 1f, 0f, 0.7f, 1f, 1f);
-        }
-    }
-
-  public void SpawnPlayer(int x, int y, int orientation, int id, string team)
+    public void SpawnPlayer(int id, int x, int y, int orientation, int level, string team)
     {
         Vector3 pos = map.cells[x, y].transform.position;
         GameObject go = Instantiate(playerPrefab);
         Player player = go.GetComponent<Player>();
 
         player.gridPos = new Vector2(x, y);
+        player.transform.position = map.cells[x, y].transform.position;
         player.team = team;
         player.id = id;
+        player.level = level;
         players.Add(player);
         player.orientation = (Player.Orientation)orientation;
         player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
-        //change color material for team;
+        player.LevelUp(level);
+        if (teamMaterial.ContainsKey(team) && teamMaterial[team] < body.Length)
+        {
+            SkinnedMeshRenderer skmr = player.transform.GetChild(1).GetChild(1).GetComponent<SkinnedMeshRenderer>();
+            Material[] mats = skmr.materials;
+            mats[0] = body[teamMaterial[team]];
+            mats[4] = arms[teamMaterial[team]];
+            skmr.materials = mats;
+        }
+    }
+
+    public void AddTeam(string teamName)
+    {
+        if (teamMaterial == null)
+            teamMaterial = new Dictionary<string, int>();
+        if (!teamMaterial.ContainsKey(teamName))
+        {
+            teamMaterial[teamName] = teamIndex;
+            ++teamIndex;
+        }
     }
 
     public Player FindPlayerById(int id)

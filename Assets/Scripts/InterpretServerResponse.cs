@@ -28,13 +28,21 @@ public class InterpretServerResponse : MonoBehaviour
         commands["pgt"] = updateManager.Take;
         commands["sgt"] = updateManager.UpdateUnitTime;
         commands["seg"] = updateManager.EndGame;
+        commands["tna"] = updateManager.TeamName;
 
         InterpretResponse("sgt 10\n");
         InterpretResponse("msz 10 5\n");
-        InterpretResponse("pnw 0 0 0 1 0 toto\n");
+        InterpretResponse("tna toto\n");
+        InterpretResponse("tna billy\n");
+
+
+        InterpretResponse("pnw 0 0 0 1 1 toto\n");
+        InterpretResponse("pnw 0 0 1 1 2 toto\n");
+        InterpretResponse("pnw 0 1 0 1 3 billy\n");
+
         //InterpretResponse("ppo 0 0 0 2\n");
-        InterpretResponse("ppo 0 0 5 1\n");
-        InterpretResponse("ppo 0 0 0 1\n");
+        //  InterpretResponse("ppo 0 0 1 1\n");
+        //InterpretResponse("ppo 0 0 2 1\n");
 
 
         /*InterpretResponse("ppo 0 0 4 1\n");

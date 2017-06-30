@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public GameObject expulse;
     public Orientation orientation;
     public Orientation nextOrientation;
+    public Material[] materials;
+
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
@@ -56,15 +58,14 @@ public class Player : MonoBehaviour
         waitForEndOfFrame = new WaitForEndOfFrame();
         coroutineManager = GetComponent<CoroutineFramework>();
         speed = 7 / UpdateManager.frequency;
+        UpdateAnimSpeed();
+    }
 
-        /*   StartCoroutine(MoveForward());
-           StartCoroutine(Turn90Left());
-           StartCoroutine(MoveForward());
-           StartCoroutine(Turn90Right());
-           StartCoroutine(MoveForward());
-           StartCoroutine(Turn90Right());
-           StartCoroutine(MoveForward());
-          */
+    public void UpdateAnimSpeed()
+    {
+        animator.speed = UpdateManager.frequency / 25.0f;
+        if (animator.speed < 2)
+            animator.speed = 2;
     }
 
     public IEnumerator MoveForward()
@@ -84,9 +85,9 @@ public class Player : MonoBehaviour
 
     public IEnumerator Move(int x, int y)
     {
-        Walk = true;
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
+        Walk = true;
         if (gridPos.x - x == -GetMap.dimension.x || gridPos.x - x == 1)
             yield return StartCoroutine(MoveLeft());
         else if (gridPos.x - x == GetMap.dimension.x || gridPos.x - x == -1)
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-       // print("MoveUp : position before : " + transform.position);
+        // print("MoveUp : position before : " + transform.position);
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.North);
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
@@ -146,7 +147,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator MoveOverSpeed(Vector3 end, float speed)
     {
-        print(transform.localPosition + " != " + end);
+        //print(transform.localPosition + " != " + end);
         while (transform.localPosition != end)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, end, speed * Time.deltaTime);
@@ -172,7 +173,6 @@ public class Player : MonoBehaviour
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        print("player orientation : " + orientation + " new oriantation :" + orient);
         if ((orientation == Orientation.NORTH && orient == Orientation.EAST) ||
             (orientation == Orientation.EAST && orient == Orientation.SOUTH) ||
             (orientation == Orientation.SOUTH && orient == Orientation.WEST) ||
@@ -214,7 +214,7 @@ public class Player : MonoBehaviour
     public void LevelUp(int lvl)
     {
         level = lvl;
-        //change color
+        transform.localScale = Vector3.one + (Vector3.one * 0.5f * (lvl - 1));
     }
 
     public bool IsPositionDifferent(int x, int y)
@@ -234,5 +234,13 @@ public class Player : MonoBehaviour
         expulse.SetActive(true);
         yield return new WaitForSeconds(1);
         expulse.SetActive(false);
+    }
+
+    public void UpdatePlayerColor(Color color)
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = color;
+        }
     }
 }

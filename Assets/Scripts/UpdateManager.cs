@@ -33,7 +33,7 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 7 && res[0] == "pnw")
         {
-            spawnManager.SpawnPlayer(int.Parse(res[2]), int.Parse(res[3]), int.Parse(res[4]), int.Parse(res[1]), res[5]);
+            spawnManager.SpawnPlayer(int.Parse(res[1]), int.Parse(res[2]), int.Parse(res[3]), int.Parse(res[4]), int.Parse(res[5]), res[6]);
         }
     }
 
@@ -43,6 +43,7 @@ public class UpdateManager : MonoBehaviour
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
             p.LevelUp(int.Parse(res[2]));
+            incantation.StopIncantation(true);
         }
     }
 
@@ -82,7 +83,7 @@ public class UpdateManager : MonoBehaviour
 
     public void EndIncantation(string[] res)
     {
-        incantation.StopIncantation(true);
+        incantation.StopIncantation(false);
         // stop anim for incant
     }
 
@@ -142,6 +143,7 @@ public class UpdateManager : MonoBehaviour
             foreach (Player p in spawnManager.players)
             {
                 p.speed = 7 / frequency;
+                p.UpdateAnimSpeed();
             }
         }
     }
@@ -151,6 +153,14 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 2 && res[0] == "seg")
         {
             EndGameGui end = GetComponent<EndGameGui>();
+        }
+    }
+
+    public void TeamName(string[] res)
+    {
+        if (res.Length == 2)
+        {
+            spawnManager.AddTeam(res[1]);
         }
     }
 }
