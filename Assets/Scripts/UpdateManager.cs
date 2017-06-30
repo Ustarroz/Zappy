@@ -9,8 +9,9 @@ public class UpdateManager : MonoBehaviour
 
     public static float frequency = 100;
     public GameObject   incantationPrefab;
-    private List<Incantation> incantationList;
-    private List<Egg> eggList;
+    public GameObject   eggPrefab;
+    public List<Incantation> incantationList;
+    public List<Egg> eggList;
 
     public void UpdateCell(string[] res)
     {
@@ -89,11 +90,8 @@ public class UpdateManager : MonoBehaviour
         y = int.Parse(res[2]);
         pos = new Vector2(x, y);
         GameObject go = Instantiate(incantationPrefab);
-        print(go);
         Incantation newIncant = go.GetComponent<Incantation>();
-        print(newIncant);
         newIncant.setPosition(pos);
-        print(newIncant);
         incantationList.Add(newIncant);
         incantationList.Find(incant => incant.getPosition() == pos).PlayIncantation();
     }
@@ -121,12 +119,39 @@ public class UpdateManager : MonoBehaviour
 
     public void LayEgg(string[] res)
     {
+        int x;
+        int y;
+        int id;
+        Vector2 pos;
 
+        if (res.Length != 5)
+            return;
+        x = int.Parse(res[3]);
+        y = int.Parse(res[4]);
+        id = int.Parse(res[1]);
+        pos = new Vector2(x, y);
+        GameObject go = Instantiate(eggPrefab);
+        Egg newEgg = go.GetComponent<Egg>();
+        newEgg.setPosition(pos);
+        newEgg.setId(id);
+        eggList.Add(newEgg);
+        eggList.Find(egg => egg.getPosition() == pos).Pop();
     }
 
     public void HatchingEgg(string[] res)
     {
+        int id;
+        Vector2 pos;
 
+        if (res.Length != 2)
+            return;
+        id = int.Parse(res[1]);
+        Egg egg = eggList.Find(e => e.getId() == id);
+        if (egg != null)
+        {
+            egg.Crack();
+            eggList.Remove(egg);
+        }
     }
 
     public void EggDied(string[] res)
