@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 2682fa3452820874c9782139dad6dd94
 timeCreated: 1498845303
+=======
+guid: e2056a38cca776c49858a32a381018c0
+timeCreated: 1498833619
+>>>>>>> origin/rework_incantation
 licenseType: Free
 MonoImporter:
   serializedVersion: 2

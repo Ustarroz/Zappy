@@ -23,6 +23,14 @@ public class Player : MonoBehaviour
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
 
+<<<<<<< HEAD
+=======
+    private AudioClip   putSound;
+    private AudioClip   pickupSound;
+    private AudioSource audioSource;
+
+
+>>>>>>> origin/rework_incantation
     public enum Orientation
     {
         NORTH = 1,
@@ -55,6 +63,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        // Load audio stuff
+        audioSource = gameObject.GetComponent<AudioSource>();
+        putSound = (AudioClip)Resources.Load("Sounds/put");
+        pickupSound = (AudioClip)Resources.Load("Sounds/pickup");
+
         inventory = new ZappyObjects();
         waitForEndOfFrame = new WaitForEndOfFrame();
         coroutineManager = GetComponent<CoroutineFramework>();
@@ -237,11 +250,24 @@ public class Player : MonoBehaviour
         expulse.SetActive(false);
     }
 
+<<<<<<< HEAD
     public void UpdatePlayerColor(Color color)
     {
         for (int i = 0; i < materials.Length; i++)
         {
             materials[i].color = color;
         }
+=======
+    public void Put()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(putSound, 1);
+    }
+
+    public void Take()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(pickupSound, 1);
+>>>>>>> origin/rework_incantation
     }
 }

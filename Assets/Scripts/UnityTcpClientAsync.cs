@@ -22,7 +22,9 @@ public abstract class UnityTcpClientAsync : MonoBehaviour
             if (tcpClient.receiveStatus)
             {
                 tcpClient.receiveStatus = false;
-                OnReceive(tcpClient.getData());
+                string[] commands = tcpClient.getData().Split('\n');
+                foreach (string cmd in commands)
+                    OnReceive(cmd);
                 tcpClient.Receive();
             }
             if (tcpClient.sendStatus)

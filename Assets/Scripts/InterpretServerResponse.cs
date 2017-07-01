@@ -66,9 +66,15 @@ public class InterpretServerResponse : MonoBehaviour
         /*  InterpretResponse("ppo 0 0 0 2\n");
           InterpretResponse("ppo 0 1 0 1\n");
           InterpretResponse("pex 0\n"); */
-        /*    InterpretResponse("pex 0\n");
-            InterpretResponse("pic 0 0 1 0\n");*/
-    }
+        /*    InterpretResponse("pex 0\n");*/
+/*            InterpretResponse("pic 0 0 1 0\n");
+            InterpretResponse("pic 2 2 2 2\n");
+            InterpretResponse("pic 3 3 2 1\n");
+*/
+    InterpretResponse("enw 0 2 0 0");
+    InterpretResponse("eht 0");
+
+}
 
 
     public void InterpretResponse(string response)
