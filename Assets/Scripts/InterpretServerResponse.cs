@@ -34,7 +34,7 @@ public class InterpretServerResponse : MonoBehaviour
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
         commands["pbc"] = updateManager.Broadcast;
 
-        InterpretResponse("sgt 10\n");
+        /*InterpretResponse("sgt 10\n");
         InterpretResponse("sgt 1\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
@@ -46,7 +46,7 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("pnw 2 0 0 3 3 billy\n");
         InterpretResponse("pnw 3 0 0 4 4 billy\n");
         InterpretResponse("pbc 0 toto");
-       
+*/       
     }
 
 
