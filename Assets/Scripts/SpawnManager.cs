@@ -31,12 +31,13 @@ public class SpawnManager : MonoBehaviour
 
             player.gridPos = new Vector2(x, y);
             player.offset = map.GetRandomMeshPos();
-            player.transform.position = map.cells[x, y].transform.position + player.offset;
+            player.transform.position = map.cells[x, y].transform.position;// + player.offset;
             player.team = team;
             player.id = id;
             player.level = level;
             players.Add(player);
             player.orientation = (Player.Orientation)orientation;
+         //   player.nextOrientation = player.orientation;
             player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
             player.LevelUp(level);
             if (teamMaterial != null && teamMaterial.ContainsKey(team) && teamMaterial[team] < body.Length)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour
 {
+    public NetworkAsync net;
     public InventoryUI invUI;
 
     private GameObject Click()
@@ -29,18 +30,20 @@ public class ClickManager : MonoBehaviour
                 ZappyObjects inv;
 
                 if (go.tag == "Player")
+                {
+                    net.Send("pin " + go.GetComponent<Player>().id.ToString() + "\n");
                     inv = go.GetComponent<Player>().inventory;
+                }
                 else
-                    inv = go.GetComponent<ZappyCell>().inventory;
+                {
+                    ZappyCell cell = go.GetComponent<ZappyCell>();
+                    net.Send("bct " + cell.gridPos.x + " " + cell.gridPos.y + "\n");
+                    inv = cell.inventory;
+                }
                 if (inv != null)
                 {
-                    invUI.UpdateUI(go.name, "Food", inv.Food);
-                    invUI.UpdateUI(go.name, "Deraumere", inv.Deraumere);
-                    invUI.UpdateUI(go.name, "Linemate", inv.Linemate);
-                    invUI.UpdateUI(go.name, "Mendiane", inv.Mendiane);
-                    invUI.UpdateUI(go.name, "Phiras", inv.Phiras);
-                    invUI.UpdateUI(go.name, "Sibur", inv.Sibur);
-                    invUI.UpdateUI(go.name, "Thystame", inv.Thystame);
+                    invUI.go = go;
+                    invUI.activeInventory = inv;
                 }
             }
         }

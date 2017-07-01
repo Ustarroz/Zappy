@@ -16,6 +16,8 @@ public class InterpretServerResponse : MonoBehaviour
         commands["msz"] = updateManager.MapSizeUpdate;
         commands["pnw"] = updateManager.NewPlayer;
         commands["plv"] = updateManager.UpdatePlayerLvl;
+        commands["pin"] = updateManager.UpdatePlayerInv;
+
         commands["ppo"] = updateManager.UpdatePlayerPos;
         commands["pex"] = updateManager.PlayerExpulse;
         commands["pic"] = updateManager.StartIncantation;
@@ -31,31 +33,28 @@ public class InterpretServerResponse : MonoBehaviour
         commands["pdi"] = updateManager.PlayerDied;
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
 
-     /*   InterpretResponse("sgt 1\n");
+       /* InterpretResponse("sgt 10\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
 
         InterpretResponse("pnw 0 0 0 1 1 toto\n");
-        InterpretResponse("pnw 1 0 0 1 1 toto\n");
-        InterpretResponse("pnw 2 0 0 1 1 billy\n");
-        InterpretResponse("pnw 3 0 0 1 1 billy\n");
-        InterpretResponse("pnw 4 0 0 1 1 titti\n");
+        InterpretResponse("ppo 0 1 0 1\n");
+        InterpretResponse("ppo 0 1 1 1\n");
+        InterpretResponse("ppo 0 0 1 1\n");
+        InterpretResponse("ppo 0 0 0 1\n");
 
-        InterpretResponse("ppo 1 10 0 1\n");
-        InterpretResponse("ppo 2 10 0 1\n");
+
+        /*   InterpretResponse("pnw 1 0 0 2 2 toto\n");
+        InterpretResponse("pnw 2 0 0 3 3 billy\n");
+        InterpretResponse("pnw 3 0 0 4 4 billy\n");
+
+        InterpretResponse("ppo 0 0 0 2\n");
+     /*   InterpretResponse("ppo 2 10 0 1\n");
         InterpretResponse("ppo 3 10 0 1\n");
         InterpretResponse("ppo 4 10 0 1\n");
 
-
-        InterpretResponse("enw 0 0 0 0\n");
-        InterpretResponse("enw 1 0 0 0\n");
-        InterpretResponse("enw 2 0 0 0\n");
-        InterpretResponse("enw 3 0 0 0\n");
-        InterpretResponse("enw 4 0 0 0\n");
-
-        InterpretResponse("pic 0 1\n");
-        //        InterpretResponse("pie 0 1 1\n");
+       //        InterpretResponse("pie 0 1 1\n");
 
         /*
         InterpretResponse("pnw 1 0 1 1 2 toto\n");
@@ -104,7 +103,7 @@ public class InterpretServerResponse : MonoBehaviour
         {
             string[] arg = l.Split(' ');
 
-            if (commands.ContainsKey(arg[0]))
+            if (commands != null && commands.ContainsKey(arg[0]))
                 commands[arg[0]](arg);
         }
     }
