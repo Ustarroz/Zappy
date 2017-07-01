@@ -31,16 +31,22 @@ public class InterpretServerResponse : MonoBehaviour
         commands["pdi"] = updateManager.PlayerDied;
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
 
-        InterpretResponse("sgt 10\n");
+     /*   InterpretResponse("sgt 1\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
 
         InterpretResponse("pnw 0 0 0 1 1 toto\n");
         InterpretResponse("pnw 1 0 0 1 1 toto\n");
-        InterpretResponse("pnw 2 0 0 1 1 toto\n");
-        InterpretResponse("pnw 3 0 0 1 1 toto\n");
-        InterpretResponse("pnw 4 0 0 1 1 toto\n");
+        InterpretResponse("pnw 2 0 0 1 1 billy\n");
+        InterpretResponse("pnw 3 0 0 1 1 billy\n");
+        InterpretResponse("pnw 4 0 0 1 1 titti\n");
+
+        InterpretResponse("ppo 1 10 0 1\n");
+        InterpretResponse("ppo 2 10 0 1\n");
+        InterpretResponse("ppo 3 10 0 1\n");
+        InterpretResponse("ppo 4 10 0 1\n");
+
 
         InterpretResponse("enw 0 0 0 0\n");
         InterpretResponse("enw 1 0 0 0\n");
