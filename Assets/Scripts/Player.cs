@@ -17,20 +17,15 @@ public class Player : MonoBehaviour
     public Orientation orientation;
     public Orientation nextOrientation;
     public Material[] materials;
-    public Egg egg;
 
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
-
-<<<<<<< HEAD
-=======
     private AudioClip   putSound;
     private AudioClip   pickupSound;
     private AudioSource audioSource;
 
 
->>>>>>> origin/rework_incantation
     public enum Orientation
     {
         NORTH = 1,
@@ -250,14 +245,14 @@ public class Player : MonoBehaviour
         expulse.SetActive(false);
     }
 
-<<<<<<< HEAD
     public void UpdatePlayerColor(Color color)
     {
         for (int i = 0; i < materials.Length; i++)
         {
             materials[i].color = color;
         }
-=======
+    }
+
     public void Put()
     {
         audioSource.Stop();
@@ -268,6 +263,5 @@ public class Player : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.PlayOneShot(pickupSound, 1);
->>>>>>> origin/rework_incantation
     }
 }

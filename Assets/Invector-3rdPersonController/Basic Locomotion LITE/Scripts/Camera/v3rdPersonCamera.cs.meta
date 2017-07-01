@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 fileFormatVersion: 2
 guid: 1a1bfe72fbc87d04e885296b53e91c66
 MonoImporter:
@@ -7,13 +6,3 @@ MonoImporter:
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
-=======
-fileFormatVersion: 2
-guid: 1a1bfe72fbc87d04e885296b53e91c66
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
->>>>>>> origin/rework_incantation

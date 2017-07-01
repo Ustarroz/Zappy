@@ -5,8 +5,12 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject eggPrefab;
+    public GameObject incantPrefab;
+
     public List<Player> players;
     public List<Egg> eggs;
+    public List<Incantation> incantationList;
 
     public Map map;
     public Material[] body;
@@ -54,9 +58,14 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SpawnEgg(Egg egg)
+    public void SpawnEgg(Vector2 pos, int id, string team)
     {
-        egg.gameObject.SetActive(true);
+        GameObject go = Instantiate(eggPrefab);
+        Egg newEgg = go.GetComponent<Egg>();
+        newEgg.id = id;
+        newEgg.team = team;
+        eggs.Add(newEgg);
+        newEgg.Pop();
     }
 
     public Player FindPlayerById(int id)
@@ -83,5 +92,15 @@ public class SpawnManager : MonoBehaviour
                 return new Vector3(0, 270, 0);
         };
         return Vector3.zero;
+    }
+
+    public void SpawnIncant(Vector3 pos)
+    {
+        GameObject go = Instantiate(incantPrefab);
+        Incantation newIncant = go.GetComponent<Incantation>();
+
+        newIncant.setPosition(pos);
+        incantationList.Add(newIncant);
+        newIncant.PlayIncantation();
     }
 }

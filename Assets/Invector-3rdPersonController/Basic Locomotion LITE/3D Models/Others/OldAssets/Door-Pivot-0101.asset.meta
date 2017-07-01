@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 fileFormatVersion: 2
 guid: 93357504725e7d2489d4bab8733bdafa
 timeCreated: 1450359377
@@ -7,13 +6,3 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-=======
-fileFormatVersion: 2
-guid: 93357504725e7d2489d4bab8733bdafa
-timeCreated: 1450359377
-licenseType: Store
-NativeFormatImporter:
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
->>>>>>> origin/rework_incantation

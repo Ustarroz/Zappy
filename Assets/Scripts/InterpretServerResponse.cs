@@ -31,7 +31,7 @@ public class InterpretServerResponse : MonoBehaviour
         commands["pdi"] = updateManager.PlayerDied;
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
 
-    /*    InterpretResponse("sgt 10\n");
+        InterpretResponse("sgt 10\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
@@ -40,12 +40,14 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("pnw 0 0 0 1 1 toto\n");
         InterpretResponse("enw 0 0 0 0\n");
 
-        /*  InterpretResponse("pnw 1 0 1 1 2 toto\n");
-          InterpretResponse("pnw 2 1 0 1 3 billy\n");
-          InterpretResponse("pnw 3 1 3 1 8 billy\n");
-          */
-      //  InterpretResponse("pdi 3\n");
-      //  InterpretResponse("seg billy\n");
+        InterpretResponse("pnw 1 0 1 1 2 toto\n");
+        InterpretResponse("pnw 2 1 0 1 3 billy\n");
+        InterpretResponse("pnw 3 1 3 1 8 billy\n");
+        InterpretResponse("ebo 0\n");
+
+
+        //  InterpretResponse("pdi 3\n");
+        //  InterpretResponse("seg billy\n");
 
 
         //InterpretResponse("ppo 0 0 0 2\n");
@@ -67,14 +69,12 @@ public class InterpretServerResponse : MonoBehaviour
           InterpretResponse("ppo 0 1 0 1\n");
           InterpretResponse("pex 0\n"); */
         /*    InterpretResponse("pex 0\n");*/
-/*            InterpretResponse("pic 0 0 1 0\n");
-            InterpretResponse("pic 2 2 2 2\n");
-            InterpretResponse("pic 3 3 2 1\n");
-*/
-    InterpretResponse("enw 0 2 0 0");
-    InterpretResponse("eht 0");
+        /*            InterpretResponse("pic 0 0 1 0\n");
+                    InterpretResponse("pic 2 2 2 2\n");
+                    InterpretResponse("pic 3 3 2 1\n");
+        */
 
-}
+    }
 
 
     public void InterpretResponse(string response)

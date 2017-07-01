@@ -77,5 +77,4 @@ public class Incantation : MonoBehaviour
     {
         return id;
     }
-
 }

@@ -1,44 +1,21 @@
-<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Egg : MonoBehaviour {
-
-    public GameObject egg;
-    public int id;
-
-  public void Show()
-    {
-        egg.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        egg.SetActive(false);
-    }
-}
-=======
-using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class Egg : MonoBehaviour
 {
     private Vector2 position;
-    private int     id;
+    public int     id;
 
     // Audio
     public float       volume;
     public AudioClip   eggPopSound;
     public AudioClip   eggCrackSound;
     public AudioSource audio;
-
-    private void Awake()
-    {
-        audio = GetComponent<AudioSource>();
-    }
-
+    public GameObject egg;
+    public string team;
+    
     public void Pop()
     {
         audio.Stop();
@@ -71,4 +48,3 @@ public class Egg : MonoBehaviour
         id = _id;
     }
 }
->>>>>>> origin/rework_incantation

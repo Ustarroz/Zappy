@@ -9,16 +9,8 @@ public class UpdateManager : MonoBehaviour
     public Map map;
 
     public static float frequency = 100;
-<<<<<<< HEAD
-    public Incantation incantation;
     public GameObject endUI;
     public GameObject inventoryUI;
-=======
-    public GameObject   incantationPrefab;
-    public GameObject   eggPrefab;
-    public List<Incantation> incantationList;
-    public List<Egg> eggList;
->>>>>>> origin/rework_incantation
 
     public void UpdateCell(string[] res)
     {
@@ -53,13 +45,8 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 3 && res[0] == "plv")
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-<<<<<<< HEAD
             p.LevelUp(int.Parse(res[2]));
-            incantation.StopIncantation(true);
-=======
             p.level = int.Parse(res[2]);
-            p.Spawn(p.transform.position);
->>>>>>> origin/rework_incantation
         }
     }
 
@@ -102,11 +89,7 @@ public class UpdateManager : MonoBehaviour
         x = int.Parse(res[1]);
         y = int.Parse(res[2]);
         pos = new Vector2(x, y);
-        GameObject go = Instantiate(incantationPrefab);
-        Incantation newIncant = go.GetComponent<Incantation>();
-        newIncant.setPosition(pos);
-        incantationList.Add(newIncant);
-        incantationList.Find(incant => incant.getPosition() == pos).PlayIncantation();
+        spawnManager.SpawnIncant(pos);
     }
 
     public void EndIncantation(string[] res)
@@ -122,48 +105,32 @@ public class UpdateManager : MonoBehaviour
         y = int.Parse(res[2]);
         success = int.Parse(res[3]);
         pos = new Vector2(x, y);
-        Incantation incantation = incantationList.Find(incant => incant.getPosition() == pos);
+        Incantation incantation = spawnManager.incantationList.Find(incant => incant.getPosition() == pos);
         if (incantation != null)
         {
             incantation.StopIncantation(success == 1);
-            incantationList.Remove(incantation);
+            spawnManager.incantationList.Remove(incantation);
+            Destroy(incantation.gameObject);
         }
     }
 
     public void LayEgg(string[] res)
     {
-<<<<<<< HEAD
         if (res.Length == 5)
         {
-            Player p = spawnManager.FindPlayerById(int.Parse(res[2]));
-            p.egg.id = int.Parse(res[1]);
-            p.egg.Show();
-            spawnManager.SpawnEgg(p.egg);  
-        }
-=======
-        int x;
-        int y;
-        int id;
-        Vector2 pos;
+            int x = int.Parse(res[3]);
+            int y = int.Parse(res[4]);
+            int id = int.Parse(res[1]);
+            Vector2 pos = new Vector2(x, y);
 
-        if (res.Length != 5)
-            return;
-        x = int.Parse(res[3]);
-        y = int.Parse(res[4]);
-        id = int.Parse(res[1]);
-        pos = new Vector2(x, y);
-        GameObject go = Instantiate(eggPrefab);
-        Egg newEgg = go.GetComponent<Egg>();
-        newEgg.setPosition(pos);
-        newEgg.setId(id);
-        eggList.Add(newEgg);
-        eggList.Find(egg => egg.getPosition() == pos).Pop();
->>>>>>> origin/rework_incantation
+            Player p = spawnManager.FindPlayerById(int.Parse(res[2]));
+            if (p != null)
+                spawnManager.SpawnEgg(pos, id, p.team);
+        }
     }
 
     public void HatchingEgg(string[] res)
     {
-<<<<<<< HEAD
         if (res.Length == 2)
         {
             Egg egg = spawnManager.FindEggById(int.Parse(res[1]));
@@ -177,21 +144,12 @@ public class UpdateManager : MonoBehaviour
         {
             Egg egg = spawnManager.FindEggById(int.Parse(res[1]));
 
-            spawnManager.eggs.Remove(egg);
-            egg.Hide();
-=======
-        int id;
-        Vector2 pos;
-
-        if (res.Length != 2)
-            return;
-        id = int.Parse(res[1]);
-        Egg egg = eggList.Find(e => e.getId() == id);
-        if (egg != null)
-        {
-            egg.Crack();
-            eggList.Remove(egg);
->>>>>>> origin/rework_incantation
+            if (egg != null)
+            {
+                spawnManager.eggs.Remove(egg);
+                egg.Crack();
+                Destroy(egg.gameObject);
+            }
         }
     }
 
@@ -202,7 +160,7 @@ public class UpdateManager : MonoBehaviour
             Egg egg = spawnManager.FindEggById(int.Parse(res[1]));
 
             spawnManager.eggs.Remove(egg);
-            egg.Hide();
+            Destroy(egg.gameObject);
         }
     }
 
@@ -261,7 +219,7 @@ public class UpdateManager : MonoBehaviour
             inventoryUI.SetActive(false);
             endUI.SetActive(true);
             endUI.transform.GetChild(2).GetComponent<Text>().text = res[1].ToUpper();
-           // GetComponent<NetworkAsync>().Disconnect();
+            // GetComponent<NetworkAsync>().Disconnect();
         }
     }
 
