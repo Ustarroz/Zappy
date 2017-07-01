@@ -6,6 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject playerPrefab;
     public List<Player> players;
+    public List<Egg> eggs;
+
     public Map map;
     public Material[] body;
     public Material[] arms;
@@ -15,26 +17,29 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnPlayer(int id, int x, int y, int orientation, int level, string team)
     {
-        Vector3 pos = map.cells[x, y].transform.position;
-        GameObject go = Instantiate(playerPrefab);
-        Player player = go.GetComponent<Player>();
-
-        player.gridPos = new Vector2(x, y);
-        player.transform.position = map.cells[x, y].transform.position;
-        player.team = team;
-        player.id = id;
-        player.level = level;
-        players.Add(player);
-        player.orientation = (Player.Orientation)orientation;
-        player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
-        player.LevelUp(level);
-        if (teamMaterial.ContainsKey(team) && teamMaterial[team] < body.Length)
+        if (map.cells != null)
         {
-            SkinnedMeshRenderer skmr = player.transform.GetChild(1).GetChild(1).GetComponent<SkinnedMeshRenderer>();
-            Material[] mats = skmr.materials;
-            mats[0] = body[teamMaterial[team]];
-            mats[4] = arms[teamMaterial[team]];
-            skmr.materials = mats;
+            Vector3 pos = map.cells[x, y].transform.position;
+            GameObject go = Instantiate(playerPrefab);
+            Player player = go.GetComponent<Player>();
+
+            player.gridPos = new Vector2(x, y);
+            player.transform.position = map.cells[x, y].transform.position;
+            player.team = team;
+            player.id = id;
+            player.level = level;
+            players.Add(player);
+            player.orientation = (Player.Orientation)orientation;
+            player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
+            player.LevelUp(level);
+            if (teamMaterial != null && teamMaterial.ContainsKey(team) && teamMaterial[team] < body.Length)
+            {
+                SkinnedMeshRenderer skmr = player.transform.GetChild(1).GetChild(1).GetComponent<SkinnedMeshRenderer>();
+                Material[] mats = skmr.materials;
+                mats[0] = body[teamMaterial[team]];
+                mats[4] = arms[teamMaterial[team]];
+                skmr.materials = mats;
+            }
         }
     }
 
@@ -49,9 +54,19 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void SpawnEgg(Egg egg)
+    {
+        egg.gameObject.SetActive(true);
+    }
+
     public Player FindPlayerById(int id)
     {
         return players.Find((x) => x.id == id);
+    }
+
+    public Egg FindEggById(int id)
+    {
+        return eggs.Find((x) => x.id == id);
     }
 
     public Vector3 ConvertOrientation(Player.Orientation orientation)

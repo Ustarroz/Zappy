@@ -34,7 +34,7 @@ public class Map : MonoBehaviour
             for (int y = 0; y < dimension.y; y++)
             {
                 GameObject go = Instantiate(prefab, new Vector3(mesh.bounds.size.x * x, 0, mesh.bounds.size.z * y), Quaternion.identity, transform);
-                go.name = "cube(" + x + ","+ y + ")";
+                go.name = "cube(" + x + "," + y + ")";
                 cells[x, y] = go.GetComponent<ZappyCell>();
                 cells[x, y].gridPos = new Vector2(x, y);
             }
@@ -61,7 +61,8 @@ public class Map : MonoBehaviour
 
     public void UpdateCell(int x, int y, int food, int libenate, int deraumere, int sibur, int mendiane, int phiras, int thystame)
     {
-        cells[x, y].UpdateCell(food, libenate, deraumere, sibur, mendiane, phiras, thystame);
+        if (cells != null && x >= 0 && y >= 0 && x < cells.GetLength(0) && y < cells.GetLength(1))
+            cells[x, y].UpdateCell(food, libenate, deraumere, sibur, mendiane, phiras, thystame);
     }
 
     int MyCeil(double i)

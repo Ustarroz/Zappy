@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    public Text title;
     public GameObject prefabsUI;
     public static Dictionary<string, Text> inventoryPair;
     public readonly string[] names = { "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame", "Food" };
     public Sprite[] img;
-
+    
     void Awake()
     {
         inventoryPair = new Dictionary<string, Text>();
@@ -24,14 +25,16 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public static void UpdateUI(string names, string value)
+    public void UpdateUI(string clickName, string names, string value)
     {
+        title.text = clickName;
         if (inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value;
     }
 
-    public static void UpdateUI(string names, int value)
+    public void UpdateUI(string clickName, string names, int value)
     {
+        title.text = clickName;
         if (inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value.ToString();
     }

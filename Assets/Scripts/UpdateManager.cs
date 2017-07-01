@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpdateManager : MonoBehaviour
 {
@@ -9,9 +10,12 @@ public class UpdateManager : MonoBehaviour
 
     public static float frequency = 100;
     public Incantation incantation;
+    public GameObject endUI;
+    public GameObject inventoryUI;
 
     public void UpdateCell(string[] res)
     {
+        print("bct : " + res.Length + " - " + res[0]);
         if (res.Length == 10 && res[0] == "bct")
             map.UpdateCell(int.Parse(res[1]), int.Parse(res[2]), int.Parse(res[3]),
                 int.Parse(res[4]), int.Parse(res[5]), int.Parse(res[6]), int.Parse(res[7]), int.Parse(res[8]),
@@ -24,8 +28,8 @@ public class UpdateManager : MonoBehaviour
         {
             map.dimension.x = int.Parse(res[1]);
             map.dimension.y = int.Parse(res[2]);
-            //   if (map.cells != null && map.cells.Length == 0)
-            map.CreateMap();
+            if (map.cells == null)
+                map.CreateMap();
         }
     }
 
@@ -89,19 +93,43 @@ public class UpdateManager : MonoBehaviour
 
     public void LayEgg(string[] res)
     {
-
+        if (res.Length == 5)
+        {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[2]));
+            p.egg.id = int.Parse(res[1]);
+            p.egg.Show();
+            spawnManager.SpawnEgg(p.egg);  
+        }
     }
 
     public void HatchingEgg(string[] res)
     {
+        if (res.Length == 2)
+        {
+            Egg egg = spawnManager.FindEggById(int.Parse(res[1]));
 
+        }
+    }
+
+    public void ConnectPlayerForEgg(string[] res)
+    {
+        if (res.Length == 2)
+        {
+            Egg egg = spawnManager.FindEggById(int.Parse(res[1]));
+
+            spawnManager.eggs.Remove(egg);
+            egg.Hide();
+        }
     }
 
     public void EggDied(string[] res)
     {
-        if (res[0] == "")
+        if (res.Length == 2)
         {
+            Egg egg = spawnManager.FindEggById(int.Parse(res[1]));
 
+            spawnManager.eggs.Remove(egg);
+            egg.Hide();
         }
     }
 
@@ -127,10 +155,13 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 2)
         {
-            Player player;
             int playerId = int.Parse(res[1]);
-            player = spawnManager.FindPlayerById(playerId);
-            Destroy(player);
+            Player player = spawnManager.FindPlayerById(playerId);
+            if (player != null)
+            {
+                spawnManager.players.Remove(player);
+                Destroy(player.gameObject);
+            }
         }
     }
 
@@ -139,7 +170,6 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 2 && res[0] == "sgt")
         {
             frequency = int.Parse(res[1]);
-
             foreach (Player p in spawnManager.players)
             {
                 p.speed = 7 / frequency;
@@ -152,7 +182,11 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 2 && res[0] == "seg")
         {
-            EndGameGui end = GetComponent<EndGameGui>();
+            print("game over");
+            inventoryUI.SetActive(false);
+            endUI.SetActive(true);
+            endUI.transform.GetChild(2).GetComponent<Text>().text = res[1].ToUpper();
+           // GetComponent<NetworkAsync>().Disconnect();
         }
     }
 

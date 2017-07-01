@@ -35,10 +35,10 @@ public class FlyCamController : MonoBehaviour
 
     void Update()
     { 
-        if (Input.GetKeyUp(KeyCode.LeftShift) & _shifted)
+        if (Input.GetKeyUp(KeyCode.LeftControl) & _shifted)
             _shifted = false;
 
-        if ((Input.GetKeyDown(KeyCode.LeftShift) & !_shifted) |
+        if ((Input.GetKeyDown(KeyCode.LeftControl) & !_shifted) |
             (Input.GetKeyDown(KeyCode.Escape) & _mouselookEnabled))
         {
             _shifted = true;

@@ -7,10 +7,30 @@ public class ZappyCell : MonoBehaviour
     public Vector2 gridPos;
     public ZappyObjects inventory;
     public GameObject[] gems;
-
+    public List<Vector3> spawnPoints;
+    
     public void Awake()
     {
+        spawnPoints = new List<Vector3>();
         inventory = new ZappyObjects();
+        foreach (Transform t in transform.GetChild(0))
+        {
+            spawnPoints.Add(t.position);
+        }
+
+        for (int i = 0; i < gems.Length; i++)
+        {
+            gems[i].transform.position = GetSpawnPoint();
+        }
+    }
+
+    private Vector3 GetSpawnPoint()
+    {
+        int r = Random.Range(0, spawnPoints.Count);
+
+        Vector3 vec = spawnPoints[r];
+        spawnPoints.Remove(spawnPoints[r]);
+        return (vec);
     }
 
     public void UpdateCell(int food, int libenate, int deraumere, int sibur, int mendiane, int phiras, int thystame)

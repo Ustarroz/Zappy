@@ -7,7 +7,6 @@ public class InterpretServerResponse : MonoBehaviour
 {
     public UpdateManager updateManager;
     private Dictionary<string, Action<string[]>> commands;
-    bool wait = true;
 
     private void Awake()
     {
@@ -29,16 +28,25 @@ public class InterpretServerResponse : MonoBehaviour
         commands["sgt"] = updateManager.UpdateUnitTime;
         commands["seg"] = updateManager.EndGame;
         commands["tna"] = updateManager.TeamName;
+        commands["pdi"] = updateManager.PlayerDied;
+        commands["ebo"] = updateManager.ConnectPlayerForEgg;
 
-        InterpretResponse("sgt 10\n");
+    /*    InterpretResponse("sgt 10\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
 
 
         InterpretResponse("pnw 0 0 0 1 1 toto\n");
-        InterpretResponse("pnw 0 0 1 1 2 toto\n");
-        InterpretResponse("pnw 0 1 0 1 3 billy\n");
+        InterpretResponse("enw 0 0 0 0\n");
+
+        /*  InterpretResponse("pnw 1 0 1 1 2 toto\n");
+          InterpretResponse("pnw 2 1 0 1 3 billy\n");
+          InterpretResponse("pnw 3 1 3 1 8 billy\n");
+          */
+      //  InterpretResponse("pdi 3\n");
+      //  InterpretResponse("seg billy\n");
+
 
         //InterpretResponse("ppo 0 0 0 2\n");
         //  InterpretResponse("ppo 0 0 1 1\n");

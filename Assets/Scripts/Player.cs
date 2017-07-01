@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public Orientation orientation;
     public Orientation nextOrientation;
     public Material[] materials;
+    public Egg egg;
 
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;

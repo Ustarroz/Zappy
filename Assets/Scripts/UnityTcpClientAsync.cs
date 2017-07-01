@@ -67,10 +67,13 @@ public abstract class UnityTcpClientAsync : MonoBehaviour
 
     public void Disconnect()
     {
-		start = false;
-		run = false;
-		timer = 0;
-		tcpClient.Disconnect ();
+        if (tcpClient != null)
+        {
+            start = false;
+            run = false;
+            timer = 0;
+            tcpClient.Disconnect();
+        }
     }
 
     abstract public void OnConnect(params object[] p);

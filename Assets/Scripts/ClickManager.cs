@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour
 {
-    private ZappyObjects Click()
+    public InventoryUI invUI;
+
+    private GameObject Click()
     {
         RaycastHit hit;
         Ray screenToWorldPos = Camera.main.ScreenPointToRay(Input.mousePosition);
-       
+
         if (Physics.Raycast(screenToWorldPos, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Clickable")))
         {
-            Debug.Log(hit.transform.name);
-            if (hit.transform.tag == "Player")
-                return hit.transform.parent.gameObject.GetComponent<Player>().inventory;
-            else
-                return hit.transform.gameObject.GetComponent<ZappyCell>().inventory;
+            return hit.transform.gameObject;
         }
         return null;
     }
@@ -24,17 +22,26 @@ public class ClickManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            ZappyObjects inv = Click();
+            GameObject go = Click();
 
-            if (inv != null)
+            if (go != null)
             {
-                InventoryUI.UpdateUI("Food", inv.Food);
-                InventoryUI.UpdateUI("Deraumere", inv.Deraumere);
-                InventoryUI.UpdateUI("Linemate", inv.Linemate);
-                InventoryUI.UpdateUI("Mendiane", inv.Mendiane);
-                InventoryUI.UpdateUI("Phiras", inv.Phiras);
-                InventoryUI.UpdateUI("Sibur", inv.Sibur);
-                InventoryUI.UpdateUI("Thystame", inv.Thystame);
+                ZappyObjects inv;
+
+                if (go.tag == "Player")
+                    inv = go.GetComponent<Player>().inventory;
+                else
+                    inv = go.GetComponent<ZappyCell>().inventory;
+                if (inv != null)
+                {
+                    invUI.UpdateUI(go.name, "Food", inv.Food);
+                    invUI.UpdateUI(go.name, "Deraumere", inv.Deraumere);
+                    invUI.UpdateUI(go.name, "Linemate", inv.Linemate);
+                    invUI.UpdateUI(go.name, "Mendiane", inv.Mendiane);
+                    invUI.UpdateUI(go.name, "Phiras", inv.Phiras);
+                    invUI.UpdateUI(go.name, "Sibur", inv.Sibur);
+                    invUI.UpdateUI(go.name, "Thystame", inv.Thystame);
+                }
             }
         }
     }
