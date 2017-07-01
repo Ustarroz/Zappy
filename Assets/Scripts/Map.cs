@@ -79,4 +79,17 @@ public class Map : MonoBehaviour
             r = (int)Math.Ceiling(i);
         return r;
     }
+
+    public Vector3 GetRandomMeshPos()
+    {
+        float newX = UnityEngine.Random.Range(mesh.bounds.min.x + mesh.bounds.extents.x / 4, mesh.bounds.max.x - mesh.bounds.extents.x / 4);
+        float newY = UnityEngine.Random.Range(mesh.bounds.min.z + mesh.bounds.extents.z / 4, mesh.bounds.max.z - mesh.bounds.extents.z / 4);
+
+        return new Vector3(newX, 0, newY);
+    }
+
+    public Vector3 GetRandomCasePos(int x, int y)
+    {
+        return GetRandomMeshPos() + cells[x, y].transform.position;
+    }
 }

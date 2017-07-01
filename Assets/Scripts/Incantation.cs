@@ -4,8 +4,8 @@ using System.Collections;
 [RequireComponent (typeof(AudioSource))]
 public class Incantation : MonoBehaviour
 {
-    // Position
-    private Vector2 position = new Vector2(0, 0);
+    // gridPos
+    private Vector2 gridPos = new Vector2(0, 0);
 
     // Audio
     public float volume;
@@ -35,15 +35,12 @@ public class Incantation : MonoBehaviour
 
     public void PlayIncantation()
     {
-        Vector3 pos = new Vector3(4, 0, 0);
-
         audio.Stop();
         audio.loop = true;
         audio.clip = incantationMainSound;
         audio.volume = volume;
         audio.Play();
         particle.Stop();
-        particle.transform.position = pos;
         particle.Play();
     }
 
@@ -63,14 +60,14 @@ public class Incantation : MonoBehaviour
         }
     }
 
-    public void setPosition(Vector2 pos)
+    public void setGridPos(Vector2 pos)
     {
-        position = pos;
+        gridPos = pos;
     }
 
-    public Vector2 getPosition()
+    public Vector2 getGridPos()
     {
-        return position;
+        return gridPos;
     }
 
     public int getId()

@@ -70,26 +70,21 @@ public class TcpClientAsync
     private void ReceiveCallback(IAsyncResult ar)
     {
         int bytesRead = client.GetStream().EndRead(ar);
-        Debug.Log("byteRead : " + bytesRead);
         if (bytesRead > 0)
         {
             returndata += Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            Debug.Log("returnData : " + returndata + " byteRead : " + bytesRead);
             buffer = new byte[BufferSize];
             if (client.Client.Poll(0, SelectMode.SelectRead) || returndata[returndata.Length - 1] != '\n')
                 client.Client.BeginReceive(buffer, 0, BufferSize, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
             else
             {
                 receiveStatus = true;
-                Debug.Log("yolo returnData : " + returndata + " byteRead : " + bytesRead);
             }
         }
         else
         {
             if (returndata.Length > 1)
                 returndata += Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            Debug.Log("ELSE returnData : " + returndata);
-
             receiveStatus = true;
         }
     }
