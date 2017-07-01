@@ -28,14 +28,14 @@ public class InventoryUI : MonoBehaviour
     public void UpdateUI(string clickName, string names, string value)
     {
         title.text = clickName;
-        if (inventoryPair.ContainsKey(names))
+        if (inventoryPair != null && inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value;
     }
 
     public void UpdateUI(string clickName, string names, int value)
     {
         title.text = clickName;
-        if (inventoryPair.ContainsKey(names))
+        if (inventoryPair != null && inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value.ToString();
     }
 }

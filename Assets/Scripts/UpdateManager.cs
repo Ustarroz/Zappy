@@ -233,7 +233,8 @@ public class UpdateManager : MonoBehaviour
             return;
         int playerid = int.Parse(res[1]);
         Player player = spawnManager.FindPlayerById(playerid);
-        StartCoroutine(ShowForSecond(player.exclamation, 2));
+        if (player)
+            StartCoroutine(ShowForSecond(player.exclamation, 2));
     }
 
     private IEnumerator ShowForSecond(GameObject go, float seconds)
