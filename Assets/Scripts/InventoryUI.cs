@@ -10,8 +10,10 @@ public class InventoryUI : MonoBehaviour
     public static Dictionary<string, Text> inventoryPair;
     public readonly string[] names = { "Linemate", "Deraumere", "Sibur", "Mendiane", "Phiras", "Thystame", "Food" };
     public Sprite[] img;
-    
-    void Awake()
+    public GameObject go;
+    public ZappyObjects activeInventory;
+
+   void Awake()
     {
         inventoryPair = new Dictionary<string, Text>();
         for (int i = 0; i < names.Length; i++)
@@ -25,16 +27,30 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void UpdateUI(string clickName, string names, string value)
+    private void Update()
     {
-        title.text = clickName;
+        if (go != null && activeInventory != null)
+        {
+            title.text = go.name;
+
+            UpdateUI("Food", activeInventory.Food);
+            UpdateUI("Deraumere", activeInventory.Deraumere);
+            UpdateUI("Linemate", activeInventory.Linemate);
+            UpdateUI("Mendiane", activeInventory.Mendiane);
+            UpdateUI("Phiras", activeInventory.Phiras);
+            UpdateUI("Sibur", activeInventory.Sibur);
+            UpdateUI("Thystame", activeInventory.Thystame);
+        }
+    }
+
+    public void UpdateUI(string names, string value)
+    {
         if (inventoryPair != null && inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value;
     }
 
-    public void UpdateUI(string clickName, string names, int value)
+    public void UpdateUI(string names, int value)
     {
-        title.text = clickName;
         if (inventoryPair != null && inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value.ToString();
     }

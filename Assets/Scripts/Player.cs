@@ -110,9 +110,9 @@ public class Player : MonoBehaviour
             yield return StartCoroutine(MoveLeft());
         else if (gridPos.x - x == GetMap.dimension.x || gridPos.x - x == -1)
             yield return StartCoroutine(MoveRight());
-        else if (gridPos.y - y == -GetMap.dimension.y || gridPos.y - y == 1)
-            yield return StartCoroutine(MoveDown());
         else if (gridPos.y - y == GetMap.dimension.y || gridPos.y - y == -1)
+            yield return StartCoroutine(MoveDown());
+        else if (gridPos.y - y == -GetMap.dimension.y || gridPos.y - y == 1)
             yield return StartCoroutine(MoveUp());
         Walk = false;
         gridPos.x = x;
@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         // print("MoveUp : position before : " + transform.position);
-        Vector3 dest = GetMap.WorldToGrid(transform.position - offset + Map.North);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.North);
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.South * (GetMap.dimension.y)).z + transform.position.z);
@@ -135,17 +135,17 @@ public class Player : MonoBehaviour
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         // print("MoveDOwn : position before : " + transform.position);
-        Vector3 dest = GetMap.WorldToGrid(transform.position - offset + Map.South);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.South);
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.South * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
-            transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.North * (GetMap.dimension.y - 1)).z + offset.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.North * (GetMap.dimension.y - 1)).z);
     }
 
     private IEnumerator MoveRight()
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        Vector3 dest = GetMap.WorldToGrid(transform.position - offset + Map.East);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.East);
         //print("MoveLeft : position before : " + transform.position + " dest : " + dest);
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.East * GetMap.ScaleFactor.x), speed));
         if (!GetMap.Contains(dest))
@@ -156,11 +156,11 @@ public class Player : MonoBehaviour
     {
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
-        Vector3 dest = GetMap.WorldToGrid(transform.position - offset + Map.West);
+        Vector3 dest = GetMap.WorldToGrid(transform.position + Map.West);
         // print("MoveRIght : position before : " + transform.position + " dest : " + dest);
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.West * GetMap.ScaleFactor.x), speed));
         if (!GetMap.Contains(dest))
-            transform.position = new Vector3(GetMap.GridToWorld(Map.East * (GetMap.dimension.x - 1)).x + offset.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(GetMap.GridToWorld(Map.East * (GetMap.dimension.x - 1)).x, transform.position.y, transform.position.z);
     }
 
     private IEnumerator MoveOverSpeed(Vector3 end, float speed)

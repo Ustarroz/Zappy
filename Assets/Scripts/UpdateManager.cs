@@ -60,6 +60,7 @@ public class UpdateManager : MonoBehaviour
             int x = int.Parse(res[2]);
             int y = int.Parse(res[3]);
 
+          
             if (p.IsPositionDifferent(x, y))
                 StartCoroutine(p.Move(x, y));
             else if (p.IsOrientationDifferent(orientation))
@@ -67,6 +68,22 @@ public class UpdateManager : MonoBehaviour
             p.nexGgridPos.x = x;
             p.nexGgridPos.y = y;
             p.nextOrientation = orientation;
+        }
+    }
+
+    public void UpdatePlayerInv(string[] res)
+    {
+        if (res.Length == 11)
+        {
+            Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
+
+            p.inventory.Food = int.Parse(res[4]);
+            p.inventory.Linemate = int.Parse(res[5]);
+            p.inventory.Deraumere = int.Parse(res[6]);
+            p.inventory.Sibur = int.Parse(res[7]);
+            p.inventory.Mendiane = int.Parse(res[8]);
+            p.inventory.Phiras = int.Parse(res[9]);
+            p.inventory.Thystame = int.Parse(res[10]);
         }
     }
 
@@ -112,7 +129,7 @@ public class UpdateManager : MonoBehaviour
         {
             incantation.StopIncantation(success == 1);
             spawnManager.incantationList.Remove(incantation);
-            Destroy(incantation.gameObject);
+            StartCoroutine(DelayDestroy(incantation.gameObject, 2f));
         }
     }
 
@@ -196,7 +213,7 @@ public class UpdateManager : MonoBehaviour
             {
                 player.Die();
                 spawnManager.players.Remove(player);
-                //Destroy(player.gameObject);
+                StartCoroutine(DelayDestroy(player.gameObject, 1));
             }
         }
     }
@@ -229,7 +246,7 @@ public class UpdateManager : MonoBehaviour
 
     public void Broadcast(string[] res)
     {
-        if (res.Length != 3)
+        if (res.Length < 3)
             return;
         int playerid = int.Parse(res[1]);
         Player player = spawnManager.FindPlayerById(playerid);
@@ -250,5 +267,11 @@ public class UpdateManager : MonoBehaviour
         {
             spawnManager.AddTeam(res[1]);
         }
+    }
+
+    private IEnumerator DelayDestroy(GameObject go, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(go);
     }
 }
