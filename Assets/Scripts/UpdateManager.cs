@@ -193,6 +193,7 @@ public class UpdateManager : MonoBehaviour
             Player player = spawnManager.FindPlayerById(playerId);
             if (player != null)
             {
+                player.Die();
                 spawnManager.players.Remove(player);
                 Destroy(player.gameObject);
             }
