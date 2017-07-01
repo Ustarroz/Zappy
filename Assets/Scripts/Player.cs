@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public Orientation nextOrientation;
     public Material[] materials;
 
+    public GameObject exclamation;
+
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;

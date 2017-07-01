@@ -30,8 +30,9 @@ public class InterpretServerResponse : MonoBehaviour
         commands["tna"] = updateManager.TeamName;
         commands["pdi"] = updateManager.PlayerDied;
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
+        commands["pbc"] = updateManager.Broadcast;
 
-        InterpretResponse("sgt 1\n");
+        /*InterpretResponse("sgt 1\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
