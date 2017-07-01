@@ -36,38 +36,51 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
 
-
         InterpretResponse("pnw 0 0 0 1 1 toto\n");
+        InterpretResponse("pnw 1 0 0 1 1 toto\n");
+        InterpretResponse("pnw 2 0 0 1 1 toto\n");
+        InterpretResponse("pnw 3 0 0 1 1 toto\n");
+        InterpretResponse("pnw 4 0 0 1 1 toto\n");
+
         InterpretResponse("enw 0 0 0 0\n");
+        InterpretResponse("enw 1 0 0 0\n");
+        InterpretResponse("enw 2 0 0 0\n");
+        InterpretResponse("enw 3 0 0 0\n");
+        InterpretResponse("enw 4 0 0 0\n");
 
+        InterpretResponse("pic 0 1\n");
+        //        InterpretResponse("pie 0 1 1\n");
+
+        /*
         InterpretResponse("pnw 1 0 1 1 2 toto\n");
-        InterpretResponse("pnw 2 1 0 1 3 billy\n");
-        InterpretResponse("pnw 3 1 3 1 8 billy\n");
-        InterpretResponse("ebo 0\n");
+
+         InterpretResponse("pnw 2 1 0 1 3 billy\n");
+         InterpretResponse("pnw 3 1 3 1 8 billy\n");
+         InterpretResponse("ebo 0\n");
 
 
-        //  InterpretResponse("pdi 3\n");
-        //  InterpretResponse("seg billy\n");
+         //  InterpretResponse("pdi 3\n");
+         //  InterpretResponse("seg billy\n");
 
 
-        //InterpretResponse("ppo 0 0 0 2\n");
-        //  InterpretResponse("ppo 0 0 1 1\n");
-        //InterpretResponse("ppo 0 0 2 1\n");
+         //InterpretResponse("ppo 0 0 0 2\n");
+         //  InterpretResponse("ppo 0 0 1 1\n");
+         //InterpretResponse("ppo 0 0 2 1\n");
 
 
-        /*InterpretResponse("ppo 0 0 4 1\n");
-        InterpretResponse("ppo 0 10 4 1\n");
-        InterpretResponse("ppo 0 0 4 1\n");
-        InterpretResponse("ppo 0 0 5 1\n");
+         /*InterpretResponse("ppo 0 0 4 1\n");
+         InterpretResponse("ppo 0 10 4 1\n");
+         InterpretResponse("ppo 0 0 4 1\n");
+         InterpretResponse("ppo 0 0 5 1\n");
 
-        //  InterpretResponse("ppo 0 0 0 4\n");
-        // InterpretResponse("ppo 0 0 0 3\n");
+         //  InterpretResponse("ppo 0 0 0 4\n");
+         // InterpretResponse("ppo 0 0 0 3\n");
 
-        //InterpretResponse("bct 0 0 1 2 3 4 5 6 7");
+         //InterpretResponse("bct 0 0 1 2 3 4 5 6 7");
 
-        /*  InterpretResponse("ppo 0 0 0 2\n");
-          InterpretResponse("ppo 0 1 0 1\n");
-          InterpretResponse("pex 0\n"); */
+         /*  InterpretResponse("ppo 0 0 0 2\n");
+           InterpretResponse("ppo 0 1 0 1\n");
+           InterpretResponse("pex 0\n"); */
         /*    InterpretResponse("pex 0\n");*/
         /*            InterpretResponse("pic 0 0 1 0\n");
                     InterpretResponse("pic 2 2 2 2\n");

@@ -84,12 +84,13 @@ public class UpdateManager : MonoBehaviour
         int y;
         Vector2 pos;
 
-        if (res.Length < 3)
-            return;
-        x = int.Parse(res[1]);
-        y = int.Parse(res[2]);
-        pos = new Vector2(x, y);
-        spawnManager.SpawnIncant(pos);
+        if (res.Length >= 2)
+        {
+            x = int.Parse(res[1]);
+            y = int.Parse(res[2]);
+            pos = new Vector2(x, y);
+            spawnManager.SpawnIncant(pos);
+        }
     }
 
     public void EndIncantation(string[] res)
@@ -99,13 +100,13 @@ public class UpdateManager : MonoBehaviour
         int success;
         Vector2 pos;
 
-        if (res.Length < 4)
+        if (res.Length != 4)
             return;
         x = int.Parse(res[1]);
         y = int.Parse(res[2]);
         success = int.Parse(res[3]);
         pos = new Vector2(x, y);
-        Incantation incantation = spawnManager.incantationList.Find(incant => incant.getPosition() == pos);
+        Incantation incantation = spawnManager.incantationList.Find(incant => incant.getGridPos() == pos);
         if (incantation != null)
         {
             incantation.StopIncantation(success == 1);

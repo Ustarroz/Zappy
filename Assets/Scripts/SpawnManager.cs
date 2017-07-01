@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject eggPrefab;
     public GameObject incantPrefab;
+    public Transform eggRoot;
+    public Transform incantRoot;
 
     public List<Player> players;
     public List<Egg> eggs;
@@ -28,7 +30,8 @@ public class SpawnManager : MonoBehaviour
             Player player = go.GetComponent<Player>();
 
             player.gridPos = new Vector2(x, y);
-            player.transform.position = map.cells[x, y].transform.position;
+            player.offset = map.GetRandomMeshPos();
+            player.transform.position = map.cells[x, y].transform.position + player.offset;
             player.team = team;
             player.id = id;
             player.level = level;
@@ -60,7 +63,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnEgg(Vector2 pos, int id, string team)
     {
-        GameObject go = Instantiate(eggPrefab);
+        GameObject go = Instantiate(eggPrefab, map.GetRandomCasePos((int)pos.x, (int)pos.y) + new Vector3(0, 0.2f, 0), eggPrefab.transform.rotation, eggRoot);
         Egg newEgg = go.GetComponent<Egg>();
         newEgg.id = id;
         newEgg.team = team;
@@ -94,12 +97,12 @@ public class SpawnManager : MonoBehaviour
         return Vector3.zero;
     }
 
-    public void SpawnIncant(Vector3 pos)
+    public void SpawnIncant(Vector2 pos)
     {
-        GameObject go = Instantiate(incantPrefab);
+        GameObject go =
+            Instantiate(incantPrefab, map.cells[(int)pos.x, (int)pos.y].transform.position, incantPrefab.transform.rotation, incantRoot);
         Incantation newIncant = go.GetComponent<Incantation>();
-
-        newIncant.setPosition(pos);
+        newIncant.setGridPos(pos);
         incantationList.Add(newIncant);
         newIncant.PlayIncantation();
     }
