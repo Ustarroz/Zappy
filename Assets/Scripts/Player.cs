@@ -275,6 +275,6 @@ public class Player : MonoBehaviour
     public void Die()
     {
         audioSource.Stop();
-        audioSource.PlayOneShot(deathSound, 1);
+        audioSource.PlayOneShot(deathSound, 3);
     }
 }

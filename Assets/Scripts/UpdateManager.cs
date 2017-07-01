@@ -11,6 +11,7 @@ public class UpdateManager : MonoBehaviour
     public static float frequency = 100;
     public GameObject endUI;
     public GameObject inventoryUI;
+    public MainMusicManager mainMusicManager;
 
     public void UpdateCell(string[] res)
     {
@@ -195,7 +196,7 @@ public class UpdateManager : MonoBehaviour
             {
                 player.Die();
                 spawnManager.players.Remove(player);
-                Destroy(player.gameObject);
+                //Destroy(player.gameObject);
             }
         }
     }
@@ -222,6 +223,7 @@ public class UpdateManager : MonoBehaviour
             endUI.SetActive(true);
             endUI.transform.GetChild(2).GetComponent<Text>().text = res[1].ToUpper();
             // GetComponent<NetworkAsync>().Disconnect();
+            mainMusicManager.PlayEndTheme();
         }
     }
 

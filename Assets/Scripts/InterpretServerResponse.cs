@@ -31,7 +31,7 @@ public class InterpretServerResponse : MonoBehaviour
         commands["pdi"] = updateManager.PlayerDied;
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
 
-     /*   InterpretResponse("sgt 1\n");
+        InterpretResponse("sgt 1\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
@@ -49,12 +49,14 @@ public class InterpretServerResponse : MonoBehaviour
 
 
         InterpretResponse("enw 0 0 0 0\n");
+        InterpretResponse("pdi 0\n");
         InterpretResponse("enw 1 0 0 0\n");
         InterpretResponse("enw 2 0 0 0\n");
         InterpretResponse("enw 3 0 0 0\n");
         InterpretResponse("enw 4 0 0 0\n");
 
         InterpretResponse("pic 0 1\n");
+        InterpretResponse("seg Billy");
         //        InterpretResponse("pie 0 1 1\n");
 
         /*
