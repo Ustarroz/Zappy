@@ -21,8 +21,14 @@ public class Player : MonoBehaviour
     private CoroutineFramework coroutineManager;
     private WaitForEndOfFrame waitForEndOfFrame;
     private Map map;
+
+    // Audio
+    [SerializeField]
     private AudioClip   putSound;
+    [SerializeField]
     private AudioClip   pickupSound;
+    [SerializeField]
+    private AudioClip   deathSound;
     private AudioSource audioSource;
 
 
@@ -62,6 +68,7 @@ public class Player : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         putSound = (AudioClip)Resources.Load("Sounds/put");
         pickupSound = (AudioClip)Resources.Load("Sounds/pickup");
+        deathSound = (AudioClip)Resources.Load("Sounds/playerDeath");
 
         inventory = new ZappyObjects();
         waitForEndOfFrame = new WaitForEndOfFrame();
@@ -263,5 +270,11 @@ public class Player : MonoBehaviour
     {
         audioSource.Stop();
         audioSource.PlayOneShot(pickupSound, 1);
+    }
+
+    public void Die()
+    {
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathSound, 3);
     }
 }
