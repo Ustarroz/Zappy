@@ -33,7 +33,7 @@ public class InventoryUI : MonoBehaviour
         {
             Player player = go.GetComponent<Player>();
             if (player)
-                title.text = "Id: " + player.id + " Level: " + player.level;
+                title.text = "Team: " + player.team + " Id: " + player.id + " Level: " + player.level;
             else
                 title.text = go.name;
 

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public Orientation orientation;
     public Orientation nextOrientation;
     public Material[] materials;
+    public Transform particleRoot;
 
     public GameObject exclamation;
 
@@ -26,13 +27,15 @@ public class Player : MonoBehaviour
 
     // Audio
     [SerializeField]
-    private AudioClip   putSound;
+    private AudioClip putSound;
     [SerializeField]
-    private AudioClip   pickupSound;
+    private AudioClip pickupSound;
     [SerializeField]
-    private AudioClip   deathSound;
+    private AudioClip deathSound;
     private AudioSource audioSource;
 
+    // Particle
+    public ParticleSystem tpParticle;
 
     public enum Orientation
     {
@@ -112,11 +115,17 @@ public class Player : MonoBehaviour
             yield return StartCoroutine(MoveRight());
         else if (gridPos.y - y == GetMap.dimension.y - 1 || gridPos.y - y == -1)
             yield return StartCoroutine(MoveDown());
-        else if (gridPos.y - y == -(GetMap.dimension.y - 1)|| gridPos.y - y == 1)
+        else if (gridPos.y - y == -(GetMap.dimension.y - 1) || gridPos.y - y == 1)
             yield return StartCoroutine(MoveUp());
         Walk = false;
         gridPos.x = x;
         gridPos.y = y;
+    }
+
+    private void SpawnParticle(Vector3 pos)
+    {
+        GameObject go = Instantiate(tpParticle.gameObject, pos, tpParticle.transform.rotation, particleRoot);
+        StartCoroutine(UpdateManager.DelayDestroy(go, 1));
     }
 
     private IEnumerator MoveUp()
@@ -125,6 +134,8 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         // print("MoveUp : position before : " + transform.position);
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.North);
+        if (!GetMap.Contains(dest))
+            SpawnParticle(transform.position + (Map.North * GetMap.ScaleFactor.z));
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.North * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.South * (GetMap.dimension.y)).z + transform.position.z);
@@ -136,6 +147,8 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         // print("MoveDOwn : position before : " + transform.position);
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.South);
+        if (!GetMap.Contains(dest))
+            SpawnParticle(transform.position + (Map.South * GetMap.ScaleFactor.z));
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.South * GetMap.ScaleFactor.z), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(transform.position.x, transform.position.y, GetMap.GridToWorld(Map.North * (GetMap.dimension.y - 1)).z);
@@ -147,6 +160,8 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.East);
         //print("MoveLeft : position before : " + transform.position + " dest : " + dest);
+        if (!GetMap.Contains(dest))
+            SpawnParticle(transform.position + (Map.East * GetMap.ScaleFactor.x));
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.East * GetMap.ScaleFactor.x), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(GetMap.GridToWorld(Map.West * (GetMap.dimension.x)).x + transform.position.x, transform.position.y, transform.position.z);
@@ -158,6 +173,8 @@ public class Player : MonoBehaviour
             yield return waitForEndOfFrame;
         Vector3 dest = GetMap.WorldToGrid(transform.position + Map.West);
         // print("MoveRIght : position before : " + transform.position + " dest : " + dest);
+        if (!GetMap.Contains(dest))
+            SpawnParticle(transform.position + (Map.West * GetMap.ScaleFactor.x));
         yield return coroutineManager.StartTrackedCoroutine(MoveOverSeconds(transform.position + (Map.West * GetMap.ScaleFactor.x), speed));
         if (!GetMap.Contains(dest))
             transform.position = new Vector3(GetMap.GridToWorld(Map.East * (GetMap.dimension.x - 1)).x, transform.position.y, transform.position.z);
@@ -279,4 +296,5 @@ public class Player : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(deathSound, 3);
     }
+
 }

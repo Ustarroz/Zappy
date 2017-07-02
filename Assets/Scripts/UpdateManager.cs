@@ -253,6 +253,7 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 2 && res[0] == "seg")
         {
+            print("GameOver");
             endGame = true;
             inventoryUI.SetActive(false);
             endUI.SetActive(true);
@@ -295,9 +296,14 @@ public class UpdateManager : MonoBehaviour
         }
     }
 
-    private IEnumerator DelayDestroy(GameObject go, float delay)
+    public static IEnumerator DelayDestroy(GameObject go, float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(go);
+    }
+
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

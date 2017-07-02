@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Reflection;
 using UnityEngine;
-
+using System.Threading;
 
 public class TcpClientAsync
 {
@@ -116,6 +116,7 @@ public class TcpClientAsync
 
     public void Disconnect()
     {
+        Thread.Sleep(2000);
         if (client.Connected)
         {
             client.GetStream().Close();

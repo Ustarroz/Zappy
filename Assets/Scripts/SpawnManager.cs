@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    public TeamInfoManager teamInfoManager;
     public GameObject playerPrefab;
     public GameObject eggPrefab;
     public GameObject incantPrefab;
@@ -50,6 +51,15 @@ public class SpawnManager : MonoBehaviour
                 mats[4] = arms[teamMaterial[team]];
                 skmr.materials = mats;
             }
+        }
+    }
+
+    private void Update()
+    {
+        teamInfoManager.Reset();
+        for (int i = 0; i < players.Count; i++)
+        {
+            teamInfoManager.UpdateTeamInfo(players[i]);
         }
     }
 
