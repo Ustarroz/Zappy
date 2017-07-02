@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UpdateManager : MonoBehaviour
@@ -257,9 +258,12 @@ public class UpdateManager : MonoBehaviour
 
     private IEnumerator ShowForSecond(GameObject go, float seconds)
     {
-        go.SetActive(true);
-        yield return new WaitForSeconds(seconds);
-        go.SetActive(false);
+        if (!go.activeSelf)
+        {
+            go.SetActive(true);
+            yield return new WaitForSeconds(seconds);
+            go.SetActive(false);
+        }
     }
 
     public void TeamName(string[] res)
