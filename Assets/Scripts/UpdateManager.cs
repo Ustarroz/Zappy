@@ -13,6 +13,7 @@ public class UpdateManager : MonoBehaviour
     public GameObject inventoryUI;
     public MainMusicManager mainMusicManager;
     public SliderOnPointerUp freqSlider;
+    public static bool endGame = false;
 
     public void UpdateCell(string[] res)
     {
@@ -46,8 +47,11 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 3 && res[0] == "plv")
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            p.LevelUp(int.Parse(res[2]));
-            p.level = int.Parse(res[2]);
+            if (p != null)
+            {
+                p.LevelUp(int.Parse(res[2]));
+                p.level = int.Parse(res[2]);
+            }
         }
     }
 
@@ -59,7 +63,6 @@ public class UpdateManager : MonoBehaviour
             Player.Orientation orientation = (Player.Orientation)int.Parse(res[4]);
             int x = int.Parse(res[2]);
             int y = int.Parse(res[3]);
-
             if (p != null)
             {
                 if (p.IsPositionDifferent(x, y))
@@ -79,13 +82,16 @@ public class UpdateManager : MonoBehaviour
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
 
-            p.inventory.Food = int.Parse(res[4]);
-            p.inventory.Linemate = int.Parse(res[5]);
-            p.inventory.Deraumere = int.Parse(res[6]);
-            p.inventory.Sibur = int.Parse(res[7]);
-            p.inventory.Mendiane = int.Parse(res[8]);
-            p.inventory.Phiras = int.Parse(res[9]);
-            p.inventory.Thystame = int.Parse(res[10]);
+            if (p != null)
+            {
+                p.inventory.Food = int.Parse(res[4]);
+                p.inventory.Linemate = int.Parse(res[5]);
+                p.inventory.Deraumere = int.Parse(res[6]);
+                p.inventory.Sibur = int.Parse(res[7]);
+                p.inventory.Mendiane = int.Parse(res[8]);
+                p.inventory.Phiras = int.Parse(res[9]);
+                p.inventory.Thystame = int.Parse(res[10]);
+            }
         }
     }
 
@@ -94,7 +100,8 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 2 && res[0] == "pex")
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            StartCoroutine(p.Expulse());
+            if (p != null)
+                StartCoroutine(p.Expulse());
         }
     }
 
@@ -190,8 +197,11 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 3)
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            p.inventory.UpdateRessource(int.Parse(res[2]), -1);
-            p.Put();
+            if (p != null)
+            {
+                p.inventory.UpdateRessource(int.Parse(res[2]), -1);
+                p.Put();
+            }
         }
     }
 
@@ -200,8 +210,11 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 3)
         {
             Player p = spawnManager.FindPlayerById(int.Parse(res[1]));
-            p.inventory.UpdateRessource(int.Parse(res[2]), 1);
-            p.Take();
+            if (p != null)
+            {
+                p.inventory.UpdateRessource(int.Parse(res[2]), 1);
+                p.Take();
+            }
         }
     }
 
@@ -239,11 +252,10 @@ public class UpdateManager : MonoBehaviour
     {
         if (res.Length == 2 && res[0] == "seg")
         {
-            print("game over");
+            endGame = true;
             inventoryUI.SetActive(false);
             endUI.SetActive(true);
             endUI.transform.GetChild(2).GetComponent<Text>().text = res[1].ToUpper();
-            // GetComponent<NetworkAsync>().Disconnect();
             mainMusicManager.PlayEndTheme();
         }
     }
@@ -258,11 +270,20 @@ public class UpdateManager : MonoBehaviour
             StartCoroutine(ShowForSecond(player.exclamation, 2));
     }
 
+    public void Disconnect()
+    {
+        GetComponent<NetworkAsync>().Disconnect();
+    }
+
     private IEnumerator ShowForSecond(GameObject go, float seconds)
     {
-        go.SetActive(true);
-        yield return new WaitForSeconds(seconds);
-        go.SetActive(false);
+        if (!go.activeSelf && go != null)
+        {
+            go.SetActive(true);
+            yield return new WaitForSeconds(seconds);
+            if (go != null)
+                go.SetActive(false);
+        }
     }
 
     public void TeamName(string[] res)

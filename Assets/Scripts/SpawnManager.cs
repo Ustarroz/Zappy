@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
             GameObject go = Instantiate(playerPrefab);
             Player player = go.GetComponent<Player>();
 
+            go.name = "Player_" + id;
             player.gridPos = new Vector2(x, y);
             player.offset = map.GetRandomMeshPos();
             player.transform.position = map.cells[x, y].transform.position;// + player.offset;
@@ -37,6 +38,8 @@ public class SpawnManager : MonoBehaviour
             player.level = level;
             players.Add(player);
             player.orientation = (Player.Orientation)orientation;
+            player.nexGgridPos = player.gridPos;
+            player.nextOrientation = player.orientation;
             player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
             player.LevelUp(level);
             if (teamMaterial != null && teamMaterial.ContainsKey(team) && teamMaterial[team] < body.Length)
@@ -63,7 +66,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnEgg(Vector2 pos, int id, string team)
     {
-        GameObject go = Instantiate(eggPrefab, map.GetRandomCasePos((int)pos.x, (int)pos.y) + new Vector3(0, 0.2f, 0), eggPrefab.transform.rotation, eggRoot);
+        GameObject go = Instantiate(eggPrefab, map.GetRandomCasePos((int)pos.x, (int)pos.y) + new Vector3(0, 0.5f, 0), eggPrefab.transform.rotation, eggRoot);
         Egg newEgg = go.GetComponent<Egg>();
         newEgg.id = id;
         newEgg.team = team;

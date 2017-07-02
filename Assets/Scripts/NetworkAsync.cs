@@ -36,13 +36,13 @@ public class NetworkAsync : UnityTcpClientAsync
         print(ip + ":" + port);
         homeUI.SetActive(false);
         inventoryUI.SetActive(true);
-        print(inventoryUI.activeSelf);
         Send("GRAPHIC\n");
     }
 
     public override void OnDisconnect(params object[] p)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (!UpdateManager.endGame)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public override void OnError(params object[] p)
@@ -57,7 +57,7 @@ public class NetworkAsync : UnityTcpClientAsync
     {
         foreach (object obj in p)
         {
-            print(obj.ToString());
+            //   Debug.Log(obj);
             interpretor.InterpretResponse(obj.ToString());
         }
     }

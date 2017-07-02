@@ -86,6 +86,7 @@ public class TcpClientAsync
             if (returndata.Length > 1)
                 returndata += Encoding.ASCII.GetString(buffer, 0, bytesRead);
             receiveStatus = true;
+            Disconnect();
         }
     }
 
