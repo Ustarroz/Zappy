@@ -36,18 +36,22 @@ public class InterpretServerResponse : MonoBehaviour
 
         /*InterpretResponse("sgt 10\n");
         InterpretResponse("sgt 1\n");
+
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
 
         InterpretResponse("pnw 0 0 0 1 1 toto\n");
+        /*   InterpretResponse("ppo 0 0 4 1\n");
+           InterpretResponse("ppo 0 0 0 1\n");
+           InterpretResponse("ppo 0 9 0 1\n");
+           InterpretResponse("ppo 0 0 0 1\n");*/
+/*
+        InterpretResponse("pnw 1 0 0 1 2 toto\n");
+        InterpretResponse("pnw 2 0 0 1 3 billy\n");
+        InterpretResponse("pnw 3 0 0 1 4 billy\n");*/
 
-        InterpretResponse("pnw 1 0 0 2 2 toto\n");
-        InterpretResponse("pnw 2 0 0 3 3 billy\n");
-        InterpretResponse("pnw 3 0 0 4 4 billy\n");
-        InterpretResponse("pbc 0 toto");
-        InterpretResponse("seg toto");
-*/        
+
     }
 
     public void InterpretResponse(string response)
@@ -56,7 +60,6 @@ public class InterpretServerResponse : MonoBehaviour
 
         foreach (string l in line)
         {
-            print(l);
             string[] arg = l.Split(' ');
 
             if (commands != null && commands.ContainsKey(arg[0]))

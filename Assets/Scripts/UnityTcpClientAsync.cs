@@ -64,6 +64,7 @@ public abstract class UnityTcpClientAsync : MonoBehaviour
 
     public void Send(string data)
     {
+        if (start)
         tcpClient.Send(data);
     }
 
