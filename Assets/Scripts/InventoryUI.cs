@@ -31,7 +31,11 @@ public class InventoryUI : MonoBehaviour
     {
         if (go != null && activeInventory != null)
         {
-            title.text = go.name;
+            Player player = go.GetComponent<Player>();
+            if (player)
+                title.text = "Id: " + player.id + " Level: " + player.level;
+            else
+                title.text = go.name;
 
             UpdateUI("Food", activeInventory.Food);
             UpdateUI("Deraumere", activeInventory.Deraumere);

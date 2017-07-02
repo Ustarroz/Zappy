@@ -246,6 +246,7 @@ public class UpdateManager : MonoBehaviour
 
     public void Broadcast(string[] res)
     {
+        print(res.Length);
         if (res.Length < 3)
             return;
         int playerid = int.Parse(res[1]);

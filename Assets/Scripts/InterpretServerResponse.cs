@@ -34,7 +34,7 @@ public class InterpretServerResponse : MonoBehaviour
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
         commands["pbc"] = updateManager.Broadcast;
 
-        /*InterpretResponse("sgt 10\n");
+/*        InterpretResponse("sgt 10\n");
         InterpretResponse("sgt 1\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
@@ -45,10 +45,8 @@ public class InterpretServerResponse : MonoBehaviour
         InterpretResponse("pnw 1 0 0 2 2 toto\n");
         InterpretResponse("pnw 2 0 0 3 3 billy\n");
         InterpretResponse("pnw 3 0 0 4 4 billy\n");
-        InterpretResponse("pbc 0 toto");
-*/       
+        InterpretResponse("pbc 0 toto");*/
     }
-
 
     public void InterpretResponse(string response)
     {
@@ -56,6 +54,7 @@ public class InterpretServerResponse : MonoBehaviour
 
         foreach (string l in line)
         {
+            print(l);
             string[] arg = l.Split(' ');
 
             if (commands != null && commands.ContainsKey(arg[0]))
