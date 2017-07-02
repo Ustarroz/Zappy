@@ -33,24 +33,67 @@ public class InterpretServerResponse : MonoBehaviour
         commands["pdi"] = updateManager.PlayerDied;
         commands["ebo"] = updateManager.ConnectPlayerForEgg;
 
-       /* InterpretResponse("sgt 10\n");
-        InterpretResponse("sgt 1\n");
+        InterpretResponse("sgt 10\n");
         InterpretResponse("msz 10 5\n");
         InterpretResponse("tna toto\n");
         InterpretResponse("tna billy\n");
 
-        InterpretResponse("pnw 0 0 0 1 1 toto\n");
-        InterpretResponse("ppo 0 1 0 1\n");
-        InterpretResponse("ppo 0 1 1 1\n");
-        InterpretResponse("ppo 0 0 1 1\n");
-        InterpretResponse("ppo 0 0 0 1\n");
+      //  InterpretResponse("pnw 0 0 0 1 1 toto\n");
+        /*   InterpretResponse("ppo 0 0 4 1\n");
+           InterpretResponse("ppo 0 0 0 1\n");
+           InterpretResponse("ppo 0 9 0 1\n");
+           InterpretResponse("ppo 0 0 0 1\n");*/
+
+    
+
+        InterpretResponse("pnw 1 0 0 1 2 toto\n");
+        InterpretResponse("pnw 2 0 0 1 3 billy\n");
+        InterpretResponse("pnw 3 0 0 1 4 billy\n");
 
 
-        /*   InterpretResponse("pnw 1 0 0 2 2 toto\n");
-        InterpretResponse("pnw 2 0 0 3 3 billy\n");
-        InterpretResponse("pnw 3 0 0 4 4 billy\n");
+        InterpretResponse("ppo 1 1 0 1\n");
+        InterpretResponse("ppo 2 1 0 1\n");
+        InterpretResponse("ppo 3 1 0 1\n");
 
-       */
+        InterpretResponse("ppo 1 1 1 1\n");
+        InterpretResponse("ppo 2 1 1 1\n");
+        InterpretResponse("ppo 3 1 1 1\n");
+
+        InterpretResponse("ppo 1 0 1 1\n");
+        InterpretResponse("ppo 2 0 1 1\n");
+        InterpretResponse("ppo 3 0 1 1\n");
+
+        InterpretResponse("ppo 1 0 0 1\n");
+        InterpretResponse("ppo 2 0 0 1\n");
+        InterpretResponse("ppo 3 0 0 1\n");
+
+        InterpretResponse("ppo 1 0 4 1\n");
+        InterpretResponse("ppo 2 0 4 1\n");
+        InterpretResponse("ppo 3 0 4 1\n");
+
+        InterpretResponse("ppo 1 0 0 1\n");
+        InterpretResponse("ppo 2 0 0 1\n");
+        InterpretResponse("ppo 3 0 0 1\n");
+
+        InterpretResponse("ppo 1 9 0 1\n");
+        InterpretResponse("ppo 2 9 0 1\n");
+        InterpretResponse("ppo 3 9 0 1\n");
+
+        InterpretResponse("ppo 1 8 0 1\n");
+        InterpretResponse("ppo 2 8 0 1\n");
+        InterpretResponse("ppo 3 8 0 1\n");
+
+        InterpretResponse("ppo 1 8 4 1\n");
+        InterpretResponse("ppo 2 8 4 1\n");
+        InterpretResponse("ppo 3 8 4 1\n");
+
+        InterpretResponse("ppo 1 9 4 1\n");
+
+        InterpretResponse("ppo 1 9 3 1\n");
+
+
+        InterpretResponse("ppo 1 0 3 1\n");
+        
     }
 
 

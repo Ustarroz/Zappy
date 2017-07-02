@@ -37,7 +37,6 @@ public class SpawnManager : MonoBehaviour
             player.level = level;
             players.Add(player);
             player.orientation = (Player.Orientation)orientation;
-         //   player.nextOrientation = player.orientation;
             player.transform.eulerAngles = ConvertOrientation((Player.Orientation)orientation);
             player.LevelUp(level);
             if (teamMaterial != null && teamMaterial.ContainsKey(team) && teamMaterial[team] < body.Length)

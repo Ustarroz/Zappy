@@ -104,13 +104,13 @@ public class Player : MonoBehaviour
         while (coroutineManager.IsTrackedCoroutineRunning())
             yield return waitForEndOfFrame;
         Walk = true;
-        if (gridPos.x - x == -GetMap.dimension.x || gridPos.x - x == 1)
+        if (gridPos.x - x == -(GetMap.dimension.x - 1) || gridPos.x - x == 1)
             yield return StartCoroutine(MoveLeft());
-        else if (gridPos.x - x == GetMap.dimension.x || gridPos.x - x == -1)
+        else if (gridPos.x - x == GetMap.dimension.x - 1 || gridPos.x - x == -1)
             yield return StartCoroutine(MoveRight());
-        else if (gridPos.y - y == GetMap.dimension.y || gridPos.y - y == -1)
+        else if (gridPos.y - y == GetMap.dimension.y - 1 || gridPos.y - y == -1)
             yield return StartCoroutine(MoveDown());
-        else if (gridPos.y - y == -GetMap.dimension.y || gridPos.y - y == 1)
+        else if (gridPos.y - y == -(GetMap.dimension.y - 1)|| gridPos.y - y == 1)
             yield return StartCoroutine(MoveUp());
         Walk = false;
         gridPos.x = x;
