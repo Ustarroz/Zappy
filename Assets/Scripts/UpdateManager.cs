@@ -12,10 +12,10 @@ public class UpdateManager : MonoBehaviour
     public GameObject endUI;
     public GameObject inventoryUI;
     public MainMusicManager mainMusicManager;
+    public SliderOnPointerUp freqSlider;
 
     public void UpdateCell(string[] res)
     {
-        print("bct : " + res.Length + " - " + res[0]);
         if (res.Length == 10 && res[0] == "bct")
             map.UpdateCell(int.Parse(res[1]), int.Parse(res[2]), int.Parse(res[3]),
                 int.Parse(res[4]), int.Parse(res[5]), int.Parse(res[6]), int.Parse(res[7]), int.Parse(res[8]),
@@ -60,14 +60,16 @@ public class UpdateManager : MonoBehaviour
             int x = int.Parse(res[2]);
             int y = int.Parse(res[3]);
 
-          
-            if (p.IsPositionDifferent(x, y))
-                StartCoroutine(p.Move(x, y));
-            else if (p.IsOrientationDifferent(orientation))
-                StartCoroutine(p.Turn(orientation));
-            p.nexGgridPos.x = x;
-            p.nexGgridPos.y = y;
-            p.nextOrientation = orientation;
+            if (p != null)
+            {
+                if (p.IsPositionDifferent(x, y))
+                    StartCoroutine(p.Move(x, y));
+                else if (p.IsOrientationDifferent(orientation))
+                    StartCoroutine(p.Turn(orientation));
+                p.nexGgridPos.x = x;
+                p.nexGgridPos.y = y;
+                p.nextOrientation = orientation;
+            }
         }
     }
 
@@ -223,10 +225,12 @@ public class UpdateManager : MonoBehaviour
         if (res.Length == 2 && res[0] == "sgt")
         {
             frequency = int.Parse(res[1]);
+            freqSlider.UpdateSlider((int)frequency);
             foreach (Player p in spawnManager.players)
             {
                 p.speed = 7 / frequency;
                 p.UpdateAnimSpeed();
+
             }
         }
     }
@@ -242,6 +246,23 @@ public class UpdateManager : MonoBehaviour
             // GetComponent<NetworkAsync>().Disconnect();
             mainMusicManager.PlayEndTheme();
         }
+    }
+
+    public void Broadcast(string[] res)
+    {
+        if (res.Length < 3)
+            return;
+        int playerid = int.Parse(res[1]);
+        Player player = spawnManager.FindPlayerById(playerid);
+        if (player)
+            StartCoroutine(ShowForSecond(player.exclamation, 2));
+    }
+
+    private IEnumerator ShowForSecond(GameObject go, float seconds)
+    {
+        go.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        go.SetActive(false);
     }
 
     public void TeamName(string[] res)

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClickManager : MonoBehaviour
 {
     public NetworkAsync net;
-    public InventoryUI invUI;
+    public InventoryUI  invUI;
 
     private GameObject Click()
     {
@@ -23,16 +24,21 @@ public class ClickManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Player player = null;
             GameObject go = Click();
+            ZappyObjects inv = null;
 
             if (go != null)
             {
-                ZappyObjects inv;
 
                 if (go.tag == "Player")
                 {
-                    net.Send("pin " + go.GetComponent<Player>().id.ToString() + "\n");
-                    inv = go.GetComponent<Player>().inventory;
+                    player = go.GetComponent<Player>();
+                    if (player != null)
+                    {
+                        net.Send("pin " + player.id.ToString() + "\n");
+                        inv = player.inventory;
+                    }
                 }
                 else
                 {

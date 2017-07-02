@@ -31,7 +31,11 @@ public class InventoryUI : MonoBehaviour
     {
         if (go != null && activeInventory != null)
         {
-            title.text = go.name;
+            Player player = go.GetComponent<Player>();
+            if (player)
+                title.text = "Id: " + player.id + " Level: " + player.level;
+            else
+                title.text = go.name;
 
             UpdateUI("Food", activeInventory.Food);
             UpdateUI("Deraumere", activeInventory.Deraumere);
@@ -45,13 +49,13 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI(string names, string value)
     {
-        if (inventoryPair.ContainsKey(names))
+        if (inventoryPair != null && inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value;
     }
 
     public void UpdateUI(string names, int value)
     {
-        if (inventoryPair.ContainsKey(names))
+        if (inventoryPair != null && inventoryPair.ContainsKey(names))
             inventoryPair[names].text = value.ToString();
     }
 }
